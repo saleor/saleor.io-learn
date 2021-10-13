@@ -4,4 +4,7 @@ title: Checkout Completion
 description: 
 ---
 
-# Checkout Paymen
+
+# Checkout Payment
+
+Doing some changes.
