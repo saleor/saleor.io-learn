@@ -1,5 +1,5 @@
 ---
-pos: 4
+pos: 5
 title: TypeScript Path Aliases 
 description:
 prev:
@@ -8,9 +8,9 @@ next:
   path: /setup/tailwind-css-styling/
 ---
 
-Let's configure the path aliases in TypeScript so that the import statements are short are more convenient to use.
+Path Alias is a TypeScript configuration that maps a custom alias to a path in your project. Thanks to path aliases the import statements are short are more convenient to use. 
 
-Open `tsconfig.json` and add the following `paths` section under `compilerOptions`
+Let's declare couple of aliases for components, the auto-generated Saleor typings and the location of GraphQL statements. Open `tsconfig.json` and add the following `paths` section under `compilerOptions`
 
 ```json
 {

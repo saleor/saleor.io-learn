@@ -22,7 +22,14 @@ If you prefer to use your own computer for development, you need to setup Node.j
 
 Initialize the application using the following command:
 
+With `npm`:
+
 ```
 npx create-next-app --typescript saleor-tutorial
 ```
 
+With `pnpm`:
+
+```
+pnpm dlx create-next-app --typescript saleor-tutorial
+```

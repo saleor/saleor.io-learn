@@ -20,21 +20,34 @@ Install Apollo Client:
 npm install @apollo/client graphql
 ```
 
-Let's start by creating a client instance that has to configuration to connect with the Saleor GraphQL API. This client must be added to a component called `ApolloProvider`, that wraps the application with the connection to the GraphQL endpoint. You wrap your application with the client provider on the highest level in the component tree so that it's available for any child component. 
+```
+pnpm add @apollo/client graphql
+```
 
-In our case, we will use `pages/_app.js`: 
+Let's start by creating an Apollo client instance that points to the Saleor GraphQL API. In this tutorial we will use the following API endpoint provided by the Saleor Cloud. Feel free to change it to your own Saleor server instance.
+
+
+```
+https://tutorial.saleor.cloud/graphql/
+```
+
+The GraphQL client will be provided to our application via the `ApolloProvider` component that wraps the application with the connection to the GraphQL endpoint. We wrap our application with the Apollo provider on the highest level in the component tree so that it's available for any child component below. 
+
+In our case, this will be `pages/_app.tsx`: 
 
 ```tsx
 import type { AppProps } from 'next/app'
 
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 
+import '../styles/globals.css'
+
 const client = new ApolloClient({
   uri: "https://tutorial.saleor.cloud/graphql/",
   cache: new InMemoryCache(),
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
       <Component {...pageProps} />
@@ -43,94 +56,4 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 ```
 
-The `ApolloClient` instance requires a `uri` pointing to a Saleor API and `cache` that in this case will be simply in-memory.
-
-## Location for GraphQL Statements
-
-We will put all GraphQL statements (queries, mutations and fragments) inside the `graphql/` directory `queries.graphql`. Later on, we may decide to split it so that each query or mutation is being kept seperate. 
-
-Let's start with one of the simplest GraphQL queries in Saleor API i.e. getting names of first 10 products from our store. We call this query `First10ProductNames` and store it in `graphql/queries.graphql`
-
-```graphql
-query First10ProductNames {
-  products(first: 10, channel: "default-channel") {
-    edges {
-      node {
-        name
-      }
-    }
-  }
-}
-```
-
-##  Autogenerate React.js Hooks
-
-Let's start by configuring the [GraphQL Code Generator](https://www.graphql-code-generator.com/) library to automatically generate types representing all *the commerce notions* available in the Saleor API. This library connects to a GraphQL endpoint and locates the API schema to execute the proess of generating corresponding TypeScript types.
-
-Install the GraphQL Code Generator command-line tool along with few plugins, namely the Apollo GraphQL integration:
-
-```
-npm -D @graphql-codegen/cli \ 
-  @graphql-codegen/introspection \
-  @graphql-codegen/typescript \
-  @graphql-codegen/typescript-operations \
-  @graphql-codegen/typescript-react-apollo
-```
-
-The Apollo integration allows us to automatically generate React.js Hooks from GraphQL queries and mutations. We will be using this feature a lot in this tutorial.
-
-Finally, let's put it all together using the `codegen.yml` configuration file that should be stored in the root of our project:
-
-```yaml
-overwrite: true
-schema: "https://tutorial.saleor.cloud/graphql/"
-documents: "graphql/**/*.{ts,graphql}"
-generates:
-  saleor/api.tsx:
-    plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-react-apollo"
-      - "typescript-apollo-client-helpers"
-    config:
-      dedupeOperationSuffix: true 
-  ./graphql.schema.json:
-    plugins:
-      - "introspection"
-```
-
-This configuration files instructs the code generator to use the `graphql/` directory as the place where GraphQL statements are stored and it generates types in `saleor/api.tsx`.
-
-We can now try to run the generation process using the following command:
-
-```bash
-npx graphql-codegen --config codegen.yml 
-```
-
-For convenience, we can put this command in `package.json` under the `scripts` section as `generate`
-
-```json
-{
-  ...
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "generate": "graphql-codegen --config codegen.yml -w"
-  }
-}
-```
-
-Now we can run it as simply as this:
-
-```
-npm run generate
-```
-
-Once the command executes, you should have a relatively large file generated at `saleor/api.tsx`. We will be using it frequently to 
-
-
-
-
-
+The `ApolloClient` instance requires a `uri` pointing to a Saleor API endpoint and `cache` that in this case will be simply in-memory.

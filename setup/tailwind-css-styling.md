@@ -1,5 +1,5 @@
 ---
-pos: 5
+pos: 6
 title: Tailwind CSS for Styling 
 description:
 prev:
@@ -16,15 +16,22 @@ Let's start by installing Tailwind and its dependencies, i.e. PostCSS and autopr
 npm install -D tailwindcss postcss autoprefixer
 ```
 
+```
+pnpm add -D tailwindcss postcss autoprefixer
+```
+
 Next, generate the configuration files for Tailwind and PostCSS:
 
 ```
 npx tailwindcss init -p
 ```
+```
+pnpm dlx tailwindcss init -p
+```
 
 In newly generated `tailwind.config.js`, configure the `purge` option with the paths to Next.js pages and React.js components. This will allow Tailwind to tree-shake unused styles in production builds:
 
-```js
+```js{3,4}
 module.exports = {
   purge: [
     './pages/**/*.{js,ts,jsx,tsx}', 

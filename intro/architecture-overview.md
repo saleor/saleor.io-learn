@@ -1,6 +1,6 @@
 ---
 pos: 1
-title: Architecture Overview: Intro to Saleor
+title: "Architecture Overview"
 description: Build a high performaing ecommerce Storefront
 ---
 

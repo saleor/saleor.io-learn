@@ -63,7 +63,7 @@ Here's how a typical response to that query may look like:
 
 Another way of controlling the number of elements to fetch is through pagination. We will discuss it at the end of this section.
 
-## Autogenerate Products React.js Hook
+## Autogenerate a React Hook for Products
 
 Now we can put this query in our application under the `graphql/` directory as `FetchTwelveProducts.graphql`. 
 
@@ -77,13 +77,13 @@ npm run generate
 The `generate` script we configured in the setup section uses the `-w` option that instructs the code generation to keep running and watch for changes in GraphQL files. You can leave it running in a terminal for convenience.
 </Notice>
 
-## The `ProductCollection` component
+## React Component for Product Collection
 
-Let's create our first React.js components. Call it `ProductCollection.tsx` and place the file in `components/`: 
+Let's create our first React component for displaying available products as a grid. Name this component `ProductCollection.tsx` and place the file in `components/`.
 
-```tsx
+```tsx{3}
 import React from 'react';
-import Link from 'next/link';
+
 import { useFetchTwelveProductsQuery } from '@/saleor/api';
 
 export const ProductCollection = () => {
@@ -120,9 +120,34 @@ export const ProductCollection = () => {
 
 ```
 
-The GraphQL Code Generator alongside the Apollo plugins automatically generate the `useFetchTwelveProductsQuery` hook. 
+The GraphQL Code Generator alongside the Apollo React plugin automatically generates the `useFetchTwelveProductsQuery` React hook. 
 
 Once the `data` is available, we display the product names as a list. It's important to notice that the product collection is available as a GraphQL edge as it stores information that goes beyond what's in each object, e.g. the count, and then each collection element is a node.
+
+## Display the Home Page
+
+In Next.js the routing is generated from the file system. All the pages are located in `pages` and `pages/index.tsx` is the page that will be displed for the `/` path. Right now, it's just a 4-element grid with links to Next.js resources. Let's replace it with the `ProductCollection` component:
+
+```tsx
+import type { NextPage } from 'next'
+import React from 'react'
+
+import { ProductCollection } from '../components/ProductCollection';
+
+const Home: NextPage = () => {
+  return (
+    <div className="py-10 max-w-7xl mx-auto">
+      <ProductCollection />
+    </div>
+  )
+}
+
+export default Home
+```
+
+As a result when navigating to `localhost:3000/` you should see a grid of product names as shown below:
+
+> **IMAGE**
 
 ## Displaying product thumbnails
 
