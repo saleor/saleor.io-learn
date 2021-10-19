@@ -28,7 +28,7 @@ With `npm`:
 npx create-next-app --typescript saleor-tutorial
 ```
 
-With `pnpm`:
+With `pnpm` (you need the version `6.13.0` or higher):
 
 ```
 pnpm dlx create-next-app --typescript saleor-tutorial

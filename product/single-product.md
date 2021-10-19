@@ -4,7 +4,11 @@ title: Fetching single product
 description: 
 ---
 
-Sometimes you may need to fetch a specific product. Usually, you display the most important product information on the collection page, and then when the user navigates to a specific product you provide details about it. This is the moment when you can use the `product` query for fetching those details.
+Sometimes you may need to fetch a specific product. Usually, you display the most important product information on the collection page, and then when the user navigates to a specific product you provide details about it.  We can use the `product` query for fetching those details.
+
+## GraphQL Query for Single Product
+
+Let's call our query `ProductByID` to make it explicit:
 
 ```graphql
 query ProductByID($id: ID!) {
@@ -30,3 +34,7 @@ const { loading, error, data } = useProductByIdQuery({
   } 
 });
 ```
+
+## React Component for Single Product
+
+## Page per Product

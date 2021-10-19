@@ -3,6 +3,10 @@ pos: 3
 title: Basic filtering 
 description: 
 stackblitz: saleor-tutorial-basic-filtering
+prev:
+  path: /product/fetching-products/
+next:
+  path: /product/filtering-with-variables/
 ---
 
 When fetching products using the `products` query, we can also filter them using various criteria provided via the `filter` argument. 
@@ -38,7 +42,7 @@ npm run generate
 
 In `components/ProductCollection.tsx`, we can replace the `useFetchTwelveProductsQuery` with the newly generated `useTShirtProductsQuery` as the shape of the elements in the product collection doesn't change.
 
-```tsx{3,5}
+```tsx{3,6}
 import React from 'react';
 import Link from 'next/link';
 import { useTShirtProductsQuery } from '@/saleor/api';

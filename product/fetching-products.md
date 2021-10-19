@@ -4,13 +4,17 @@ title: Fetching Products
 description: 
 stackblitz: saleor-tutorial-start 
 github:
+prev:
+  path: /product/overview/
+next:
+  path: /product/basic-filtering/
 ---
 
 In Saleor, you can fetch:
 - a collection of products by using the `products` query, or
 - a single product by using the `product` query that requires the product `ID` as input. 
 
-The former operation also allows to filter and sort a collection of products by specifing either the filter criteria, or the sorting parameters.
+The first operation also allows to filter and sort a collection of products by specifing either the filter criteria, or the sorting parameters.
 
 ## Fetching a collection 
 
@@ -151,11 +155,13 @@ As a result when navigating to `localhost:3000/` you should see a grid of produc
 
 ## Displaying product thumbnails
 
-Right now our product collection contains only the product names. Let's improve it by adding the product thumbnails. We need to slightly modify our GraphQL query to also include the thumbnails in the response. While we are at it, we can also fetch the product category.
+Right now our product collection contains only the product names. Let's improve it by including the product images. 
+
+We need to slightly modify our GraphQL query to also include the product thumbnails in the response. While we are at it, we can also fetch the product category.
 
 Here's the modified query:
 
-```graphql
+```graphql{7-12}
 query FetchTwelveProducts {
   products(first: 12, channel: "default-channel") {
     edges {

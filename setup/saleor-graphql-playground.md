@@ -8,7 +8,11 @@ next:
   path: /setup/configure-graphql-client-nextjs/
 ---
 
-Saleor's GraphQL Playground provides is a web application that provides a convenient user interfaces for interacting with the Saleor API. The playground consists of three main sections:
+Saleor's GraphQL Playground is a web application that provides a convenient user interfaces for interacting with the Saleor API. 
+
+![GraphQL Playground](/images/setup-graphql-playground.png)
+
+The playground consists of three main sections:
 
 1. the operation input section
 2. the result section
