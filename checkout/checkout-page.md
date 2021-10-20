@@ -2,6 +2,10 @@
 pos: 3
 title: Checkout Page
 description: 
+prev:
+  path: /checkout/checkout-creation/
+next:
+  path: /checkout/checkout-content/
 ---
 
 In a typical storefront, there is a page that displays the current content of a cart. The application from this tutorial will be no different. The cart page will be available under the `/cart` route.

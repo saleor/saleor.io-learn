@@ -2,6 +2,8 @@
 pos: 1
 title: Overview 
 description: 
+prev:
+  path: /setup/setup-summary/
 next:
   path: /product/fetching-products/
 ---

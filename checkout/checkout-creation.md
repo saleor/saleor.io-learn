@@ -2,6 +2,10 @@
 pos: 2
 title: Checkout Creation 
 description: 
+prev:
+  path: /checkout/overview/
+next:
+  path: /checkout/checkout-page/
 ---
 
 ## Creating an empty checkout 

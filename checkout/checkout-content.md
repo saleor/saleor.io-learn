@@ -2,6 +2,10 @@
 pos: 4
 title: Checkout Content
 description: 
+prev:
+  path: /checkout/checkout-page/
+next:
+  path: /checkout/checkout-completion/
 ---
 
 So far the checkout page that displays the content of the cart is static. We hardcoded all the elements on the page to focus on its structure. In this section, we will connect the checkout object provided by Saleor with what's displayed on the screen when visiting the `/cart` route. This way the cart page will be able to dynamically display what's currently in the cart.
