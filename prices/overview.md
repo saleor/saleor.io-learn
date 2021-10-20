@@ -2,6 +2,10 @@
 pos: 1
 title: Overview 
 description: 
+prev:
+  path: /product/variants/
+next:
+  path: /prices/pricing-range/
 ---
 
 Since products have variants, the product price may be different dependening on the variant. For that reason, it is not possible to ask for a product price and the product exposes a range of prices as the `pricing` field on the `Product` type. The range is represented as a tuple with the lowest and the highest price in that range.  If all the variants have the same price, the both elements of the tuple are equal.

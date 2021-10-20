@@ -3,7 +3,7 @@ pos: 5
 title: TypeScript Path Aliases 
 description:
 prev:
-  path: /setup/configure-graphql-client-nextjs/
+  path: /setup/graphql-code-generator/
 next:
   path: /setup/tailwind-css-styling/
 ---

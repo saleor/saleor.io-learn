@@ -2,6 +2,10 @@
 pos: 999
 title: Checkout Shipping
 description: 
+prev:
+  path: /checkout/checkout-completion/
+next:
+  path: /checkout/checkout-payment/
 ---
 
 Products can be divided into physical and digital ones. For the physical products, we need an additional step in our checkout process to specify the proper shipping method.

@@ -5,7 +5,7 @@ description:
 prev:
   path: /setup/saleor-graphql-playground/
 next:
-  path: /setup/tailwind-css-styling/
+  path: /setup/graphql-code-generator/
 ---
 
 As GraphQL returns JSON data over HTTP you can use any HTTP client to integrate with a GraphQL endpoint. It is, however, easier to use a dedicated library that comes with some additional features already configured such as in-memory cache, error handling etc.

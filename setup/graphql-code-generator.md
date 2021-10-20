@@ -3,9 +3,9 @@ pos: 4
 title: GraphQL Code Generator 
 description:
 prev:
-  path: /setup/saleor-graphql-playground/
+  path: /setup/configure-graphql-client-nextjs/
 next:
-  path: /setup/tailwind-css-styling/
+  path: /setup/typescript-path-aliases/
 ---
 
 [GraphQL Code Generator](https://www.graphql-code-generator.com/) is a command-line tool that generates TypeScript typings along with helpers such as React Hooks from a GraphQL schema. This way we can not only have on the client the TypeScript types that corresponds to the GraphQL ones from the Saleor API, but we can also automate the process of transforming the GraphQL statement definitions (queries, mutations) into ready-to-execute code pieces provided as React Hooks. 
@@ -21,7 +21,8 @@ npm install -D @graphql-codegen/cli \
   @graphql-codegen/introspection \
   @graphql-codegen/typescript \
   @graphql-codegen/typescript-operations \
-  @graphql-codegen/typescript-react-apollo
+  @graphql-codegen/typescript-react-apollo \
+  @graphql-codegen/typescript-apollo-client-helpers
 ```
 
 ```

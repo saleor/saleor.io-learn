@@ -2,6 +2,10 @@
 pos: 7
 title: Fetching single product 
 description: 
+prev:
+  path: /product/pagination/
+next:
+  path: /product/variants/
 ---
 
 Sometimes you may need to fetch a specific product. Usually, you display the most important product information on the collection page, and then when the user navigates to a specific product you provide details about it.  We can use the `product` query for fetching those details.
