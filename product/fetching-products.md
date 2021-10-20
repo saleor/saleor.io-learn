@@ -128,6 +128,12 @@ The GraphQL Code Generator alongside the Apollo React plugin automatically gener
 
 Once the `data` is available, we display the product names as a list. It's important to notice that the product collection is available as a GraphQL edge as it stores information that goes beyond what's in each object, e.g. the count, and then each collection element is a node.
 
+Let's define the export statement in `components/index.ts` for this component, so that we can directly import it from `@/components` later on.
+
+```tsx
+export { ProductCollection } from './ProductCollection';
+```
+
 ## Display the Home Page
 
 In Next.js the routing is generated from the file system. All the pages are located in `pages` and `pages/index.tsx` is the page that will be displed for the `/` path. Right now, it's just a 4-element grid with links to Next.js resources. Let's replace it with the `ProductCollection` component:
@@ -138,7 +144,7 @@ import React from 'react'
 
 import { 
   ProductCollection 
-  } from '@/components';
+} from '@/components';
 
 const Home: NextPage = () => {
   return (
