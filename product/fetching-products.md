@@ -136,12 +136,16 @@ In Next.js the routing is generated from the file system. All the pages are loca
 import type { NextPage } from 'next'
 import React from 'react'
 
-import { ProductCollection } from '../components/ProductCollection';
+import { 
+  ProductCollection 
+  } from '@/components';
 
 const Home: NextPage = () => {
   return (
-    <div className="py-10 max-w-7xl mx-auto">
-      <ProductCollection />
+    <div className="min-h-screen bg-gray-100">
+      <div className="py-10 max-w-7xl mx-auto">
+        <ProductCollection />
+      </div>
     </div>
   )
 }
@@ -152,6 +156,60 @@ export default Home
 As a result when navigating to `localhost:3000/` you should see a grid of product names as shown below:
 
 > **IMAGE**
+
+Additionally, we can standarise the structure for each Next.js page with a fixed layout using the following component:
+
+```tsx
+import React from 'react';
+
+interface Props {
+  children: React.ReactNode;
+}
+
+const styles = {
+  background: 'min-h-screen bg-gray-100',
+  container: 'py-10 max-w-7xl mx-auto',
+}
+
+export const Layout: React.VFC<Props> = ({ children }) => {
+  return (
+    <div className={styles.background}>
+      <div className={styles.container}>
+        {children}
+      </div>
+    </div>
+  );
+}
+```
+
+Let's define the export statement in `components/index.ts` for this component, so that we can directly import it from `@/components` later on.
+
+```tsx{2}
+export { ProductCollection } from './ProductCollection';
+export { Layout } from './Layout';
+```
+
+With `Layout` we can rewrite the `Home` page in the following way:
+
+```tsx
+import type { NextPage } from 'next'
+import React from 'react'
+
+import { 
+  ProductCollection,
+  Layout 
+} from '@/components';
+
+const Home: NextPage = () => {
+  return (
+    <Layout>
+      <ProductCollection />
+    </Layout>
+  )
+}
+
+export default Home
+```
 
 ## Displaying product thumbnails
 
