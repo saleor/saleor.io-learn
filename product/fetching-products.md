@@ -21,6 +21,7 @@ The first operation also allows to filter and sort a collection of products by s
 Let's start with a simple collection of 12 elements that returns a product `id` and `name`. Put the following GraphQL query inside the GraphQL Playground of your Saleor endpoint and execute it using the play button in the middle. 
 
 ```graphql
+# graphql/FetchTwelveProducts.graphql
 query FetchTwelveProducts {
   products(first: 12, channel: "default-channel") {
     edges {
@@ -86,11 +87,12 @@ The `generate` script we configured in the setup section uses the `-w` option th
 Let's create our first React component for displaying available products as a grid. Name this component `ProductCollection.tsx` and place the file in `components/`.
 
 ```tsx{3}
+// components/ProductCollection.tsx
 import React from 'react';
 
 import { useFetchTwelveProductsQuery } from '@/saleor/api';
 
-export const ProductCollection = () => {
+export const ProductCollection: React.VFC = () => {
   const { loading, error, data } = useFetchTwelveProductsQuery();
 
   if (loading) return <p>Loading...</p>;
@@ -139,6 +141,7 @@ export { ProductCollection } from './ProductCollection';
 In Next.js the routing is generated from the file system. All the pages are located in `pages` and `pages/index.tsx` is the page that will be displed for the `/` path. Right now, it's just a 4-element grid with links to Next.js resources. Let's replace it with the `ProductCollection` component:
 
 ```tsx
+// pages/index.tsx
 import type { NextPage } from 'next'
 import React from 'react'
 
@@ -225,7 +228,8 @@ We need to slightly modify our GraphQL query to also include the product thumbna
 
 Here's the modified query:
 
-```graphql{7-12}
+```graphql{8-13}
+# graphql/FetchTwelveProducts.graphql
 query FetchTwelveProducts {
   products(first: 12, channel: "default-channel") {
     edges {
@@ -249,8 +253,8 @@ Let's use this query to replace the previous one inside the `FetchTwelveProducts
 Modify the `ProductCollection.tsx` component to display the product thumbnails along with their categories:
 
 ```tsx
+// components/ProductCollection.tsx
 import React from 'react';
-import Link from 'next/link';
 import { useFetchTwelveProductsQuery } from '@/saleor/api';
 
 export const ProductCollection: React.VFC = () => {
@@ -297,6 +301,7 @@ Before we dive into other Saleor features, let's take a moment to slightly refac
 Call this component `ProductElement` and put it in `components/`
 
 ```tsx
+// components/ProductElement.tsx
 export const ProductElement: React.VFC = ({ id, name, thumbnail, category }) => {
   return (
     <li key={id} className="relative bg-white border">
@@ -314,11 +319,19 @@ export const ProductElement: React.VFC = ({ id, name, thumbnail, category }) => 
 }
 ```
 
+Let's add the export statement in `components/index.ts` for this component.
+
+```tsx{2}
+export { ProductCollection } from './ProductCollection';
+export { ProductElement } from './ProductElement';
+export { Layout } from './Layout';
+```
+
 Now we can reorganize the `ProductCollection` component in the following way:
 
 ```tsx
+// components/ProductCollection.tsx
 import React from 'react';
-import Link from 'next/link';
 import { useFetchTwelveProductsQuery } from '@/saleor/api';
 import { ProductElement } from '@/components';
 
@@ -335,7 +348,7 @@ export const ProductCollection: React.VFC = () => {
       <div>
         <ul role="list" className="grid gap-4 grid-cols-4">
           {products?.length > 0 &&
-            products.map(({ node }) => <ProductElement {...node} />)
+            products.map(({ node }) => <ProductElement {...node} key={node.id} />)
           }
         </ul>
       </div>
