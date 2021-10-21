@@ -319,6 +319,14 @@ export const ProductElement: React.VFC = ({ id, name, thumbnail, category }) => 
 }
 ```
 
+Let's add the export statement in `components/index.ts` for this component.
+
+```tsx{2}
+export { ProductCollection } from './ProductCollection';
+export { ProductElement } from './ProductElement';
+export { Layout } from './Layout';
+```
+
 Now we can reorganize the `ProductCollection` component in the following way:
 
 ```tsx
