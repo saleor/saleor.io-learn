@@ -32,17 +32,51 @@ query FilterProducts($filter: ProductFilterInput!) {
 }
 ```
 
-In the example above, we are setting the `filter` argument using the `$filter` variable with a precisely defined type of `ProductFilterInput`. The exclamation mark signifies that query variable definition is *required*.
+In the example above, we are setting the `filter` argument using the `$filter` variable with a precisely defined type of `ProductFilterInput`. The exclamation mark signifies that query variable definition is *required*. 
 
+Notice also that we change the name of the query to `FilterProducts`. This will generate the `useFilterProductsQuery` React Hook.
 
-Such defined GraphQL query accepts its input via the `variables` field. This transformation is done automatically by the Apollo library along with the code generation and available as input in its React.js hook.
+Such defined GraphQL query accepts its input via the `variables` field. This transformation is done automatically by the Apollo library along with the code generation and available as input in its React Hook.
 
-```js
-const { loading, error, data } = useFilterProductsQuery({
-  variables: {
-    filter: { search: 'T-Shirt' }
+In `components/ProductCollection.tsx`, we can replace the `useFetchTwelveProductsQuery` with the newly generated `useFilterProductsQuery` as the shape of the elements in the product collection doesn't change.
+
+```tsx{4,12-16}
+// components/ProductCollection.tsx
+import React from 'react';
+
+import { Product, useFilterProductsQuery } from '@/saleor/api';
+import { ProductElement } from '@/components';
+
+const styles = {
+  grid: 'grid gap-4 grid-cols-4',
+}
+
+export const ProductCollection = () => {
+  const { loading, error, data } = useFilterProductsQuery({
+    variables: {
+      filter: { search: 'T-Shirt' }
+    }
+  });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error</p>;
+
+  if (data) {
+    const products = data.products?.edges || [];
+
+    return (
+      <ul role="list" className={styles.grid}>
+        {products?.length > 0 &&
+          products.map(
+            ({ node }) => <ProductElement key={node.id} {...node as Product} />,
+          )}
+      </ul>
+    );
   }
-});
+
+  return null;
+}
+
 ```
 
 Thanks to GraphQL variables we can parametrize our queries directly from the React components. 

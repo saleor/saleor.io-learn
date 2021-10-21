@@ -15,9 +15,9 @@ It’s not a good idea to keep this information in the entity itself as it’s n
 
 Let's adapt the query for fetching products so that it can be paginated.
 
-```graphql{1-2,14-19}
-query Products($before: String, $after: String) {
-  products(first: 4, channel: "default-channel", after: $after, before: $before) {
+```graphql{1-2,15-20}
+query ProductCollection($after: String) {
+  products(first: 4, channel: "default-channel", after: $after) {
     edges {
       node {
         id
@@ -42,119 +42,146 @@ query Products($before: String, $after: String) {
 
 We are not only returing the product `node`, but also the `pageInfo` with `hasNextPage` / `hasPreviousPage` helpers to see if there are elements after and before the current collection subset along with `startCursor` / `endCursor` that uniqely identify the current subset of product collection. 
 
-Additionally, the `products` query has the `after` and `before` arguments that take the value of `startCursor` and `endCursor` as input. 
+Additionally, the `products` query has the `after` arguments that take the value of `startCursor` and `endCursor` as input. 
+
+Let's re-write the `ProductCollection` by adding the pagination as a *Fetch More* button.
 
 ```tsx
-import React from "react";
+import React from 'react';
 
-import { ProductFilterInput, useProductCollectionQuery } from "@/saleor/api";
+import { Product, useFetchTwelveProductsQuery } from '@/saleor/api';
+import { Pagination, ProductElement } from '@/components';
 
-import { Pagination } from "./Pagination";
-import { ProductElement } from "./ProductElement";
-
-export const ProductCollection: React.VFC = ({}) => {
-  const { loading, error, data, fetchMore } = useProductCollectionQuery();
-
-  const onLoadMore = () => {
-    fetchMore({
-      variables: {
-        after: data?.products?.pageInfo.endCursor,
-      },
-    });
-  };
-
-  if (loading) return <p>Loading...</p> 
-  if (error) return <p>Error</p>;
-
-  const products = data?.products?.edges.map((edge) => edge.node) || [];
-
-  if (products.length === 0) {
-    return <p>No products.</p>;
-  }
-
-  return (
-    <div>
-      <ul
-        role="list"
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-      >
-        {products.map((product) => (
-          <ProductElement key={product.id} product={product} />
-        ))}
-      </ul>
-
-      <Pagination
-        onLoadMore={onLoadMore}
-        pageInfo={data?.products?.pageInfo}
-        itemCount={data?.products?.edges.length}
-        totalCount={data?.products?.totalCount || undefined}
-      />
-    </div>
-  );
-};
-
-export default ProductCollection;
-```
-
-```tsx
-import { PageInfo } from "@/saleor/api";
-
-export interface PaginationProps {
-  pageInfo?: PageInfo;
-  onLoadMore: () => void;
-  totalCount?: number;
-  itemCount?: number;
+const styles = {
+  grid: 'grid gap-4 grid-cols-4',
 }
 
-export const Pagination: React.VFC<PaginationProps> = ({
-  pageInfo,
+export const ProductCollection = () => {
+  const { loading, error, data, fetchMore } = useFetchTwelveProductsQuery();
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error</p>;
+
+  if (data) {
+    const products = data.products?.edges || [];
+    const pageInfo = data.products?.pageInfo;
+    const totalCount = data.products?.totalCount;
+
+    const onLoadMore = () => {
+      fetchMore({
+        variables: {
+          after: pageInfo?.endCursor,
+        },
+      });
+    };
+
+    return (
+      <>
+        <ul role="list" className={styles.grid}>
+          {products?.length > 0 &&
+            products.map(
+              ({ node }) => <ProductElement key={node.id} {...node as Product} />,
+            )}
+        </ul>
+        {pageInfo?.hasNextPage && 
+          <Pagination
+            onLoadMore={onLoadMore}
+            itemCount={products.length}
+            totalCount={totalCount || NaN}
+          />
+        }
+      </>
+    );
+  }
+
+  return null;
+}
+```
+
+There is a couple of changes here. First of all, we add the `Pagination` component that is responsible for displaying the *Fetch More* button along handling the request for more data in the product collection. Then, we use Apollo's `fetchMore` helper method to construct the `onClick` event handler. This helper accepts the same variables as the auto-generated React Hook itself. As we request the next elements in the collection, we set the `after` argument to the cursor the the last element (the end) in the current subset of the product collection. Finally, we conditionally display the `Pagination` component depenending on the value of `pageInfo.hasNextPage`.
+
+The `Pagination` component is straightforward. We have a button with the passed in handler attached to the `onClick` event along with the information about the current count and total count. 
+
+```tsx
+// components/Pagination.tsx
+import React from 'react';
+
+const styles = {
+  nav: 'my-8 flex justify-center flex-col items-center',
+  info: 'text-sm text-gray-500 mt-2' 
+}
+
+interface Props {
+  onLoadMore: () => void;
+  totalCount: number;
+  itemCount: number;
+}
+
+export const Pagination = ({
   onLoadMore,
   itemCount,
   totalCount,
-}) => {
-
-  if (!pageInfo || !pageInfo?.hasNextPage) {
-    return <></>;
-  }
-
+}: Props) => {
   return (
-    <nav className="mt-8 p-4 ">
-      <div className="flex justify-center flex-col items-center">
-        <a
-          onClick={onLoadMore}
-          className="relative inline-flex  items-center px-4 py-2 border text-sm font-medium rounded-md text-gray-700 bg-gray-50 hover:border-blue-300 cursor-pointer"
-        >
-          Load More
-        </a>
-        {itemCount && totalCount && (
-          <div className="text-sm text-gray-500 mt-2">
-            {itemCount} out of {totalCount}
-          </div>
-        )}
-      </div>
+    <nav className={styles.nav}>
+      <a
+        onClick={onLoadMore}
+        className="button"
+      >
+        Load More
+      </a>
+      {itemCount && totalCount && (
+        <div className={styles.info}>
+          {itemCount} out of {totalCount}
+        </div>
+      )}
     </nav>
   );
 };
-
 ```
 
----
+Let's not forget to export the `Pagination` component from `components/index.ts`:
 
-The pagination process consists of passing the last product that is displayed as `after` when paginating forward, and as `before` when paginating backward. Here's a React.js snippet that implements that behavior.
+```tsx{4}
+export { ProductCollection } from './ProductCollection';
+export { Layout } from './Layout';
+export { ProductElement } from './ProductElement';
+export { Pagination } from './Pagination';
+```
 
-```js
-const [before, setBefore] = useState('');
-const [after, setAfter] = useState('');
-const { loading, error, data } = useProductsQuery({
-  variables: { after, before }
+Lastly, we must define the type policy for the `products` query. In `pages/_app.tsx` while defining the Apollo client instance, we communicate to the Apollo cache that the `products` query has the Relay style pagination.
+
+```tsx{4,11-17}
+// pages/_app.tsx
+import type { AppProps } from 'next/app'
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import { relayStylePagination } from "@apollo/client/utilities";
+
+import '../styles/main.css';
+
+const client = new ApolloClient({
+  uri: "https://vercel.saleor.cloud/graphql/",
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          products: relayStylePagination([]),
+        },
+      },
+    }
+  }),
 });
+
+export default function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <ApolloProvider client={client}>
+      <Component {...pageProps} />
+    </ApolloProvider>
+  )
+}
 ```
 
-In our React.js component, we must connect the pagination buttons accordingaly:
+We end up with the following page that displays four products along with the button to fetch more; once the button is clicked, four more products will be displayed: 
 
-```tsx
-<div>
-  <a href="#" onClick={() => setBefore(latestProducts[0].cursor || '')}>Prev</a>
-  <a href="#" onClick={() => setAfter(latestProducts[latestProducts.length - 1].cursor || '')}>Next</a>
-</div>
-```
+![Products Pagination](/images/products-pagination.png)
+
