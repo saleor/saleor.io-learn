@@ -92,7 +92,16 @@ import React from 'react';
 
 import { useFetchTwelveProductsQuery } from '@/saleor/api';
 
-export const ProductCollection: React.VFC = () => {
+const styles = {
+  grid: 'grid gap-4 grid-cols-4',
+  product: {
+    card: 'bg-white border',
+    summary: 'px-4 py-2 border-gray-100 bg-gray-50 border-t',
+    title: 'block text-lg text-gray-900 truncate',
+  }
+}
+
+export const ProductCollection = () => {
   const { loading, error, data } = useFetchTwelveProductsQuery();
 
   if (loading) return <p>Loading...</p>;
@@ -102,22 +111,20 @@ export const ProductCollection: React.VFC = () => {
     const products = data.products?.edges || [];
 
     return (
-      <div>
-        <ul role="list" className="grid gap-4 grid-cols-4">
-          {products?.length > 0 &&
-            products.map(
-              ({ node: { id, name } }) => (
-                <li key={id} className="relative bg-white border">
-                  <a>
-                    <div className="px-4 py-2 border-gray-100 bg-gray-50 border-t">
-                      <p className="block text-lg text-gray-900 truncate">{name}</p>
-                    </div>
-                  </a>
-                </li>
-              ),
-            )}
-        </ul>
-      </div>
+      <ul role="list" className={styles.grid}>
+        {products?.length > 0 &&
+          products.map(
+            ({ node: { id, name } }) => (
+              <li key={id} className={styles.product.card}>
+                <a>
+                  <div className={styles.product.summary}>
+                    <p className={styles.product.title}>{name}</p>
+                  </div>
+                </a>
+              </li>
+            ),
+          )}
+      </ul>
     );
   }
 
@@ -142,17 +149,21 @@ In Next.js the routing is generated from the file system. All the pages are loca
 
 ```tsx
 // pages/index.tsx
-import type { NextPage } from 'next'
 import React from 'react'
 
 import { 
   ProductCollection 
 } from '@/components';
 
-const Home: NextPage = () => {
+const styles = {
+  background: 'min-h-screen bg-gray-100',
+  container: 'py-10 max-w-7xl mx-auto',
+}
+
+const Home = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="py-10 max-w-7xl mx-auto">
+    <div className={styles.background}>
+      <div className={styles.container}>
         <ProductCollection />
       </div>
     </div>
@@ -180,7 +191,7 @@ const styles = {
   container: 'py-10 max-w-7xl mx-auto',
 }
 
-export const Layout: React.VFC<Props> = ({ children }) => {
+export const Layout = ({ children }: Props) => {
   return (
     <div className={styles.background}>
       <div className={styles.container}>
@@ -201,7 +212,6 @@ export { Layout } from './Layout';
 With `Layout` we can rewrite the `Home` page in the following way:
 
 ```tsx
-import type { NextPage } from 'next'
 import React from 'react'
 
 import { 
@@ -209,7 +219,7 @@ import {
   Layout 
 } from '@/components';
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
     <Layout>
       <ProductCollection />
@@ -257,7 +267,21 @@ Modify the `ProductCollection.tsx` component to display the product thumbnails a
 import React from 'react';
 import { useFetchTwelveProductsQuery } from '@/saleor/api';
 
-export const ProductCollection: React.VFC = () => {
+const styles = {
+  grid: 'grid gap-4 grid-cols-4',
+  product: {
+    card: 'bg-white border',
+    summary: 'px-4 py-2 border-gray-100 bg-gray-50 border-t',
+    title: 'block text-lg text-gray-900 truncate',
+    category: 'block text-sm font-medium text-gray-500',
+    image: {
+      aspect: 'aspect-h-1 aspect-w-1',
+      content: 'object-center object-cover'
+    }
+  }
+}
+
+export const ProductCollection = () => {
   const { loading, error, data } = useFetchTwelveProductsQuery();
 
   if (loading) return <p>Loading...</p>;
@@ -267,26 +291,24 @@ export const ProductCollection: React.VFC = () => {
     const products = data.products?.edges || [];
 
     return (
-      <div>
-        <ul role="list" className="grid gap-4 grid-cols-4">
-          {products?.length > 0 &&
-            products.map(
-              ({ node: { id, name, thumbnail, category } }) => (
-                <li key={id} className="relative bg-white border">
-                  <a>
-                    <div className="aspect-h-1 aspect-w-1">
-                      <img src={thumbnail?.url} alt="" className="object-center object-cover" />
-                    </div>
-                    <div className="px-4 py-2 border-gray-100 bg-gray-50 border-t">
-                      <p className="block text-lg text-gray-900 truncate">{name}</p>
-                      <p className="block text-sm font-medium text-gray-500">{category?.name}</p>
-                    </div>
-                  </a>
-                </li>
-              ),
-            )}
-        </ul>
-      </div>
+      <ul role="list" className={styles.grid}>
+        {products?.length > 0 &&
+          products.map(
+            ({ node: { id, name, thumbnail, category } }) => (
+              <li key={id} className={styles.product.card}>
+                <a>
+                  <div className={styles.product.image.aspect}>
+                    <img src={thumbnail?.url} alt="" className={styles.product.image.content} />
+                  </div>
+                  <div className={styles.product.summary}>
+                    <p className={styles.product.title}>{name}</p>
+                    <p className={styles.product.category}>{category?.name}</p>
+                  </div>
+                </a>
+              </li>
+            ),
+          )}
+      </ul>
     );
   }
 
@@ -302,40 +324,62 @@ Call this component `ProductElement` and put it in `components/`
 
 ```tsx
 // components/ProductElement.tsx
-export const ProductElement: React.VFC = ({ id, name, thumbnail, category }) => {
+import React from 'react';
+
+const styles = {
+  card: 'bg-white border',
+  summary: 'px-4 py-2 border-gray-100 bg-gray-50 border-t',
+  title: 'block text-lg text-gray-900 truncate',
+  category: 'block text-sm font-medium text-gray-500',
+  image: {
+    aspect: 'aspect-h-1 aspect-w-1',
+    content: 'object-center object-cover'
+  }
+}
+
+import { Product } from '@/saleor/api'
+
+type Props = Pick<Product, 'id' | 'name' | 'thumbnail' | 'category'>;
+
+export const ProductElement = ({ id, name, thumbnail, category }: Props) => {
   return (
-    <li key={id} className="relative bg-white border">
+    <li key={id} className={styles.card}>
       <a>
-        <div className="aspect-h-1 aspect-w-1">
-          <img src={thumbnail?.url} alt="" className="object-center object-cover" />
+        <div className={styles.image.aspect}>
+          <img src={thumbnail?.url} alt="" className={styles.image.content} />
         </div>
-        <div className="px-4 py-2 border-gray-100 bg-gray-50 border-t">
-          <p className="block text-lg text-gray-900 truncate">{name}</p>
-          <p className="block text-sm font-medium text-gray-500">{category?.name}</p>
+        <div className={styles.summary}>
+          <p className={styles.title}>{name}</p>
+          <p className={styles.category}>{category?.name}</p>
         </div>
       </a>
     </li>
-  )
+  );
 }
 ```
 
-Let's add the export statement in `components/index.ts` for this component.
+Let's also add the `export` statement for this component to `components/index.ts`:
 
-```tsx{2}
+```tsx{3}
 export { ProductCollection } from './ProductCollection';
-export { ProductElement } from './ProductElement';
 export { Layout } from './Layout';
+export { ProductElement } from './ProductElement';
 ```
 
-Now we can reorganize the `ProductCollection` component in the following way:
+Now, we can reorganize the `ProductCollection` component in the following way:
 
 ```tsx
 // components/ProductCollection.tsx
 import React from 'react';
-import { useFetchTwelveProductsQuery } from '@/saleor/api';
+
+import { Product, useFetchTwelveProductsQuery } from '@/saleor/api';
 import { ProductElement } from '@/components';
 
-export const ProductCollection: React.VFC = () => {
+const styles = {
+  grid: 'grid gap-4 grid-cols-4',
+}
+
+export const ProductCollection = () => {
   const { loading, error, data } = useFetchTwelveProductsQuery();
 
   if (loading) return <p>Loading...</p>;
@@ -345,16 +389,19 @@ export const ProductCollection: React.VFC = () => {
     const products = data.products?.edges || [];
 
     return (
-      <div>
-        <ul role="list" className="grid gap-4 grid-cols-4">
-          {products?.length > 0 &&
-            products.map(({ node }) => <ProductElement {...node} key={node.id} />)
-          }
-        </ul>
-      </div>
+      <ul role="list" className={styles.grid}>
+        {products?.length > 0 &&
+          products.map(
+            ({ node }) => <ProductElement key={node.id} {...node as Product} />,
+          )}
+      </ul>
     );
   }
 
   return null;
 }
 ```
+
+Refactoring `ProductElement` out of `ProductCollection` doesn't change anything visually in our application at this stage. It should look like on the following image:
+
+![Refactored Product Collection](/images/product-overview.png)

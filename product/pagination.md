@@ -9,13 +9,13 @@ next:
   path: /product/single-product/
 ---
 
-The `products` query returns a paginated collection. This means that once we receive the query result, we also have data to ask for the next elements in that collection. In order to keep track of the position in the collection we need a pointer, usually known as a cursor. The query result must provide such cursor in the response once it returns so that we can ask for another subset of data. 
+The `products` query from the Saleor API returns a paginated collection. Once we receive the query result, we also have data to ask for the next elements in that collection. In order to keep track of the position in the collection we need a pointer, usually known as a cursor. The query result must provide such cursor in the response once it returns so that we can ask for another subset of data. 
 
 It’s not a good idea to keep this information in the entity itself as it’s not related to the business model. For that we introduce a layer of indirection. In GraphQL this layer is usually known as `edges`.
 
 Let's adapt the query for fetching products so that it can be paginated.
 
-```graphql{2,4}
+```graphql{1-2,14-19}
 query Products($before: String, $after: String) {
   products(first: 4, channel: "default-channel", after: $after, before: $before) {
     edges {
@@ -29,12 +29,12 @@ query Products($before: String, $after: String) {
           name
         }
       }
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        startCursor
-        endCursor
-      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
     }
   }
 }

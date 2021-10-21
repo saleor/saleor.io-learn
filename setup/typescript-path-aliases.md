@@ -10,13 +10,14 @@ next:
 
 Path Alias is a TypeScript configuration that maps a custom alias to a path in your project. Thanks to path aliases the import statements are short are more convenient to use. 
 
-Let's declare couple of aliases for components, the auto-generated Saleor typings and the location of GraphQL statements. Open `tsconfig.json` and add the following `paths` section under `compilerOptions`
+Let's declare couple of aliases for components, the auto-generated Saleor typings and the location of GraphQL statements. Open `tsconfig.json` and add the following `paths` section under `compilerOptions`. We also need to set the `baseUrl` to make the path aliases work in Next.js.
 
 ```json
 // tsconfig.json
 {
   "compilerOptions": {
     ...
+    "baseUrl": ".",
     "paths": {
       "@/components": ["components"],
       "@/components/*": ["components/*"],
@@ -24,18 +25,6 @@ Let's declare couple of aliases for components, the auto-generated Saleor typing
       "@/graphql": ["graphql"],
       "@/lib/*": ["lib/*"]
     }
-  }
-}
-```
-
-In Next.js additional configuration option is required to make path aliases work - the `baseUrl` - it allows you to import directly from the root of the project.
-
-```json
-// tsconfig.json
-{
-  "compilerOptions": {
-    ...
-    "baseUrl": "."
   }
 }
 ```
