@@ -140,6 +140,7 @@ Once the `data` is available, we display the product names as a list. It's impor
 Let's define the export statement in `components/index.ts` for this component, so that we can directly import it from `@/components` later on.
 
 ```tsx
+// components/index.ts
 export { ProductCollection } from './ProductCollection';
 ```
 
@@ -180,6 +181,7 @@ As a result when navigating to `localhost:3000/` you should see a grid of produc
 Additionally, we can standarise the structure for each Next.js page with a fixed layout using the following component:
 
 ```tsx
+// components/Layout.tsx
 import React from 'react';
 
 interface Props {
@@ -204,7 +206,8 @@ export const Layout = ({ children }: Props) => {
 
 Let's define the export statement in `components/index.ts` for this component, so that we can directly import it from `@/components` later on.
 
-```tsx{2}
+```tsx{3}
+// components/index.ts
 export { ProductCollection } from './ProductCollection';
 export { Layout } from './Layout';
 ```
@@ -212,6 +215,7 @@ export { Layout } from './Layout';
 With `Layout` we can rewrite the `Home` page in the following way:
 
 ```tsx
+// pages/index.tsx
 import React from 'react'
 
 import { 
@@ -360,7 +364,8 @@ export const ProductElement = ({ id, name, thumbnail, category }: Props) => {
 
 Let's also add the `export` statement for this component to `components/index.ts`:
 
-```tsx{3}
+```tsx{4}
+// components/index.ts
 export { ProductCollection } from './ProductCollection';
 export { Layout } from './Layout';
 export { ProductElement } from './ProductElement';

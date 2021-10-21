@@ -13,7 +13,8 @@ The `products` query allows us to the order in the returned product collection w
 
 Let's rework our previous query so that it also specifies the sorting:
 
-```graphql{1,2}
+```graphql{2,3}
+# graphql/FilterProducts.graphql
 query FilterProducts($filter: ProductFilterInput!, $sortBy: ProductOrder) {
   products(first: 12, channel: "default-channel", filter: $filter, sortBy: $sortBy) {
     edges {

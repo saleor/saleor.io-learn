@@ -14,6 +14,7 @@ Often the filtering criteria come from the users. Those criteria cannot be put a
 Let's rewrite the previous query that fetches T-shirts, so that the `filter` argument is set via a GraphQL query variable:
 
 ```graphql{1,2}
+# graphql/TShirtProducts.graphql
 query FilterProducts($filter: ProductFilterInput!) {
   products(first: 12, channel: "default-channel", filter: $filter) {
     edges {
