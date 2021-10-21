@@ -22,7 +22,7 @@ Let's declare couple of aliases for components, the auto-generated Saleor typing
       "@/components/*": ["components/*"],
       "@/saleor/api": ["saleor/api"],
       "@/graphql": ["graphql"],
-      "@/lib/*": ["lib/*"],
+      "@/lib/*": ["lib/*"]
     }
   }
 }
