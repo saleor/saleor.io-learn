@@ -15,7 +15,8 @@ It’s not a good idea to keep this information in the entity itself as it’s n
 
 Let's adapt the query for fetching products so that it can be paginated.
 
-```graphql{1-2,15-20}
+```graphql{2-3,16-21}
+# graphql/TShirtProducts.graphql
 query ProductCollection($after: String) {
   products(first: 4, channel: "default-channel", after: $after) {
     edges {
@@ -47,6 +48,7 @@ Additionally, the `products` query has the `after` arguments that take the value
 Let's re-write the `ProductCollection` by adding the pagination as a *Fetch More* button.
 
 ```tsx
+// components/ProductCollection.tsx
 import React from 'react';
 
 import { Product, useFetchTwelveProductsQuery } from '@/saleor/api';
@@ -142,7 +144,8 @@ export const Pagination = ({
 
 Let's not forget to export the `Pagination` component from `components/index.ts`:
 
-```tsx{4}
+```tsx{5}
+// components/index.ts
 export { ProductCollection } from './ProductCollection';
 export { Layout } from './Layout';
 export { ProductElement } from './ProductElement';

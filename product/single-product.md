@@ -15,6 +15,7 @@ Sometimes you may need to fetch a specific product. Usually, you display the mos
 Let's call our query `ProductByID` to make it explicit:
 
 ```graphql
+# graphql/ProductByID.graphql
 query ProductByID($id: ID!) {
   product(id: $id, channel: "default-channel") {
     id
