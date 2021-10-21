@@ -348,7 +348,7 @@ export const ProductCollection: React.VFC = () => {
       <div>
         <ul role="list" className="grid gap-4 grid-cols-4">
           {products?.length > 0 &&
-            products.map(({ node }) => <ProductElement {...node} />)
+            products.map(({ node }) => <ProductElement {...node} key={node.id} />)
           }
         </ul>
       </div>
