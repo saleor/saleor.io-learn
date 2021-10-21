@@ -35,16 +35,23 @@ query FilterProducts($filter: ProductFilterInput!, $sortBy: ProductOrder) {
 
 As with filtering, we use the `$sortBy` variable on our `FilterProducts` query so that the sorting can be specified dynamically in a React component as input to its React hook.
 
-```js{4-7}
-const { loading, error, data } = useFilterProductsQuery({
-  variables: {
-    filter: { search: 'T-Shirt' },
-    sortBy: {
-      field: ProductOrderField.Name,
-      direction: OrderDirection.Desc
+```tsx{3,9-10}
+// components/ProductCollection.tsx
+...
+import { useFilterProductsQuery,
+         ProductOrderField,
+         OrderDirection } from '@/saleor/api';
+...
+  const { loading, error, data } = useFilterProductsQuery({
+    variables: {
+      filter: { search: 'T-Shirt' },
+      sortBy: {
+        field: ProductOrderField.Name,
+        direction: OrderDirection.Desc
+      }
     }
-  }
-});
+  });
+...
 ```
 
 In the example above, we are using the product name as the field for sorting along with the *descending* direction. That means we will be using the lexicographic order and as a result, the products will be reversed.
