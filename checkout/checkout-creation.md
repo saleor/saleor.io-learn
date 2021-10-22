@@ -15,10 +15,11 @@ You can create a checkout in Saleor using the `createCheckout` mutation. We need
 In the following example, we are creating an empty cart 
 
 ```graphql
-mutation {
+# graphql/CreateCheckout.graphql
+mutation CreateCheckout {
   checkoutCreate(
     input: {
-      channel: "default-channel",
+      channel: "default-channel"
       email: "customer@example.com"
       lines: []
     }
@@ -42,11 +43,27 @@ Open the GraphQL Playground and try to execute this mutation.
 
 In our React.js application we need to trigger either create a new checkout or reuse the existing one. In order to distinguish between new and returning user, we will keep the checkout `token` client-side in the local storage. If the local storage is empty, it means there is no checkout yet and it must be created. Otherwise, we will use the `token` that found in the local storage to ask the Saleor server to fetch an existing checkout.
 
+For local storage management we will adopt `useLocalStorage` hook from the `react-use` which is a Collection of essential React Hooks.
+
+```
+npm install react-use
+```
+
+```
+pnpm add react-use
+```
+
+
 Let's use `pages/_app.tsx` as a place to initialize the checkout in our React.js application. Since the checkout creation is performed via a GraphQL mutation, we need a GraphQL client within the React.js component tree. 
 
 We need create a simple pass-through component called `Root` that wraps around `Component` provided by Next.js in order to be able to reference the GraphQL client.
 
 ```tsx
+// pages/_app.tsx
+import { useEffect } from "react";
+import { useLocalStorage } from "react-use";
+import { useCreateCheckoutMutation } from '@/saleor/api';
+...
 const Root = ({ Component, pageProps }: AppProps) => {
   const [token, setToken] = useLocalStorage("token");
   const [createCheckout, { data, loading }] = useCreateCheckoutMutation();

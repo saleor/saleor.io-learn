@@ -17,6 +17,7 @@ The client uses the `token` to reference the checkout object associated with the
 Let's name this mutation as `CheckoutByToken` and put it in `graphql/queries/CheckoutByToken.graphql`. 
 
 ```graphql
+# graphql/queries/CheckoutByToken.graphql
 query CheckoutByToken($checkoutToken: UUID!) {
   checkout(token: $checkoutToken) {
     id
@@ -120,9 +121,10 @@ query CheckoutByToken($checkoutToken: UUID!) {
 
 ## Displaying the checkout content
 
-Let's create the `pages/cart.tsx` page that will be available at `/cart`. Whenever a user navigates to this page, we will check for the session, and if a session is available, we will ask the Saleor API for the checkout content.
+Let's update the `pages/cart.tsx` page. Whenever a user navigates to this page, we will check for the session, and if a session is available, we will ask the Saleor API for the checkout content.
 
 ```tsx
+// pages/cart.tsx
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
