@@ -15,6 +15,7 @@ In a typical storefront, there is a page that displays the current content of a 
 Let's start by creating `pages/cart.tsx` with just the visual structure of the cart. There will be the website navbar along with the cart header and a list of product variants currently in the cart.
 
 ```tsx
+// pages/cart.tsx
 import React from "react";
 import Link from "next/link";
 
@@ -78,6 +79,7 @@ Let's refactor the cart page by splitting it into a few components so it's easie
 For the cart header, let's put it into `components/CartHeader.tsx`
 
 ```tsx
+// components/CartHeader.tsx
 import React from "react";
 import Link from "next/link";
 
@@ -100,11 +102,13 @@ export const CartHeader: React.VFC = ({}) => {
       </div>
     </header>
   );
+}
 ```
 
 For the cart list, let's put it into `components/CartList.tsx`
 
 ```tsx
+// components/CartList.tsx
 import React from "react";
 import Link from "next/link";
 
@@ -121,6 +125,7 @@ export const CartList: React.VFC = ({}) => {
 And finally, for the cart summary, let's put it into the `components/CartSummary.tsx`
 
 ```tsx
+// components/CartSummary.tsx
 import React from "react";
 import Link from "next/link";
 
@@ -131,9 +136,23 @@ export const CartSummary: React.VFC = ({}) => {
 }
 ```
 
+Let's not forget to export added components from `components/index.ts`:
+
+```ts{3-5}
+// components/index.ts
+...
+export { CartHeader } from './CartHeader';
+export { CartList } from './CartList';
+export { CartSummary } from './CartSummary';
+
+```
+
+
+
 Now we can put it all together and rewrite the cart page (that's located in `pages/cart.tsx`):
 
 ```tsx
+// pages/cart.tsx
 import React from "react";
 import Link from "next/link";
 
