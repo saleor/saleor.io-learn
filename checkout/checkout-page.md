@@ -20,49 +20,43 @@ import React from "react";
 import Link from "next/link";
 
 import {
-  Navbar,
+  Layout,
 } from "@/components";
 
-const Cart: React.VFC = ({}) => {
+const styles = {
+  header: 'flex justify-between',
+  title: 'text-3xl font-extrabold tracking-tight text-gray-900',
+  grid: 'grid grid-cols-3 gap-8',
+}
+
+const Cart = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Navbar />
+    <Layout>
+      <header className={styles.header}>
+        <h1 className={styles.title}>
+          Your Cart
+        </h1>
+        <div>
+          <Link href="/">
+            <a className="link">
+              Continue Shopping
+            </a>
+          </Link>
+        </div>
+      </header>
 
-      <div className="py-10">
-        <header className="mb-4">
-          <div className="max-w-7xl mx-auto px-8">
-            <div className="flex justify-between">
-              <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
-                Your Cart
-              </h1>
-              <div>
-                <Link href="/">
-                  <a className="text-sm text-blue-600 hover:text-blue-500">
-                    Continue Shopping
-                  </a>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        <main>
-          <div className="max-w-7xl mx-auto px-8">
-            <div className="grid grid-cols-3 gap-8">
-              <div className="col-span-2">
-                <ul role="list" className="divide-y divide-gray-200">
-                  <li className="flex py-6">Product 1</li>
-                  <li className="flex py-6">Product 2</li>
-                </ul>
-              </div>
-              <div>
-                Cart Summary
-              </div>
-            </div>
-          </div>
-        </main>
+      <div className={styles.grid}>
+        <div className="col-span-2">
+          <ul role="list" className="divide-y divide-gray-200">
+            <li className="py-6">Product 1</li>
+            <li className="py-6">Product 2</li>
+          </ul>
+        </div>
+        <div>
+          Cart Summary
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
@@ -71,7 +65,9 @@ export default Cart;
 
 ## Splitting the cart page into components
 
-Let's refactor the cart page by splitting it into a few components so it's easier to manage. We can identify sections as components to extract: 
+Before we add new features, first let's refactor a little bit the cart page. We will split the cart component into a few smaller components so it's easier to manage. 
+
+We can identify the followins sections to extract as separate components: 
 1. the cart header section that consists of the content between the `<header>...</header>` tags;
 1. the list of products described by the `<ul>...</ul>`;
 1. the cart summary that will eventually contain the cart value, i.e. the products total along with shipping costs, taxes and possible discounts
@@ -80,25 +76,26 @@ For the cart header, let's put it into `components/CartHeader.tsx`
 
 ```tsx
 // components/CartHeader.tsx
-import React from "react";
+import React from 'react';
 import Link from "next/link";
 
-export const CartHeader: React.VFC = ({}) => {
+const styles = {
+  header: 'flex justify-between',
+  title: 'text-3xl font-extrabold tracking-tight text-gray-900',
+}
+
+export const CartHeader = () => {
   return (
-    <header className="mb-4">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="flex justify-between">
-          <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
-            Your Cart
-          </h1>
-          <div>
-            <Link href="/">
-              <a className="text-sm text-blue-600 hover:text-blue-500">
-                Continue Shopping
-              </a>
-            </Link>
-          </div>
-        </div>
+    <header className={styles.header}>
+      <h1 className={styles.title}>
+        Your Cart
+      </h1>
+      <div>
+        <Link href="/">
+          <a className="link">
+            Continue Shopping
+          </a>
+        </Link>
       </div>
     </header>
   );
@@ -109,16 +106,15 @@ For the cart list, let's put it into `components/CartList.tsx`
 
 ```tsx
 // components/CartList.tsx
-import React from "react";
-import Link from "next/link";
+import React from 'react';
 
-export const CartList: React.VFC = ({}) => {
+export const CartList = () => {
   return (
     <ul role="list" className="divide-y divide-gray-200">
-      <li className="flex py-6">Product 1</li>
-      <li className="flex py-6">Product 2</li>
+      <li className="py-6">Product 1</li>
+      <li className="py-6">Product 2</li>
     </ul>
-  )
+  );
 }
 ```
 
@@ -126,65 +122,66 @@ And finally, for the cart summary, let's put it into the `components/CartSummary
 
 ```tsx
 // components/CartSummary.tsx
-import React from "react";
-import Link from "next/link";
+import React from 'react';
 
-export const CartSummary: React.VFC = ({}) => {
+export const CartSummary = () => {
   return (
     <div>Cart Summary</div>
-  )
+  );
 }
 ```
 
 Let's not forget to export added components from `components/index.ts`:
 
-```ts{3-5}
+```ts{6-8}
 // components/index.ts
-...
+export { ProductCollection } from './ProductCollection';
+export { Layout } from './Layout';
+export { ProductElement } from './ProductElement';
+export { Pagination } from './Pagination';
+export { Navbar } from './Navbar';
 export { CartHeader } from './CartHeader';
 export { CartList } from './CartList';
 export { CartSummary } from './CartSummary';
-
 ```
-
-
 
 Now we can put it all together and rewrite the cart page (that's located in `pages/cart.tsx`):
 
 ```tsx
 // pages/cart.tsx
 import React from "react";
-import Link from "next/link";
 
 import {
-  Navbar,
+  Layout,
   CartHeader,
   CartList,
   CartSummary
 } from "@/components";
 
-const Cart: React.VFC = ({}) => {
+const styles = {
+  grid: 'grid grid-cols-3 gap-8',
+}
+
+const Cart = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Navbar />
+    <Layout>
+      <CartHeader />
 
-      <div className="py-10">
-        <CartHeader />
-
-        <main>
-          <div className="max-w-7xl mx-auto px-8">
-            <div className="grid grid-cols-3 gap-8">
-              <div className="col-span-2">
-                <CartList />
-              </div>
-              <CartSummary />
-            </div>
-          </div>
-        </main>
+      <div className={styles.grid}>
+        <div className="col-span-2">
+          <CartList />
+        </div>
+        <div>
+          <CartSummary />
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
 export default Cart;
 ```
+
+Open your browser and navigate to `/cart`. You should see the following page:
+
+**IMAGE**
