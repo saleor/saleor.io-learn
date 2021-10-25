@@ -13,10 +13,15 @@ The `products` query allows us to the order in the returned product collection w
 
 Let's rework our previous query so that it also specifies the sorting:
 
-```graphql{2,3}
-# graphql/FilterProducts.graphql
+```graphql{2-7}
+# graphql/queries/FilterProducts.graphql
 query FilterProducts($filter: ProductFilterInput!, $sortBy: ProductOrder) {
-  products(first: 12, channel: "default-channel", filter: $filter, sortBy: $sortBy) {
+  products(
+    first: 12
+    channel: "default-channel"
+    filter: $filter
+    sortBy: $sortBy
+  ) {
     edges {
       node {
         id
@@ -31,16 +36,20 @@ query FilterProducts($filter: ProductFilterInput!, $sortBy: ProductOrder) {
     }
   }
 }
+
 ```
 
 As with filtering, we use the `$sortBy` variable on our `FilterProducts` query so that the sorting can be specified dynamically in a React component as input to its React hook.
 
-```tsx{3,9-10}
+```tsx{3,8-11}
 // components/ProductCollection.tsx
 ...
-import { useFilterProductsQuery,
-         ProductOrderField,
-         OrderDirection } from '@/saleor/api';
+import {
+  Product,
+  useFilterProductsQuery,
+  OrderDirection,
+  ProductOrderField
+} from '@/saleor/api';
 ...
   const { loading, error, data } = useFilterProductsQuery({
     variables: {

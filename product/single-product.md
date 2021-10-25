@@ -15,11 +15,12 @@ Sometimes you may need to fetch a specific product. Usually, you display the mos
 Let's call our query `ProductByID` to make it explicit that it is about fetching product details by ID:
 
 ```graphql
-# graphql/ProductByID.graphql
+# graphql/queries/ProductByID.graphql
 query ProductByID($id: ID!) {
   product(id: $id, channel: "default-channel") {
     id
     name
+    description
     media {
       url
     }
@@ -49,6 +50,7 @@ Since Next.js provides a file-based routing we can simply create the `product/` 
 Let's focus on the React component first. Let's name it `ProductPage`:
 
 ```tsx
+// pages/product/[id].tsx
 import {
   useProductByIdQuery,
 } from "@/saleor/api";
@@ -124,7 +126,8 @@ Next.js provides two special functions for React components that are used as pag
 
 `getStaticPaths` generates all the possible values for parameters in dynamic routes ahead of time when the website is being built. In our case, this function will return a collection of identifiers for all products provided by our Saleor API. Let's write it down:
 
-```tsx
+```tsx{2,3,20-32}
+// pages/product/[id].tsx
 import {
   useProductByIdQuery,
   ProductCollectionDocument,
@@ -146,6 +149,8 @@ interface Props {
 const ProductPage = ({ id }: Props) => {
   // ... as before
 }
+
+export default ProductPage;
 
 export async function getStaticPaths() {
   const { data } = await apolloClient.query<ProductCollectionQuery>({
@@ -194,7 +199,8 @@ export { apolloClient } from './graphql';
 
 The second function provided by Next.js for pages is `getStaticProps` - it returns the props that will be passed to the React component during the build. In our context, we return an identifier of a product to display. `getStaticProps` is invoked for each element of the collection returned by `getStaticPaths`. Let's add it to the single product page at `pages/product/[id].tsx`:
 
-```tsx{1,25-31}
+```tsx{2,26-32}
+// pages/product/[id].tsx
 import { GetStaticProps } from "next";
 
 import {
@@ -275,7 +281,7 @@ We use `Link` from the official `next/link` package to define the route to go wh
 
 Since we moved the Apollo client initialization to `lib/graphql.ts`, the root component at `pages/_app.tsx` can be simplified:
 
-```tsx{2,4}
+```tsx{2,10}
 import type { AppProps } from 'next/app'
 import { ApolloProvider } from '@apollo/client';
 
@@ -296,7 +302,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
 Let's finish off by defining a navbar with a link that gets us back to the collection page whenever we click on it. This way we can navigate to a product and then back to the collection without using the back button in the browser.
 
-```tsx{18}
+```tsx
 import React from "react";
 import Link from "next/link";
 

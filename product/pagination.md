@@ -16,9 +16,19 @@ It’s not a good idea to keep this information in the entity itself as it’s n
 Let's adapt the query for fetching products so that it can be paginated.
 
 ```graphql{2-3,16-21}
-# graphql/TShirtProducts.graphql
-query ProductCollection($after: String) {
-  products(first: 4, channel: "default-channel", after: $after) {
+# graphql/queries/FilterProducts.graphql
+query FilterProducts(
+  $filter: ProductFilterInput!
+  $sortBy: ProductOrder
+  $after: String
+) {
+  products(
+    first: 4
+    channel: "default-channel"
+    filter: $filter
+    sortBy: $sortBy
+    after: $after
+  ) {
     edges {
       node {
         id

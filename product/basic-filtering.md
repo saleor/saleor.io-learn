@@ -14,7 +14,7 @@ When fetching products using the `products` query, we can also filter them using
 The most basic form of filtering can be done using the `search` field. It takes a string value as input that is matched against the product title and description. In the following example we want to find all the t-shirts available in our store. 
 
 ```graphql
-# graphql/TShirtProducts.graphql
+# graphql/queries/TShirtProducts.graphql
 query TShirtProducts {
   products(first: 12,
            channel: "default-channel",
@@ -35,7 +35,7 @@ query TShirtProducts {
 }
 ```
 
-Let's put this query as `TShirtProducts.graphql` in the `graphql/` directory.
+Let's put this query as `TShirtProducts.graphql` in the `graphql/queries` directory.
 
 If the code generation is running in the watch mode, the corresponding React.js hook will be created automatically. Otherwise, run the `generate` script:
 
@@ -45,10 +45,16 @@ npm run generate
 
 In `components/ProductCollection.tsx`, we can replace the `useFetchTwelveProductsQuery` with the newly generated `useTShirtProductsQuery` as the shape of the elements in the product collection doesn't change.
 
-```tsx{3,6}
+```tsx{4,12}
 // components/ProductCollection.tsx
 import React from 'react';
-import { useTShirtProductsQuery } from '@/saleor/api';
+
+import { Product, useTShirtProductsQuery } from '@/saleor/api';
+import { ProductElement } from '@/components';
+
+const styles = {
+  grid: 'grid gap-4 grid-cols-4',
+}
 
 export const ProductCollection = () => {
   const { loading, error, data } = useTShirtProductsQuery();
@@ -60,13 +66,12 @@ export const ProductCollection = () => {
     const products = data.products?.edges || [];
 
     return (
-      <div>
-        <ul role="list" className="grid gap-4 grid-cols-4">
-          {products?.length > 0 &&
-            products.map(({ node }) => <ProductElement {...node} key={node.id} />)
-          }
-        </ul>
-      </div>
+      <ul role="list" className={styles.grid}>
+        {products?.length > 0 &&
+          products.map(
+            ({ node }) => <ProductElement key={node.id} {...node as Product} />,
+          )}
+      </ul>
     );
   }
 
