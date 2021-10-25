@@ -240,7 +240,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 ```
 
-## Link to Single Product Page
+## Link to Product Page
 
 We have the page for displaying a single product, but it is not yet connected with the collection. We would like to be able to click on each element on the collection page to go to that particular product page. Let's adjust the `ProductElement` component that's responsible for displaying each element in the product collection.
 
@@ -373,4 +373,160 @@ export const Layout = ({ children }: Props) => {
   );
 }
 
+```
+
+## Refactor the Product Page
+
+Currently the product page has several responsabilities from getting the product details to conforming to rules required by Next.js components located in the `pages/` directory. Let's simplify it by splitting the product details into a separate component, named `ProductDetails`:
+
+```tsx
+// components/ProductDetails.tsx
+import React from 'react';
+import { useRouter } from "next/router";
+import { useLocalStorage } from "react-use";
+
+import {
+  useAddProductVariantToCartMutation,
+  Product
+} from "@/saleor/api";
+
+import {
+  VariantSelector
+} from '@/components';
+
+const styles = {
+  columns: 'grid grid-cols-2 gap-x-10 items-start',
+  image: {
+    aspect: 'aspect-w-1 aspect-h-1 bg-white rounded',
+    content: 'object-center object-cover'
+  },
+  details: {
+    title: 'text-4xl font-bold tracking-tight text-gray-800',
+    category: 'text-lg mt-2 font-medium text-gray-500',
+    description: 'prose lg:prose-s'
+  }
+}
+
+interface Props {
+  product: Pick<Product, 'id' | 'name' | 'description' | 'thumbnail' | 'category' | 'media' | 'variants'>;
+}
+
+export const ProductDetails = ({ product }: Props) => {
+  const router = useRouter();
+  const [token] = useLocalStorage('token');
+  const [addProductToCart] = useAddProductVariantToCartMutation();
+
+  const onAddToCart = async () => {
+    await addProductToCart({
+      variables: { checkoutToken: token, variantId: product?.variants![0]?.id! },
+    });
+    router.push("/cart");
+  };
+
+  return (
+    <div className={styles.columns}>
+      <div className={styles.image.aspect}>
+        <img
+          src={product?.media![0]?.url}
+          className={styles.image.content}
+        />
+      </div>
+
+      <div className="space-y-8">
+        <div>
+          <h1 className={styles.details.title}>
+            {product?.name}
+          </h1>
+          <p className={styles.details.category}>
+            {product?.category?.name}
+          </p>
+        </div>
+
+        <article className={styles.details.description}>
+          {product?.description}
+        </article>
+
+        <button
+          onClick={onAddToCart}
+          type="submit"
+          className="primary-button"
+        >
+          Add to cart
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+Let's not forget to add it to `components/index.ts` so that we can import it directly from `@/components`:
+
+```ts{6}
+export { ProductCollection } from './ProductCollection';
+export { Layout } from './Layout';
+export { ProductElement } from './ProductElement';
+export { Pagination } from './Pagination';
+export { Navbar } from './Navbar';
+export { ProductDetails } from './ProductDetails';
+```
+
+Now, we are ready to significantly reduce the size of `ProductPage` located at `pages/product/[id].tsx` as shown below:
+
+```tsx{18}
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+
+import {
+  useProductByIdQuery,
+  ProductCollectionDocument,
+  ProductCollectionQuery,
+  Product
+} from "@/saleor/api";
+import { apolloClient } from "@/lib";
+import {
+  Layout,
+  ProductDetails,
+} from '@/components';
+
+const ProductPage = ({ id }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { loading, error, data } = useProductByIdQuery({ variables: { id } });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error</p>;
+
+  if (data) {
+    const { product } = data;
+
+    return (
+      <Layout>
+        <ProductDetails product={product as Product} />
+      </Layout>
+    );
+  }
+
+  return null;
+}
+
+export default ProductPage;
+
+export async function getStaticPaths() {
+  const { data } = await apolloClient.query<ProductCollectionQuery>({
+    query: ProductCollectionDocument
+  });
+  const paths = data.products?.edges.map(({ node: { id } }) => ({
+    params: { id },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  return {
+    props: {
+      id: params?.id,
+    },
+  };
+};
 ```
