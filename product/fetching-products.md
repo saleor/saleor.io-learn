@@ -21,7 +21,7 @@ The first operation also allows to filter and sort a collection of products by s
 Let's start with a simple collection of 12 elements that returns a product `id` and `name`. Put the following GraphQL query inside the GraphQL Playground of your Saleor endpoint and execute it using the play button in the middle. 
 
 ```graphql
-# graphql/FetchTwelveProducts.graphql
+# graphql/queries/FetchTwelveProducts.graphql
 query FetchTwelveProducts {
   products(first: 12, channel: "default-channel") {
     edges {
@@ -89,7 +89,6 @@ Let's create our first React component for displaying available products as a gr
 ```tsx{3}
 // components/ProductCollection.tsx
 import React from 'react';
-
 import { useFetchTwelveProductsQuery } from '@/saleor/api';
 
 const styles = {
@@ -243,7 +242,7 @@ We need to slightly modify our GraphQL query to also include the product thumbna
 Here's the modified query:
 
 ```graphql{8-13}
-# graphql/FetchTwelveProducts.graphql
+# graphql/queries/FetchTwelveProducts.graphql
 query FetchTwelveProducts {
   products(first: 12, channel: "default-channel") {
     edges {
