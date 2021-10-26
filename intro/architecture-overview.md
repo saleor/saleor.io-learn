@@ -1,20 +1,12 @@
 ---
-pos: 1
-title: "Architecture Overview"
+pos: 2
+title: "Architecture overview"
 description: Build a high performaing ecommerce Storefront
 ---
 
-Saleor is a GraphQL API that provides the backend for your frontend applications. Such frontend application can be a web application, a mobile app, or anything else that can communicate over the HTTP protocol. In this tutorial we will be using Next.js, a React.js framework for building web applications. 
+Saleor is a GraphQL API that provides the backend for your frontend applications. It comes with all the notions needed to develop flexible e-commerce solutions. 
 
-In e-commerce, frontend applications are also known as storefronts, because they provide the actual fronts for your applications. 
-In this tutorial, we are going to walk you through how to set up your own Saleor storefront. Feel free to go section by section or hop around to the sections most relevant to your needs. 
+Building a storefront in React.js using the Next.js framework provides a plenty of benefits in the e-commerce context. By using Next.js to its full potential with advanced features such us Incremental Static Regeneration, we can build production-grade e-commerce applications with excellent performance characteristics. Such approach is an excellent solution for providing customers of your e-commerce solution with an amazing user experience. 
 
-# The Tutorial is Divided into Several Sections
-## [Introduction](https://learn-saleor.vercel.app/intro/architecture-overview/)
-## [SetUp](https://learn-saleor.vercel.app/setup/prerequisites/)
-## [Products and Their Variants](https://learn-saleor.vercel.app/product/overview/)
-## [Understanding Prices](https://learn-saleor.vercel.app/prices/overview/)
-## [Checkout](https://learn-saleor.vercel.app/checkout/overview/)
+With ISR we can do static generation on a per-page basis. We don't need to rebuild the entire site. . ISR allows you to retain the benefits of static generation while beling able to slace to millions of pages with easy.
 
-# The Result
-When you've finsihed the tutorial, you'll have a completed Saleor Storefront, much like [this one](https://demo.saleor.io/).
