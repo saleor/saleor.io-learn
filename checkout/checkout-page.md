@@ -5,7 +5,7 @@ description:
 prev:
   path: /checkout/checkout-creation/
 next:
-  path: /checkout/checkout-content/
+  path: /checkout/add-to-cart/
 ---
 
 In a typical storefront, there is a page that displays the current content of a cart. The application from this tutorial will be no different. The cart page will be available under the `/cart` route.
@@ -133,7 +133,7 @@ export const CartSummary = () => {
 
 Let's not forget to export added components from `components/index.ts`:
 
-```ts{6-8}
+```ts{7-9}
 // components/index.ts
 export { ProductCollection } from './ProductCollection';
 export { Layout } from './Layout';

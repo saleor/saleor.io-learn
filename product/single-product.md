@@ -21,6 +21,9 @@ query ProductByID($id: ID!) {
     id
     name
     description
+    variants {
+      id
+    }
     media {
       url
     }
