@@ -22,7 +22,7 @@ checkoutLineDelete(token: $checkoutToken, lineId: $lineId) {
 }
 ```
 
-Let's name this mutation as `RemoveProductFromCheckout` and put it in `graphql/mutations/RemoveProductFromCheckout.graphql`. As before, we are using the `CheckoutDetailsFragment` fragment to standarize the shape of a checkout object that we are getting in response to this mutation.
+Let's name this mutation as `RemoveProductFromCheckout` and put it in `graphql/mutations/RemoveProductFromCheckout.graphql`. As before, we are using the `CheckoutFragment` fragment to standarize the shape of a checkout object that we are getting in response to this mutation.
 
 ```graphql
 # graphql/mutations/RemoveProductFromCheckout.graphql
@@ -32,7 +32,7 @@ mutation RemoveProductFromCheckout($checkoutToken: UUID!, $lineId: ID!) {
     lineId: $lineId
   ) {
     checkout {
-      ...CheckoutDetailsFragment
+      ...CheckoutFragment
     }
     errors {
       message
