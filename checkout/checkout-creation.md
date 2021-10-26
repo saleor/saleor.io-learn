@@ -15,7 +15,7 @@ You can create a checkout in Saleor using the `createCheckout` mutation. We need
 In the following example, we are creating an empty cart 
 
 ```graphql
-# graphql/CreateCheckout.graphql
+# graphql/mutations/CreateCheckout.graphql
 mutation CreateCheckout {
   checkoutCreate(
     input: {
@@ -41,7 +41,7 @@ Open the GraphQL Playground and try to execute this mutation.
 
 **IMAGE**
 
-Let's put this mutation in `graphql/CreateCheckout.graphql`. Don't forget to run your `generate` script or make sure it's running in the `watch` mode.
+Let's put this mutation in `graphql/mutations/CreateCheckout.graphql`. Don't forget to run your `generate` script or make sure it's running in the `watch` mode.
 
 ## Initializing the checkout in React.js
 
@@ -63,10 +63,10 @@ Let's use `pages/_app.tsx` as a place to initialize the checkout in our React ap
 ```tsx
 // pages/_app.tsx
 import type { AppProps } from 'next/app'
+import { ApolloProvider } from '@apollo/client';
 
 import { useEffect } from "react";
 import { useLocalStorage } from "react-use";
-import { ApolloProvider } from '@apollo/client';
 
 import '../styles/main.css';
 
