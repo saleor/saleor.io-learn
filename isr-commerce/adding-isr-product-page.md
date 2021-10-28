@@ -6,7 +6,7 @@ prev:
   path: /isr-commerce/overview/
 ---
 
-Let's use [Incremental Static Renegartion](https://vercel.com/docs/concepts/next.js/incremental-static-regeneration) for the product page in our storefront. In order to enable ISR, we need to make two adjustments in the product page located at `pages/product/[id].tsx`:
+Let's use [Incremental Static Regeneration](https://vercel.com/docs/concepts/next.js/incremental-static-regeneration) for the product page in our storefront. In order to enable ISR, we need to make two adjustments in the product page located at `pages/product/[id].tsx`:
 
 1. define a per-page revalidation time
 2. define paths for pages to generate ahead-of-time
