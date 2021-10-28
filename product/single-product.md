@@ -21,9 +21,6 @@ query ProductByID($id: ID!) {
     id
     name
     description
-    variants {
-      id
-    }
     media {
       url
     }
@@ -388,17 +385,10 @@ Currently the product page has several responsabilities from getting the product
 ```tsx
 // components/ProductDetails.tsx
 import React from 'react';
-import { useRouter } from "next/router";
-import { useLocalStorage } from "react-use";
 
 import {
-  useAddProductVariantToCartMutation,
   Product
 } from "@/saleor/api";
-
-import {
-  VariantSelector
-} from '@/components';
 
 const styles = {
   columns: 'grid grid-cols-2 gap-x-10 items-start',
@@ -414,21 +404,10 @@ const styles = {
 }
 
 interface Props {
-  product: Pick<Product, 'id' | 'name' | 'description' | 'thumbnail' | 'category' | 'media' | 'variants'>;
+  product: Pick<Product, 'id' | 'name' | 'description' | 'thumbnail' | 'category' | 'media'>;
 }
 
 export const ProductDetails = ({ product }: Props) => {
-  const router = useRouter();
-  const [token] = useLocalStorage('token');
-  const [addProductToCart] = useAddProductVariantToCartMutation();
-
-  const onAddToCart = async () => {
-    await addProductToCart({
-      variables: { checkoutToken: token, variantId: product?.variants![0]?.id! },
-    });
-    router.push("/cart");
-  };
-
   return (
     <div className={styles.columns}>
       <div className={styles.image.aspect}>
@@ -451,14 +430,6 @@ export const ProductDetails = ({ product }: Props) => {
         <article className={styles.details.description}>
           {product?.description}
         </article>
-
-        <button
-          onClick={onAddToCart}
-          type="submit"
-          className="primary-button"
-        >
-          Add to cart
-        </button>
       </div>
     </div>
   );
