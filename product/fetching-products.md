@@ -70,7 +70,7 @@ Another way of controlling the number of elements to fetch is through pagination
 
 ## Autogenerate a React Hook for Products
 
-Now we can put this query in our application under the `graphql/` directory as `FetchTwelveProducts.graphql`. 
+Now we can put this query in our application under the `graphql/queries` directory as `FetchTwelveProducts.graphql`.
 
 Run `generate` to generate the corresponding React.js hooks:
 
