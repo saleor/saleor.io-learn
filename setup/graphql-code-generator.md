@@ -62,7 +62,7 @@ In a nutshell, this configuration file instructs the code generator to use the `
 
 We will be putting all GraphQL statements (queries, mutations and fragments) inside the `graphql/`. Additionally, each query or mutation will be put in a separate file, so it's easier to locate in the filesystem. 
 
-For starters, let's use a basic GraphQL query as a placeholder for the GraphQL code generator. Put the following query in `graphql/ThreeProducts.graphql`:
+For starters, let's use a basic GraphQL query as a placeholder for the GraphQL code generator. Put the following query in `graphql/queries/ThreeProducts.graphql`:
 
 ```graphql
 query ThreeProducts {

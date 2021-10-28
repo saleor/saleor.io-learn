@@ -15,7 +15,7 @@ It’s not a good idea to keep this information in the entity itself as it’s n
 
 Let's adapt the query for fetching products so that it can be paginated.
 
-```graphql{2-3,16-21}
+```graphql{5,12,26-32}
 # graphql/queries/FilterProducts.graphql
 query FilterProducts(
   $filter: ProductFilterInput!
@@ -47,11 +47,12 @@ query FilterProducts(
       startCursor
       endCursor
     }
+    totalCount
   }
 }
 ```
 
-We are not only returing the product `node`, but also the `pageInfo` with `hasNextPage` / `hasPreviousPage` helpers to see if there are elements after and before the current collection subset along with `startCursor` / `endCursor` that uniqely identify the current subset of product collection. 
+We are not only returing the product `node`, but also the `totalCount` and `pageInfo` with `hasNextPage` / `hasPreviousPage` helpers to see if there are elements after and before the current collection subset along with `startCursor` / `endCursor` that uniqely identify the current subset of product collection.
 
 Additionally, the `products` query has the `after` arguments that take the value of `startCursor` and `endCursor` as input. 
 
@@ -61,7 +62,7 @@ Let's re-write the `ProductCollection` by adding the pagination as a *Fetch More
 // components/ProductCollection.tsx
 import React from 'react';
 
-import { Product, useFetchTwelveProductsQuery } from '@/saleor/api';
+import { Product, useFilterProductsQuery } from '@/saleor/api';
 import { Pagination, ProductElement } from '@/components';
 
 const styles = {
@@ -69,7 +70,11 @@ const styles = {
 }
 
 export const ProductCollection = () => {
-  const { loading, error, data, fetchMore } = useFetchTwelveProductsQuery();
+  const { loading, error, data, fetchMore } = useFilterProductsQuery({
+    variables: {
+      filter: {},
+    }
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
@@ -95,7 +100,7 @@ export const ProductCollection = () => {
               ({ node }) => <ProductElement key={node.id} {...node as Product} />,
             )}
         </ul>
-        {pageInfo?.hasNextPage && 
+        {pageInfo?.hasNextPage &&
           <Pagination
             onLoadMore={onLoadMore}
             itemCount={products.length}
