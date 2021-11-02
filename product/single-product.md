@@ -126,12 +126,12 @@ Next.js provides two special functions for React components that are used as pag
 
 `getStaticPaths` generates all the possible values for parameters in dynamic routes ahead of time when the website is being built. In our case, this function will return a collection of identifiers for all products provided by our Saleor API. Let's write it down:
 
-```tsx{2,3,20-32}
+```tsx{2,3,20-35}
 // pages/product/[id].tsx
 import {
   useProductByIdQuery,
-  ProductCollectionDocument,
-  ProductCollectionQuery
+  FilterProductsDocument,
+  FilterProductsQuery
 } from "@/saleor/api";
 import { apolloClient } from "@/lib";
 import {
@@ -153,10 +153,10 @@ const ProductPage = ({ id }: Props) => {
 export default ProductPage;
 
 export async function getStaticPaths() {
-  const { data } = await apolloClient.query<ProductCollectionQuery>({
-    query: ProductCollectionDocument,
+  const { data } = await apolloClient.query<FilterProductsQuery>({
+    query: FilterProductsDocument,
     variables: {
-      first: 100
+      filter: {}
     }
   });
   const paths = data.products?.edges.map(({ node: { id } }) => ({
@@ -170,13 +170,14 @@ export async function getStaticPaths() {
 }
 ```
 
-First, we are executing a GraphQL to fetch a collection of products. We are re-using the same query we defined in the section about fetching products. Both, `ProductCollectionDocument` and `ProductCollectionQuery` are auto-generated from the query name (`ProductCollection`). The first is the actual query while the second is the type describing the shape of the data returned in response to that query.
+First, we are executing a GraphQL to fetch a collection of products. We are re-using the same query we defined in the section about fetching products. Both, `FilterProductsDocument` and `FilterProductsQuery` are auto-generated from the query name (`FilterProducts`). The first is the actual query while the second is the type describing the shape of the data returned in response to that query.
 
 The response data is a collection of products. We extract just the identifier of each product using the built-in `map` function, and return the result as the collection of paths.
 
 Since we are re-using the instance of the Apollo client, let's move the initialization of that client to a separate file: `lib/graphql.ts`
 
 ```ts
+// lib/graphql.ts
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { relayStylePagination } from "@apollo/client/utilities";
 
@@ -197,6 +198,7 @@ export const apolloClient = new ApolloClient({
 For convenience, let's define the export statement in `lib/index.ts` so that we can import directly from `@/lib` anywhere in our codebase.
 
 ```ts
+// lib/index.ts
 export { apolloClient } from './graphql';
 ```
 
@@ -208,8 +210,8 @@ import { GetStaticProps } from "next";
 
 import {
   useProductByIdQuery,
-  ProductCollectionDocument,
-  ProductCollectionQuery
+  FilterProductsDocument,
+  FilterProductsQuery
 } from "@/saleor/api";
 import { apolloClient } from "@/lib";
 import {
@@ -247,7 +249,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 We have the page for displaying a single product, but it is not yet connected with the collection. We would like to be able to click on each element on the collection page to go to that particular product page. Let's adjust the `ProductElement` component that's responsible for displaying each element in the product collection.
 
-```tsx{2,15,25}
+```tsx{3,16,26}
+// components/ProductElement.tsx
 import React from 'react';
 import Link from 'next/link';
 
@@ -284,7 +287,8 @@ We use `Link` from the official `next/link` package to define the route to go wh
 
 Since we moved the Apollo client initialization to `lib/graphql.ts`, the root component at `pages/_app.tsx` can be simplified:
 
-```tsx{2,10}
+```tsx{3,11}
+// pages/_app.tsx
 import type { AppProps } from 'next/app'
 import { ApolloProvider } from '@apollo/client';
 
@@ -306,6 +310,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 Let's finish off by defining a navbar with a link that gets us back to the collection page whenever we click on it. This way we can navigate to a product and then back to the collection without using the back button in the browser.
 
 ```tsx
+// components/Navbar.tsx
 import React from "react";
 import Link from "next/link";
 
@@ -341,7 +346,8 @@ export const Navbar = () => {
 
 The product collection is visible on the home route at `/`. We use the same path for the `Link` component in `Navbar`. Let's not forget to add it to `components/index.ts` so that we can always export it from `@/components`:
 
-```tsx{5}
+```tsx{6}
+// components/index.ts
 export { ProductCollection } from './ProductCollection';
 export { Layout } from './Layout';
 export { ProductElement } from './ProductElement';
@@ -351,7 +357,8 @@ export { Navbar } from './Navbar';
 
 Finally, let's add `Navbar` to `Layout` so it's always visible:
 
-```tsx{17}
+```tsx{18}
+// components/Layout.tsx
 import React from 'react';
 
 import { Navbar } from '@/components';
@@ -438,7 +445,8 @@ export const ProductDetails = ({ product }: Props) => {
 
 Let's not forget to add it to `components/index.ts` so that we can import it directly from `@/components`:
 
-```ts{6}
+```ts{7}
+// components/index.ts
 export { ProductCollection } from './ProductCollection';
 export { Layout } from './Layout';
 export { ProductElement } from './ProductElement';
@@ -449,13 +457,14 @@ export { ProductDetails } from './ProductDetails';
 
 Now, we are ready to significantly reduce the size of `ProductPage` located at `pages/product/[id].tsx` as shown below:
 
-```tsx{18}
+```tsx{6,19}
+// pages/product/[id].tsx
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 
 import {
   useProductByIdQuery,
-  ProductCollectionDocument,
-  ProductCollectionQuery,
+  FilterProductsDocument,
+  FilterProductsQuery,
   Product
 } from "@/saleor/api";
 import { apolloClient } from "@/lib";
@@ -486,10 +495,10 @@ const ProductPage = ({ id }: InferGetStaticPropsType<typeof getStaticProps>) => 
 export default ProductPage;
 
 export async function getStaticPaths() {
-  const { data } = await apolloClient.query<ProductCollectionQuery>({
-    query: ProductCollectionDocument,
+  const { data } = await apolloClient.query<FilterProductsQuery>({
+    query: FilterProductsDocument,
     variables: {
-      first: 100,
+      filter: {}
     }
   });
   const paths = data.products?.edges.map(({ node: { id } }) => ({
