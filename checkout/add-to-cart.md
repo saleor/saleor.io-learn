@@ -28,7 +28,7 @@ It is important to note that when adding a product to a cart, we must use the pr
 
 The `checkoutLinesAdd` mutation can provide not only the `id` of the checkout, but also the entire checkout object with its content available as `lines`. Let's slightly change the mutation response so that we can use `lines` for verifying that the mutation was successful. In this context, we will get the `id` of each line in the cart along with the name of product, its variant and quantity. Call this mutation `AddProductVariantToCart` and put it in `graphql/mutations/AddProductVariantToCart.graphql`:
 
-```graphql{2,9-18}
+```graphql
 # graphql/mutations/AddProductVariantToCart.graphql
 mutation AddProductVariantToCart($checkoutToken: UUID!, $variantId: ID!) {
   checkoutLinesAdd(
@@ -63,98 +63,100 @@ Reminder. In our application we automatically generate React Hooks for GraphQL o
 
 Since we named our mutation `AddProductVariantToCart`, this will generate the `useAddProductVariantToCart` hook.  
 
-Open the page for displaying the content of a single product, located at `pages/product/[id].tsx` and modify it as shown below:
+Open the component for displaying the content of a single product, located at `components/ProductDetails.tsx` and modify it as shown below:
 
-```tsx{2-4,6,14-16,18,26-31,54-56}
-// pages/product/[id].tsx
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+```tsx{4,6,31-32,40-45,73-75}
+// components/ProductDetails.tsx
+import React from 'react';
 import { useRouter } from "next/router";
 import { useLocalStorage } from "react-use";
 
 import {
-  useProductByIdQuery,
   useAddProductVariantToCartMutation,
-  ProductCollectionDocument,
-  ProductCollectionQuery
+  Product
 } from "@/saleor/api";
-import { apolloClient } from "@/lib";
+
 import {
-  Layout
+  VariantSelector
 } from '@/components';
 
+import { formatAsMoney } from '@/lib';
+
 const styles = {
-  // as before
+  columns: 'grid grid-cols-2 gap-x-10 items-start',
+  image: {
+    aspect: 'aspect-w-1 aspect-h-1 bg-white rounded',
+    content: 'object-center object-cover'
+  },
+  details: {
+    title: 'text-4xl font-bold tracking-tight text-gray-800',
+    category: 'text-lg mt-2 font-medium text-gray-500',
+    description: 'prose lg:prose-s'
+  }
 }
 
-const ProductPage = ({ id }: InferGetStaticPropsType<typeof getStaticProps>) => {
+interface Props {
+  product: Pick<Product, 'id' | 'name' | 'description' | 'thumbnail' | 'category' | 'media' | 'variants'>;
+}
+
+export const ProductDetails = ({ product }: Props) => {
   const router = useRouter();
   const [token] = useLocalStorage('token');
-  const { loading, error, data } = useProductByIdQuery({ variables: { id } });
   const [addProductToCart] = useAddProductVariantToCartMutation();
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
+  const queryVariant = process.browser
+    ? router.query.variant?.toString()
+    : undefined;
+  const selectedVariantID = queryVariant || product?.variants![0]!.id!;
+  const selectedVariant = product?.variants!.find((variant) => variant?.id === selectedVariantID);
 
-  if (data) {
-    const { product } = data;
+  const onAddToCart = async () => {
+    await addProductToCart({
+      variables: { checkoutToken: token, variantId: selectedVariantID },
+    });
+    router.push("/cart");
+  };
 
-    const onAddToCart = async () => {
-      await addProductToCart({
-        variables: { checkoutToken: token, variantId: product?.variants![0]?.id! },
-      });
-      router.push("/cart");
-    };
+  return (
+    <div className={styles.columns}>
+      <div className={styles.image.aspect}>
+        <img
+          src={product?.media![0]?.url}
+          className={styles.image.content}
+        />
+      </div>
 
-    return (
-      <Layout>
-        <div className={styles.columns}>
-          <div className={styles.image.aspect}>
-            <img
-              src={product?.media![0]?.url}
-              className={styles.image.content}
-            />
-          </div>
-
-          <div className="space-y-8">
-            <div>
-              <h1 className={styles.details.title}>
-                {product?.name}
-              </h1>
-              <p className={styles.details.category}>
-                {product?.category?.name}
-              </p>
-            </div>
-
-            <article className={styles.details.description}>
-              {product?.description}
-            </article>
-
-            <button
-              onClick={onAddToCart}
-              type="submit"
-              className="primary-button"
-            >
-              Add to cart
-            </button>
-          </div>
+      <div className="space-y-8">
+        <div>
+          <h1 className={styles.details.title}>
+            {product?.name}
+          </h1>
+          <p className={styles.details.category}>
+            {product?.category?.name}
+          </p>
         </div>
-      </Layout>
-    );
-  }
 
-  return null;
+        <article className={styles.details.description}>
+          {product?.description}
+        </article>
+
+        <VariantSelector variants={product?.variants || []} id={product.id} selectedVariantID={selectedVariantID} />
+
+        <div className="text-2xl font-bold">
+          {formatAsMoney(selectedVariant?.pricing?.price?.gross.amount)}
+        </div>
+
+        <button
+          onClick={onAddToCart}
+          type="submit"
+          className="primary-button"
+        >
+          Add to cart
+        </button>
+      </div>
+    </div>
+  );
 }
-
-export default ProductPage;
-
-export async function getStaticPaths() {
-  // as before
-}
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  // as before
-};
-
 ```
 
-The `ProductPage` component is not shown in full as it's a bit complex. At this stage the important part is the use of the `useAddProductToCheckoutMutation` hook to prepare (not execute) the mutation and the `onAddToCart` handler that executes the mutation once the *Add to cart* button is clicked. We also get the token from the local storage to identify the current checkout session. Finally, once the mutation is executed and the selected product variant is added to the cart, we redirect to the cart page to display the current cart content. There is, however, a problem: we still display the dummy data for the cart. Let's change that in the next section.
+At this stage the important part is the use of the `useAddProductToCheckoutMutation` hook to prepare (not execute) the mutation and the `onAddToCart` handler that executes the mutation once the *Add to cart* button is clicked. We also get the token from the local storage to identify the current checkout session. Finally, once the mutation is executed and the selected product variant is added to the cart, we redirect to the cart page to display the current cart content. There is, however, a problem: we still display the dummy data for the cart. Let's change that in the next section.
