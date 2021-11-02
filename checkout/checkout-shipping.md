@@ -3,7 +3,7 @@ pos: 999
 title: Checkout Shipping
 description: 
 prev:
-  path: /checkout/checkout-completion/
+  path: /checkout/remove-from-cart/
 next:
   path: /checkout/checkout-payment/
 ---

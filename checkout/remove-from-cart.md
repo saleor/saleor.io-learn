@@ -5,7 +5,7 @@ description:
 prev:
   path: /checkout/displaying-cart-content/
 next:
-  path: /checkout/checkout-completion/
+  path: /checkout/checkout-shipping/
 ---
 
 Removing from a cart is available as the `checkoutLineDelete` mutation that takes the checkout `token` and the ID of a line in checkout to remove.

@@ -4,8 +4,6 @@ title: Checkout Payment
 description: 
 prev:
   path: /checkout/checkout-shipping/
-next:
-  path: /checkout/checkout-operations/
 ---
 
 While creating the checkout, you may also specify the shipping and the billing address at this stage. The following mutation shows how this could be achieved
