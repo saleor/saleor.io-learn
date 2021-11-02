@@ -2,6 +2,10 @@
 pos: 3
 title: Pricing for variants 
 description: 
+prev:
+  path: /prices/pricing-range/
+next:
+  path: /prices/taxes/
 ---
 
 You can also query the prices for variants. In that case the `pricing` field no longer returns a range, but a single price.
@@ -44,13 +48,12 @@ This is similar to getting a price range for a product, except that variants can
 
 With the price available for each variant, we can now adjust the `ProductDetails.tsx` component as shown below:
 
-```tsx{9,37,68-70}
+```tsx{9,35,59-61}
+// components/ProductDetails.tsx
 import React from 'react';
 import { useRouter } from "next/router";
-import { useLocalStorage } from "react-use";
 
 import {
-  useAddProductVariantToCartMutation,
   Product
 } from "@/saleor/api";
 
@@ -79,21 +82,12 @@ interface Props {
 
 export const ProductDetails = ({ product }: Props) => {
   const router = useRouter();
-  const [token] = useLocalStorage('token');
-  const [addProductToCart] = useAddProductVariantToCartMutation();
 
   const queryVariant = process.browser
     ? router.query.variant?.toString()
     : undefined;
   const selectedVariantID = queryVariant || product?.variants![0]!.id!;
   const selectedVariant = product?.variants!.find((variant) => variant?.id === selectedVariantID);
-
-  const onAddToCart = async () => {
-    await addProductToCart({
-      variables: { checkoutToken: token, variantId: selectedVariantID },
-    });
-    router.push("/cart");
-  };
 
   return (
     <div className={styles.columns}>
@@ -123,14 +117,6 @@ export const ProductDetails = ({ product }: Props) => {
         <div className="text-2xl font-bold">
           {formatAsMoney(selectedVariant?.pricing?.price?.gross.amount)}
         </div>
-
-        <button
-          onClick={onAddToCart}
-          type="submit"
-          className="primary-button"
-        >
-          Add to cart
-        </button>
       </div>
     </div>
   );
@@ -142,10 +128,17 @@ We are getting the currently selected variant from the route via the query param
 Finally, we define a helper function to format the decimal value of a price. Let's call this function `formatAsMoney` and put it in the `lib/util.ts`
 
 ```ts
+// lib/util.ts
 export const formatAsMoney = (amount: number = 0, currency = "USD") =>
   new Intl.NumberFormat("en-US", {
     minimumFractionDigits: 2,
     style: "currency",
     currency,
   }).format(amount);
+```
+
+```ts{3}
+// lib/index.ts
+export { apolloClient } from './graphql';
+export { formatAsMoney } from './util';
 ```
