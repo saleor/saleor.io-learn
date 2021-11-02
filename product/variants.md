@@ -14,7 +14,8 @@ A product may be available in different variants, e.g.  a particular t-shirt may
 
 In the previous step, we used the `ProductByID` query to fetch details for a particular product in our store. Let's now extend this query to also include the information about the possible variants of each product. In `graphql/queries/ProductByID.graphql` add the following `variants` snippet:
 
-```graphql{12-15}
+```graphql{13-16}
+# graphql/queries/ProductByID.graphql
 query ProductByID($id: ID!) {
   product(id: $id, channel: "default-channel") {
     id
@@ -40,13 +41,11 @@ If you run this query for a product from the T-shirt category, you will notice t
 
 Let's display all possible variants of a product on the page that displays the product details. This is being handled by the `ProductDetails` component.
 
-```tsx{58}
+```tsx{6,22,46}
+// components/ProductDetails.tsx
 import React from 'react';
-import { useRouter } from "next/router";
-import { useLocalStorage } from "react-use";
 
 import {
-  useAddProductVariantToCartMutation,
   Product
 } from "@/saleor/api";
 
@@ -72,17 +71,6 @@ interface Props {
 }
 
 export const ProductDetails = ({ product }: Props) => {
-  const router = useRouter();
-  const [token] = useLocalStorage('token');
-  const [addProductToCart] = useAddProductVariantToCartMutation();
-
-  const onAddToCart = async () => {
-    await addProductToCart({
-      variables: { checkoutToken: token, variantId: product?.variants![0]?.id! },
-    });
-    router.push("/cart");
-  };
-
   return (
     <div className={styles.columns}>
       <div className={styles.image.aspect}>
@@ -106,20 +94,27 @@ export const ProductDetails = ({ product }: Props) => {
           {product?.description}
         </article>
 
-        <VariantSelector variants={product?.variants} />
-
-        <button
-          onClick={onAddToCart}
-          type="submit"
-          className="primary-button"
-        >
-          Add to cart
-        </button>
+        <VariantSelector variants={product?.variants || []} id={product.id} />
       </div>
     </div>
   );
 }
 ```
+
+Let's add the export statement in `components/index.ts` for `VariantSelector`, so that we can directly import it from `@/components`.
+
+
+```tsx{8}
+// components/index.ts
+export { ProductCollection } from './ProductCollection';
+export { Layout } from './Layout';
+export { ProductElement } from './ProductElement';
+export { Pagination } from './Pagination';
+export { Navbar } from './Navbar';
+export { ProductDetails } from './ProductDetails';
+export { VariantSelector } from './VariantSelector';
+```
+
 
 With the `ProductByID` query adjusted by `variants` we pass them to a newly created `VariantSelector` component. This components gets a collection of variants and displays their names:
 
@@ -155,9 +150,23 @@ export const VariantSelector = ({ variants }: Props) => {
 }
 ```
 
-Next step is to make those variant clickable so that the user can select a particular variant of a product they want to add to their cart:
+Next step is to make those variant clickable so that the user can select a particular variant of a product they want to add to their cart.
+
+For constructing className strings conditionally let's use a tiny utility - `clsx`.
+
+```
+npm install clsx
+```
+
+```
+pnpm add clsx
+```
+
+Now the `VariantSelector` component can be modified:
+
 
 ```tsx
+// components/VariantSelector.tsx
 import React from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
@@ -208,13 +217,12 @@ export const VariantSelector = ({ variants, id, selectedVariantID }: Props) => {
 
 The id of a selected variant is being passed-in to the `VariantSelector` component as the parent component must also know its value so that we can add the correct product variant to the cart. Let's slightly modify the parent component, i.e. `ProductDetails`:
 
-```tsx{31-34,38,63}
+```tsx{3,7,23,27,29-32,54}
+// components/ProductDetails.tsx
 import React from 'react';
 import { useRouter } from "next/router";
-import { useLocalStorage } from "react-use";
 
 import {
-  useAddProductVariantToCartMutation,
   Product
 } from "@/saleor/api";
 
@@ -241,20 +249,11 @@ interface Props {
 
 export const ProductDetails = ({ product }: Props) => {
   const router = useRouter();
-  const [token] = useLocalStorage('token');
-  const [addProductToCart] = useAddProductVariantToCartMutation();
 
   const queryVariant = process.browser
     ? router.query.variant?.toString()
     : undefined;
   const selectedVariantID = queryVariant || product?.variants![0]!.id!;
-
-  const onAddToCart = async () => {
-    await addProductToCart({
-      variables: { checkoutToken: token, variantId: selectedVariantID },
-    });
-    router.push("/cart");
-  };
 
   return (
     <div className={styles.columns}>
@@ -280,17 +279,9 @@ export const ProductDetails = ({ product }: Props) => {
         </article>
 
         <VariantSelector variants={product?.variants || []} id={product.id} selectedVariantID={selectedVariantID} />
-
-        <button
-          onClick={onAddToCart}
-          type="submit"
-          className="primary-button"
-        >
-          Add to cart
-        </button>
       </div>
     </div>
   );
 }
-```
 
+```
