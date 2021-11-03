@@ -100,10 +100,10 @@ Try this query in the GraphQL Playground. In response you will get a collection 
 
 Let's update the product collection pages so that there is also the price information displayed along with each product. For simplicity, we will display a single price if both values in the price range are the same, otherwise we will display two values: the lowest and the highest price for each product.
 
-Open the `ProductCollection` query located in `graphql/queries` and adjust it as shown below:
+Open the `FilterProducts` query located in `graphql/queries` and adjust it as shown below:
 
 ```graphql{14-27}
-# graphql/queries/ProductCollection.graphql
+# graphql/queries/FilterProducts.graphql
 query ProductCollection($first: Int = 4, $after: String) {
   products(first: $first, channel: "default-channel", after: $after) {
     edges {
