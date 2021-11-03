@@ -133,13 +133,15 @@ export const CartSummary = () => {
 
 Let's not forget to export added components from `components/index.ts`:
 
-```ts{7-9}
+```ts{9-11}
 // components/index.ts
 export { ProductCollection } from './ProductCollection';
 export { Layout } from './Layout';
 export { ProductElement } from './ProductElement';
 export { Pagination } from './Pagination';
 export { Navbar } from './Navbar';
+export { ProductDetails } from './ProductDetails';
+export { VariantSelector } from './VariantSelector';
 export { CartHeader } from './CartHeader';
 export { CartList } from './CartList';
 export { CartSummary } from './CartSummary';
