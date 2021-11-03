@@ -45,7 +45,7 @@ Now we can incorporate this mutation into our application as a React.js hook. Si
 
 The ability to remove from the cart will be added to the `CartList` component available at `components/CartList`. We will add the remove link to each line in the cart.
 
-```tsx{5,7,22,23,51-53}
+```tsx{5,7,22,23,53-55}
 // components/CartList.tsx
 import React from 'react';
 import Link from 'next/link';
@@ -79,51 +79,51 @@ export const CartList = ({ products }: Props) => {
         const variant = line?.variant;
         const product = line?.variant.product;
         const price = line?.totalPrice?.gross;
+        const productID = product?.id
 
         return (
-          <li key={line?.id} className="py-6">
-            <Link href={`/products/${lineID}`}>
-              <a className="flex">
-                <div className={styles.product.image}>
-                  <img
-                    src={product?.thumbnail?.url || ""}
-                    alt={product?.thumbnail?.alt || ""}
-                  />
-                </div>
+          <li key={line?.id} className="py-6 flex">
+            <div className={styles.product.image}>
+              <img
+                src={product?.thumbnail?.url || ""}
+                alt={product?.thumbnail?.alt || ""}
+              />
+            </div>
 
-                <div className={styles.product.container}>
-
-                  <div className="flex justify-between">
-                    <div className="pr-6">
-                      <h3 className={styles.product.name}>
+            <div className={styles.product.container}>
+              <div className="flex justify-between">
+                <div className="pr-6">
+                  <h3 className={styles.product.name}>
+                    <Link href={`/product/${productID}`}>
+                      <a>
                         {product?.name}
-                      </h3>
-                      <h4>
-                        {variant?.name}
-                      </h4>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          removeProductFromCheckout({
-                            variables: {
-                              checkoutToken: token,
-                              lineId: lineID,
-                            },
-                          })
-                        }
-                        className="ml-4 text-sm font-medium text-indigo-600 hover:text-indigo-500 sm:ml-0 sm:mt-3"
-                      >
-                        <span>Remove</span>
-                      </button>
-                    </div>
-
-                    <p className="text-xl text-gray-900 text-right">
-                      {price?.amount} {price?.currency}
-                    </p>
-                  </div>
+                      </a>
+                    </Link>
+                  </h3>
+                  <h4>
+                    {variant?.name}
+                  </h4>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      removeProductFromCheckout({
+                        variables: {
+                          checkoutToken: token,
+                          lineId: lineID,
+                        },
+                      })
+                    }
+                    className="ml-4 text-sm font-medium text-indigo-600 hover:text-indigo-500 sm:ml-0 sm:mt-3"
+                  >
+                    <span>Remove</span>
+                  </button>
                 </div>
-              </a>
-            </Link>
+
+                <p className="text-xl text-gray-900 text-right">
+                  {price?.amount} {price?.currency}
+                </p>
+              </div>
+            </div>
           </li>
         );
       })}

@@ -203,36 +203,37 @@ export const CartList = ({ products }: Props) => {
         const variant = line?.variant;
         const product = line?.variant.product;
         const price = line?.totalPrice?.gross;
+        const productID = product?.id
 
         return (
-          <li key={line?.id} className="py-6">
-            <Link href={`/products/${lineID}`}>
-              <a className="flex">
-                <div className={styles.product.image}>
-                  <img
-                    src={product?.thumbnail?.url || ""}
-                    alt={product?.thumbnail?.alt || ""}
-                  />
-                </div>
+          <li key={line?.id} className="py-6 flex">
+            <div className={styles.product.image}>
+              <img
+                src={product?.thumbnail?.url || ""}
+                alt={product?.thumbnail?.alt || ""}
+              />
+            </div>
 
-                <div className={styles.product.container}>
-                  <div className="flex justify-between">
-                    <div className="pr-6">
-                      <h3 className={styles.product.name}>
+            <div className={styles.product.container}>
+              <div className="flex justify-between">
+                <div className="pr-6">
+                  <h3 className={styles.product.name}>
+                    <Link href={`/product/${productID}`}>
+                      <a>
                         {product?.name}
-                      </h3>
-                      <h4>
-                        {variant?.name}
-                      </h4>
-                    </div>
-
-                    <p className="text-xl text-gray-900 text-right">
-                      {price?.amount} {price?.currency}
-                    </p>
-                  </div>
+                      </a>
+                    </Link>
+                  </h3>
+                  <h4>
+                    {variant?.name}
+                  </h4>
                 </div>
-              </a>
-            </Link>
+
+                <p className="text-xl text-gray-900 text-right">
+                  {price?.amount} {price?.currency}
+                </p>
+              </div>
+            </div>
           </li>
         );
       })}
