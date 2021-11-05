@@ -14,7 +14,7 @@ next:
 
 Here's the final result for this section:
 
-<Codesandbox slug="github/saleor/tutorial-walkthrough/tree/variants" />
+<Codesandbox slug="github/saleor/tutorial-walkthrough/tree/product-variants" />
 
 Move the vertical sidebar to see the code.
 

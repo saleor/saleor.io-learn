@@ -16,6 +16,6 @@ The price for each product contains the tax (which may be also different for dif
 
 Here's the final result for this section:
 
-<Codesandbox slug="github/saleor/tutorial-walkthrough/tree/pricing-range" />
+<Codesandbox slug="github/saleor/tutorial-walkthrough/tree/prices-pricing-range" />
 
 Move the vertical sidebar to see the code.
