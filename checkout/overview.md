@@ -14,4 +14,8 @@ Checkout is a state kept server-side by Saleor and we will be referring to it us
 
 First thing we need to do is to create the checkout and we will cover that in the next section.
 
+<Codesandbox slug="github/saleor/tutorial-walkthrough/tree/checkout-remove-from-cart" />
+
+Move the vertical sidebar to see the code.
+
 

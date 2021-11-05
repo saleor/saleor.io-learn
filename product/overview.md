@@ -14,6 +14,7 @@ next:
 
 Here's the final result for this section:
 
-![Product Section Overview](/images/product-overview.png)
+<Codesandbox slug="github/saleor/tutorial-walkthrough/tree/variants" />
 
-Don't forget you can always use the right-side menu at any point when reading this tutorial to check not only the current code, but also the working demo.
+Move the vertical sidebar to see the code.
+
