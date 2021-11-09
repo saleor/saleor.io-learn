@@ -53,7 +53,7 @@ export async function getStaticPaths() {
 }
 ```
 
-In this scenerio we pre-fetch first 4 products to generate their pages ahead-of-time at build-time. And then, whenever the product page than these 4 pre-generated, we will block the request till the product page is generated using `fallback: 'blocking'`.
+The `fallback: 'blocking'` parameter specifies that whenever we receive a request for a page that hasn't been generated yet, Next.js will render that page on-demand as the request arrives. Future requests to this specific page will serve the pre-generated page from the cache.
 
 ---
 
