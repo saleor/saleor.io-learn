@@ -40,7 +40,7 @@ Finally, we need to configure the generator using the `codegen.yml` configuratio
 
 ```yaml
 overwrite: true
-schema: "https://tutorial.saleor.cloud/graphql/"
+schema: "https://vercel.saleor.cloud/graphql/"
 documents: "graphql/**/*.{ts,graphql}"
 generates:
   saleor/api.tsx:
