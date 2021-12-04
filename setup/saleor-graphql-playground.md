@@ -22,4 +22,4 @@ The operation input section allows you to type GraphQL operations (queries, muta
 
 The result section simply shows the result of the GraphQL operation. 
 
-The sidebar is available when clicked on the docs or the schema labels. The docs provide a quick way to find GraphQL operation available in Saleor API. The schema provides a more structured description of the available types. It can be used to auto-generated your client interface. We will discuss later in this tutorial.
+The sidebar is available when clicked on the docs or the schema labels. The docs provide a quick way to find GraphQL operation available in Saleor API. The schema provides a more structured description of the available types. It can be used to auto-generate your client interface. We will discuss it later in this tutorial.
