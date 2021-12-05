@@ -8,9 +8,9 @@ next:
   path: /setup/typescript-path-aliases/
 ---
 
-[GraphQL Code Generator](https://www.graphql-code-generator.com/) is a command-line tool that generates TypeScript typings along with helpers such as React Hooks from a GraphQL schema. This way we can not only have on the client the TypeScript types that corresponds to the GraphQL ones from the Saleor API, but we can also automate the process of transforming the GraphQL statement definitions (queries, mutations) into ready-to-execute code pieces provided as React Hooks. 
+[GraphQL Code Generator](https://www.graphql-code-generator.com/) is a command-line tool that generates TypeScript typings along with helpers such as React Hooks from a GraphQL schema. With this approach, we not only have the TypeScript types on the client that corresponds to the GraphQL ones from the Saleor API, but we also automate the process of transforming the GraphQL statement definitions (queries, mutations) into ready-to-execute code pieces provided as React Hooks. 
 
-GraphQL Code Generator will automatically generate types representing all *the commerce notions* available in the Saleor API. It connects to a GraphQL endpoint and locates the API schema to execute the proess of generating corresponding TypeScript types.
+GraphQL Code Generator will automatically generate types representing all *the commerce notions* available in the Saleor API. It connects to a GraphQL endpoint and locates the API schema to execute the process of generating the corresponding TypeScript types.
 
 ## Configure GraphQL Code Generator
 
@@ -56,11 +56,11 @@ generates:
       - "introspection"
 ```
 
-In a nutshell, this configuration file instructs the code generator to use the `graphql/` directory as the place where GraphQL statements are stored, to generate the resulting TypeScript types in `saleor/api.tsx` and to use the Saleor API endpoint as the location for the schema of our API.
+In a nutshell, this configuration file instructs the code generator to use the `graphql/` directory as the place where GraphQL statements are stored, to generate the resulting TypeScript types in `saleor/api.tsx`, and to use the Saleor API endpoint as the location for the schema of our API.
 
 ## Location for GraphQL Statements
 
-We will be putting all GraphQL statements (queries, mutations and fragments) inside the `graphql/`. Additionally, each query or mutation will be put in a separate file, so it's easier to locate in the filesystem. 
+We will be putting all GraphQL statements (queries, mutations, and fragments) inside the `graphql/`. Additionally, each query or mutation will be put in a separate file, so it's easier to locate in the filesystem.
 
 For starters, let's use a basic GraphQL query as a placeholder for the GraphQL code generator. Put the following query in `graphql/queries/ThreeProducts.graphql`:
 
