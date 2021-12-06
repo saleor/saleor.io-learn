@@ -81,9 +81,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 }
 ```
 
-With such setup, the Tailwind classes should work in any React component across the whole application.
+With such a setup, the Tailwind classes should work in any React component across the whole application.
 
-Let's finish off with defining some custom, global styles that will be also available from any component. Using Tailwind's built-in `@apply` directive, we will define one style for links and two styles for buttons (primary & regular). 
+Let's finish off by defining some custom, global styles that will be also available from any component. Using Tailwind's built-in `@apply` directive, we will define one style for links and two styles for buttons (primary & regular). 
 
 Open `styles/main.css` and adjust it so it has the following content:
 
