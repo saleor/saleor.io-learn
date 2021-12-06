@@ -8,9 +8,9 @@ next:
   path: /setup/tailwind-css-styling/
 ---
 
-Path Alias is a TypeScript configuration that maps a custom alias to a path in your project. Thanks to path aliases the import statements are short are more convenient to use. 
+Path Alias is a TypeScript configuration that maps a custom alias to a path in your project. Thanks to path aliases, the import statements are short and more convenient to use.
 
-Let's declare couple of aliases for components, the auto-generated Saleor typings and the location of GraphQL statements. Open `tsconfig.json` and add the following `paths` section under `compilerOptions`. We also need to set the `baseUrl` to make the path aliases work in Next.js.
+Let's declare a couple of aliases for components, the auto-generated Saleor typings, and the location of GraphQL statements. Open `tsconfig.json` and add the following `paths` section under `compilerOptions`. We also need to set the `baseUrl` to make the path aliases work in Next.js.
 
 ```json
 // tsconfig.json
