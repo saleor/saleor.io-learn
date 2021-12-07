@@ -18,7 +18,7 @@ The Stackblitz environemnt for this setup only works in Chrome, Edge and Brave; 
 If you prefer to use your own computer for development, you need to setup Node.js and Next.js on your computer. For that you need:
 
 * the Node.js runtime
-* the `create-next-app` wizard - it can be installed via `npm i -g create-next-app`
+* the `create-next-app` wizard - it will be automatically installed when running `npx create-next-app`
 
 Initialize the application using the following command:
 
