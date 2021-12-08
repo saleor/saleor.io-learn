@@ -11,7 +11,7 @@ next:
 
 When fetching products using the `products` query, we can also filter them using various criteria provided via the `filter` argument. 
 
-The most basic form of filtering can be done using the `search` field. It takes a string value as input that is matched against the product title and description. In the following example we want to find all the t-shirts available in our store. 
+The most basic form of filtering can be done using the `search` field. It takes a string value as input that is matched against the product title and description. In the following example, we want to find all the t-shirts available in our store. 
 
 ```graphql
 # graphql/queries/TShirtProducts.graphql
