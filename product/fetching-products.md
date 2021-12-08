@@ -14,7 +14,7 @@ In Saleor, you can fetch:
 - a collection of products by using the `products` query, or
 - a single product by using the `product` query that requires the product `ID` as input. 
 
-The first operation also allows to filter and sort a collection of products by specifing either the filter criteria, or the sorting parameters.
+The first operation also enables you to filter and sort a collection of products by specifying either the filter criteria or the sorting parameters.
 
 ## Fetching a collection 
 
@@ -134,9 +134,9 @@ export const ProductCollection = () => {
 
 The GraphQL Code Generator alongside the Apollo React plugin automatically generates the `useFetchTwelveProductsQuery` React hook. 
 
-Once the `data` is available, we display the product names as a list. It's important to notice that the product collection is available as a GraphQL edge as it stores information that goes beyond what's in each object, e.g. the count, and then each collection element is a node.
+Once the `data` is available, we display the product names as a list. It's important to notice that the product collection is available as a GraphQL edge as it stores information that goes beyond what's in each object, e.g., the count, and then each collection element is a node.
 
-Let's define the export statement in `components/index.ts` for this component, so that we can directly import it from `@/components` later on.
+Let's define the export statement in `components/index.ts` for this component, so we can directly import it from `@/components` later on.
 
 ```tsx
 // components/index.ts
@@ -145,7 +145,7 @@ export { ProductCollection } from './ProductCollection';
 
 ## Display the Home Page
 
-In Next.js the routing is generated from the file system. All the pages are located in `pages` and `pages/index.tsx` is the page that will be displed for the `/` path. Right now, it's just a 4-element grid with links to Next.js resources. Let's replace it with the `ProductCollection` component:
+In Next.js, the routing is generated based on the file system. Each file in the `pages` directory is available as a route, and `pages/index.tsx` is the file associated with the `/` path. Right now, it's just a 4-element grid with links to Next.js resources. So, let's replace it with the `ProductCollection` component:
 
 ```tsx
 // pages/index.tsx
@@ -173,11 +173,11 @@ const Home = () => {
 export default Home
 ```
 
-As a result when navigating to `localhost:3000/` you should see a grid of product names as shown below:
+As a result when navigating to `localhost:3000/`, you should see a grid of product names as shown below:
 
 > **IMAGE**
 
-Additionally, we can standarise the structure for each Next.js page with a fixed layout using the following component:
+Additionally, we can standardize the structure for each Next.js page with a fixed layout using the following component:
 
 ```tsx
 // components/Layout.tsx
@@ -203,7 +203,7 @@ export const Layout = ({ children }: Props) => {
 }
 ```
 
-Let's define the export statement in `components/index.ts` for this component, so that we can directly import it from `@/components` later on.
+Now, let's define the export statement for this component in `components/index.ts`, so we can import it directly from `@/components` later on.
 
 ```tsx{3}
 // components/index.ts
@@ -235,7 +235,7 @@ export default Home
 
 ## Displaying product thumbnails
 
-Right now our product collection contains only the product names. Let's improve it by including the product images. 
+Right now, our product collection contains only the product names. Let's improve it by including the product images.
 
 We need to slightly modify our GraphQL query to also include the product thumbnails in the response. While we are at it, we can also fetch the product category.
 
