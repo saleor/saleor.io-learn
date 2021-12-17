@@ -11,7 +11,7 @@ next:
 
 Often the filtering criteria come from the users. Those criteria cannot be put as-is into the GraphQL query. We must dynamically set them using the query variables.
 
-Let's rewrite the previous query that fetches T-shirts, so that the `filter` argument is set via a GraphQL query variable:
+Let's rewrite the previous query that fetches T-shirts so that the `filter` argument is set via a GraphQL query variable:
 
 ```graphql{1,2}
 # graphql/queries/FilterProducts.graphql
@@ -37,7 +37,7 @@ In the example above, we are setting the `filter` argument using the `$filter` v
 
 Notice also that we change the name of the query to `FilterProducts`. This will generate the `useFilterProductsQuery` React Hook.
 
-Such defined GraphQL query accepts its input via the `variables` field. This transformation is done automatically by the Apollo library along with the code generation and available as input in its React Hook.
+Such defined GraphQL query accepts its input via the `variables` field. This transformation is done automatically by the Apollo library along with the code generation and is available as input in its React Hook.
 
 In `components/ProductCollection.tsx`, we can replace the `useFetchTwelveProductsQuery` with the newly generated `useFilterProductsQuery` as the shape of the elements in the product collection doesn't change.
 
