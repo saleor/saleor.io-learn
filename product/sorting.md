@@ -9,7 +9,7 @@ next:
   path: /product/pagination/
 ---
 
-The `products` query allows us to the order in the returned product collection with sorting. The `products` query takes the `sortBy` argument as input and it allows to specify the field that will be used for sorting along with the sorting order, i.e. *ascending* or *descending*.
+The `products` query also enables us to change the order of the returned product collection through sorting. The `products` query takes the `sortBy` argument as input, and it allows you to specify which field to use for sorting along with the sorting order, i.e., *ascending* or *descending*.
 
 Let's rework our previous query so that it also specifies the sorting:
 
@@ -63,4 +63,4 @@ import {
 ...
 ```
 
-In the example above, we are using the product name as the field for sorting along with the *descending* direction. That means we will be using the lexicographic order and as a result, the products will be reversed.
+In the example above, we have the product name as the field for sorting, along with the *descending* direction. That means we will be using the lexicographic order, and as a result, the products will be reversed.
