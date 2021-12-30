@@ -8,7 +8,7 @@ next:
   path: /product/variants/
 ---
 
-Sometimes you may need to fetch a specific product. Usually, you display the most important product information on the collection page, and then when the user navigates to a specific product you provide details about it.  We will use the `product` query (singular) from the Saleor API for fetching those details.
+Sometimes you may need to fetch a specific product. Usually, you display the most relevant product information on the collection page, and then when the user navigates to a particular product, you provide details about it. We will use the `product` query (singular) from the Saleor API for fetching those details.
 
 ## GraphQL Query for Single Product
 
@@ -43,9 +43,9 @@ const { loading, error, data } = useProductByIdQuery({
 
 ## Display the Single Product Page
 
-Let's start with creating a dedicated page for a single product. This page will be displayed when accessing the `/product/[id]` route with `[id]` being an actual product identifier. 
+Let's start by creating a dedicated page for a single product. This page will get displayed when accessing the `/product/[id]` route, with `[id]` being an actual product identifier.
 
-Since Next.js provides a file-based routing we can simply create the `product/` directory within `pages` along with the `[id].tsx` file inside that directory. The `[id].tsx` is a special format in Next.js for handling dynamic routes. Once the page is generated the dynamic section i.e. `[id]` will be replaced with an ID of an actual element. In our case, this will be a product ID.
+Since Next.js provides a file-based routing, we can simply create the `product/` directory within `pages` along with the `[id].tsx` file inside that directory. The `[id].tsx` is a special format in Next.js for handling dynamic routes. Once the page gets generated, the dynamic section, i.e., `[id]`, will be replaced with the ID of an actual element. In our case, this will be a product ID.
 
 Let's focus on the React component first. Let's name it `ProductPage`:
 
@@ -120,9 +120,9 @@ export default ProductPage;
 
 ```
 
-`ProductPage` has the product identifier passed in and then it uses that to fetch details for a particular product using the auto-generated `useProductByIdQuery`. Then, we display the product data we received. The flow is similar to the page that displays the collection of products except that here we need an `id` of a product to display as input for this React component.
+`ProductPage` has the product identifier passed in, and then it uses that to fetch details for a particular product using the auto-generated `useProductByIdQuery`. Then, we display the product data we received. The flow is similar to the page that displays the collection of products, except that here we need an `id` of a product to display as input for this React component.
 
-Next.js provides two special functions for React components that are used as pages (i.e. the ones located in `pages/` directory) with dynamic routes: `getStaticPaths` and `getStaticProps`.
+Next.js provides two special functions for React components that are used as pages (i.e., the ones located in `pages/` directory) with dynamic routes: `getStaticPaths` and `getStaticProps`.
 
 `getStaticPaths` generates all the possible values for parameters in dynamic routes ahead of time when the website is being built. In our case, this function will return a collection of identifiers for all products provided by our Saleor API. Let's write it down:
 
@@ -170,9 +170,9 @@ export async function getStaticPaths() {
 }
 ```
 
-First, we are executing a GraphQL to fetch a collection of products. We are re-using the same query we defined in the section about fetching products. Both, `FilterProductsDocument` and `FilterProductsQuery` are auto-generated from the query name (`FilterProducts`). The first is the actual query while the second is the type describing the shape of the data returned in response to that query.
+First, we are executing a GraphQL query to fetch a collection of products. We are re-using the same query we defined in the section about fetching products. Both `FilterProductsDocument` and `FilterProductsQuery` are auto-generated from the query name (`FilterProducts`). The first is the actual query, while the second is the type describing the shape of the data returned in response to that query.
 
-The response data is a collection of products. We extract just the identifier of each product using the built-in `map` function, and return the result as the collection of paths.
+The response data is a collection of products. We extract just the identifier of each product using the built-in `map` function and return the result as a collection of paths.
 
 Since we are re-using the instance of the Apollo client, let's move the initialization of that client to a separate file: `lib/graphql.ts`
 
@@ -281,7 +281,7 @@ export const ProductElement = ({ id, name, thumbnail, category }: Props) => {
 }
 ```
 
-We use `Link` from the official `next/link` package to define the route to go when click on that element in the product collection. You should be now able to move from the collection page to the single product page by clicking around.
+We use `Link` from the official `next/link` package to define the route to go when you click on an element in the product collection. You should now be able to move from the collection page to the single product page by clicking around.
 
 ## Refactor the App Component
 
@@ -387,7 +387,7 @@ export const Layout = ({ children }: Props) => {
 
 ## Refactor the Product Page
 
-Currently the product page has several responsabilities from getting the product details to conforming to rules required by Next.js components located in the `pages/` directory. Let's simplify it by splitting the product details into a separate component, named `ProductDetails`:
+Currently, the product page has several responsibilities, from getting the product details to conforming to rules required by Next.js components located in the `pages/` directory. Let's simplify it by splitting the product details into a separate component, named `ProductDetails`:
 
 ```tsx
 // components/ProductDetails.tsx
