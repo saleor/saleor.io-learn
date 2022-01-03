@@ -8,7 +8,7 @@ next:
   path: /prices/overview/
 ---
 
-A product may be available in different variants, e.g.  a particular t-shirt may be available in different sizes, and each size is a variant of that t-shirt. The notion of variants is available in Saleor out of the box. You can access it on the product via the `variants` field.
+A product may be available in different variants, e.g., a particular t-shirt may be available in different sizes, and each size is a variant of that t-shirt. The notion of variants is available in Saleor out of the box. You can access it on the product via the `variants` field.
 
 ## Fetching variants of a product
 
@@ -35,7 +35,7 @@ query ProductByID($id: ID!) {
 }
 ```
 
-If you run this query for a product from the T-shirt category, you will notice that the variant names are T-shirt sizes, i.e. S, M, L or XL.
+If you run this query for a product from the T-shirt category, you will notice that the variant names are T-shirt sizes, i.e., S, M, L, or XL.
 
 ## Displaying variants on the product page
 
@@ -116,7 +116,7 @@ export { VariantSelector } from './VariantSelector';
 ```
 
 
-With the `ProductByID` query adjusted by `variants` we pass them to a newly created `VariantSelector` component. This components gets a collection of variants and displays their names:
+With the `ProductByID` query adjusted by `variants`, we pass them to a newly created `VariantSelector` component. This component gets a collection of variants and displays their names:
 
 ```tsx
 // components/VariantSelector.tsx
@@ -150,7 +150,7 @@ export const VariantSelector = ({ variants }: Props) => {
 }
 ```
 
-Next step is to make those variant clickable so that the user can select a particular variant of a product they want to add to their cart.
+The next step is to make those variants clickable so that the user can select a particular variant of a product they want to add to their cart.
 
 For constructing className strings conditionally let's use a tiny utility - `clsx`.
 
@@ -215,7 +215,7 @@ export const VariantSelector = ({ variants, id, selectedVariantID }: Props) => {
 }
 ```
 
-The id of a selected variant is being passed-in to the `VariantSelector` component as the parent component must also know its value so that we can add the correct product variant to the cart. Let's slightly modify the parent component, i.e. `ProductDetails`:
+The id of a selected variant is being passed-in to the `VariantSelector` component as the parent component must also know its value in order to add the correct product variant to the cart. Let's slightly modify the parent component, i.e., `ProductDetails`:
 
 ```tsx{3,7,23,27,29-32,54}
 // components/ProductDetails.tsx
