@@ -9,9 +9,9 @@ next:
   path: /product/single-product/
 ---
 
-The `products` query from the Saleor API returns a paginated collection. Once we receive the query result, we also have data to ask for the next elements in that collection. In order to keep track of the position in the collection we need a pointer, usually known as a cursor. The query result must provide such cursor in the response once it returns so that we can ask for another subset of data. 
+The `products` query from the Saleor API returns a paginated collection. Once we receive the query result, we also have the data to ask for the next elements in that collection. In order to keep track of the position in the collection, we need a pointer, commonly known as a cursor. The query result must provide such a cursor in the response once it returns so that we can ask for another subset of data.
 
-It’s not a good idea to keep this information in the entity itself as it’s not related to the business model. For that we introduce a layer of indirection. In GraphQL this layer is usually known as `edges`.
+It's not a good idea to keep this information within the entity itself as it's unrelated to the business model. For that, we introduce a layer of indirection. In GraphQL, this layer is usually known as `edges`.
 
 Let's adapt the query for fetching products so that it can be paginated.
 
@@ -52,9 +52,9 @@ query FilterProducts(
 }
 ```
 
-We are not only returing the product `node`, but also the `totalCount` and `pageInfo` with `hasNextPage` / `hasPreviousPage` helpers to see if there are elements after and before the current collection subset along with `startCursor` / `endCursor` that uniqely identify the current subset of product collection.
+We are not only returning the product `node`, but also the `totalCount` and `pageInfo` with `hasNextPage` / `hasPreviousPage` helpers to check if there are elements after and before the current collection subset along with `startCursor` / `endCursor` that uniquely identify the current subset of product collection.
 
-Additionally, the `products` query has the `after` arguments that take the value of `startCursor` and `endCursor` as input. 
+Additionally, the `products` query has the `after` argument that takes the value of `startCursor` and `endCursor` as input.
 
 Let's re-write the `ProductCollection` by adding the pagination as a *Fetch More* button.
 
@@ -115,7 +115,7 @@ export const ProductCollection = () => {
 }
 ```
 
-There is a couple of changes here. First of all, we add the `Pagination` component that is responsible for displaying the *Fetch More* button along handling the request for more data in the product collection. Then, we use Apollo's `fetchMore` helper method to construct the `onClick` event handler. This helper accepts the same variables as the auto-generated React Hook itself. As we request the next elements in the collection, we set the `after` argument to the cursor the the last element (the end) in the current subset of the product collection. Finally, we conditionally display the `Pagination` component depenending on the value of `pageInfo.hasNextPage`.
+There are a couple of changes here. First of all, we add the `Pagination` component that is responsible for displaying the *Fetch More* button and handling the request for more data in the product collection. Then, we use Apollo's `fetchMore` helper method to construct the `onClick` event handler. This helper accepts the same variables as the auto-generated React Hook itself. As we request the next elements in the collection, we set the `after` argument to the end cursor (the last element) in the current subset of the product collection. Finally, we conditionally display the `Pagination` component depending on the value of `pageInfo.hasNextPage`.
 
 The `Pagination` component is straightforward. We have a button with the passed in handler attached to the `onClick` event along with the information about the current count and total count. 
 
