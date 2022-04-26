@@ -105,7 +105,7 @@ export const ProductDetails = ({ product }: Props) => {
   const [addProductToCart] = useAddProductVariantToCartMutation();
 
   const queryVariant = process.browser
-    ? router.query.variant?.toString()
+    ? Router.query.variant?.toString()
     : undefined;
   const selectedVariantID = queryVariant || product?.variants![0]!.id!;
   const selectedVariant = product?.variants!.find((variant) => variant?.id === selectedVariantID);
@@ -114,7 +114,7 @@ export const ProductDetails = ({ product }: Props) => {
     await addProductToCart({
       variables: { checkoutToken: token, variantId: selectedVariantID },
     });
-    router.push("/cart");
+    Router.push("/cart");
   };
 
   return (
