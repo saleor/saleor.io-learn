@@ -1,7 +1,7 @@
 ---
 pos: 3
-title: Technologies 
-description: 
+title: Technologies
+description:
 ---
 
 Our storefront will be built in React.js using the Next.js framework. Those two solutions will be complemented with TypeScript, GraphQL & Apollo Client and Tailwind CSS.
@@ -24,8 +24,16 @@ GraphQL is a query language and server-side runtime for APIs that prioritizes gi
 
 ## Apollo Client
 
-Apollo Client is a comprehensive state management JavaScript library for GraphQL. It enables you to manage both local and remote data with GraphQL. You can use it to fetch, cache, and modify application data, and the library will take care of it while automatically updating your UI. Apollo Client helps you structure code in an economical, predictable, and declarative way that's consistent with modern development practices. 
+Apollo Client is a comprehensive state management JavaScript library for GraphQL. It enables you to manage both local and remote data with GraphQL. You can use it to fetch, cache, and modify application data, and the library will take care of it while automatically updating your UI. Apollo Client helps you structure code in an economical, predictable, and declarative way that's consistent with modern development practices.
 
 ## Tailwind CSS
 
 Tailwind CSS is a utility-first CSS framework that allows you to build complex components from a constrained set of primitive utilities like `flex`, `pt-4`, `text-center`, and `rotate-90`, directly in your markup. The framework provides a wide variety of predefined classes where each has its own focused use. This approach makes it easier to quickly test and check how CSS styles are applied on web pages.
+
+## Typesense
+
+[Typesense](https://typesense.org/) is an open source search engine that is optimised for instant sub-50ms searches, while providing an intuitive developer experience. It is equipped with a number of useful features, such as typo tolerance, faceting and filtering and geo search by default which makes it a tempting alternative to Algolia or ElasticSearch.
+
+## React InstantSearch
+
+With [InstantSearch.js](https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/js/) UI library from Algolia, we can quickly build a search interface in our front-end app. It equips you with a complete production-ready search ecosystem based on widgets that are fully customizable. Moreover, InstantSearch.js comes with many flavours, one of them being React Instant Search, which we will use in this guide.
