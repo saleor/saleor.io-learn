@@ -18,12 +18,12 @@ In order to use the functionality of instantSearch.js we need to install a coupl
 In the terminal run:
 
 ```
-yarn add react-instantsearch-dom
-yarn add @types/react-instantsearch-dom
-yarn add --dev typesense-instantsearch-adapter
+pnpm add react-instantsearch-dom
+pnpm add @types/react-instantsearch-dom
+pnpm add -D typesense-instantsearch-adapter
 ```
 
-After successful install, we need to connect the search client to Typescript server. Go to the main page in `index.tsx` in the `pages` folder and add the configuration for `searchClient`:
+After a successful install, we need to connect the search client to Typescript server. Go to the main page in `index.tsx` in the `pages` folder and add the configuration for `searchClient`:
 
 ```js
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
@@ -80,7 +80,7 @@ First, we need the Instant Search root widget, which is responsible for communic
 ```javascript
 ...
 </header>
-<InstantSearch  indexName="products"  searchClient={searchClient}>
+<InstantSearch  indexName="products" searchClient={searchClient}>
   <div>
     <aside></aside>
     <main>
@@ -108,7 +108,7 @@ Let's now add the `<SearchBox />` in the `main` section of the page.
 Instead of the `<Products />` we will now render `<Hits />`, a widget responsible for displaying the results of a given search. `<Hits />` takes a component as an attribute which is responsible for rendering a single product.
 The example code of the component may look like that:
 
-```javascript
+```tsx
 type Props = { hit: any };
 
 const Hit = ({ hit }: Props) => {
@@ -137,11 +137,11 @@ const Hit = ({ hit }: Props) => {
 export default Hit;
 ```
 
-If we try to run `yarn dev` to start the development server, there is going to be an issue with Next.js:
+If we try to run `pnpm dev` to start the development server, there is going to be an issue with Next.js:
 ![](https://lh6.googleusercontent.com/mvMPVE6ulhfUTBVSSbVW7qBichMzb8SkTRRvgBVLn8EaIL1wkdi1xutRVy2zw6U4F9ifreULigECf5AXMhLkwqKqAVh2lxdpI3uvpdyvAmkW15NyrlOXUjPtMJKBqEpPbU-t5YWi)
 We need to add the `vercel.saleor.cloud` domain to the images source in `next.config.js.` So, let's do that:
 
-    next.config.js
+`next.config.js`
 
 ```javascript
 module.exports = {
@@ -255,7 +255,7 @@ The library doesn't load any CSS by default but it is possible to manually insta
 
 `Reset.css` is a bare minimum that is recommended, `satellite.css` ships with a lot more style. You can use either of them. In oder to install the theme run:
 
-`yarn add instantsearch.css --dev style-loader css-loader`
+`pnpm add instantsearch.css -D style-loader css-loader`
 Then import the theme in your component:
 
 ```javascript
@@ -273,4 +273,4 @@ You can customise the styling using the respective css classes, like so:
 }
 ```
 
-The HTML output with its respective CSS classes of every widget used by react-instantsearch-dom is available in Algolia's [api reference.](https://www.algolia.com/doc/api-reference/widgets/hits/react/)
+The HTML output with its respective CSS classes of every widget used by react-instantsearch-dom is available in Algolia's [Api Reference.](https://www.algolia.com/doc/api-reference/widgets/hits/react/)

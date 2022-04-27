@@ -17,8 +17,8 @@ Typesense provides us with a few options when it comes to setting up the search 
 So far, our application displays a number of products, which are fetched using the Apollo’s `useLatestProductsQuery()` hook. Now, let us add [Typesense.js](https://github.com/typesense/typesense-js) to our project, so that we can start creating a real search experience for the users.
 In your terminal, type in:
 
-`yarn add --dev typesense`
-`yarn add --dev @babel/runtime`
+`pnpm add -D typesense`
+`pnpm add -D @babel/runtime`
 
 ## Creating the main function
 
@@ -139,7 +139,7 @@ query LatestProducts {
 
 Then, in your terminal run:
 
-`yarn generate`
+`pnpm generate`
 
 which will regenerate all the types and hooks for your new GraphQL schema. This will give us a new `LatestProductsDocument`:
 
@@ -337,12 +337,12 @@ Our code is ready and now it is time to run it. Go to `package.json` file and wi
 
 Then, run the script in your terminal:
 
-`yarn run populate`
+`pnpm populate`
 
 Unfortunately, you may encounter an error saying that “–jsx” flag is not set:
 ![](https://lh3.googleusercontent.com/cTx7byCnURQPzHn4bBRuFeU3j4exiRBSG-MbDYZNGmxzJsIIN5uElZkNRGoO9jCyOkmYR5xUpB3FUoMtZSYxcnqXT395Q88DkJ4ig0KJG2uT1R8RmJEVH-wrB2Qm0Nso7CWxlStz)
 
 One of the ways to get rid of this error is to simply change the `saleor.tsx` file to `saleor.ts`
 
-After running `yarn populate` again we should have everything set up.
+After running `pnpm populate` again we should have everything set up.
 You may now check the Typesense Cloud account and inspect the newly created collection.
