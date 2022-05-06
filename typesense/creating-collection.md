@@ -331,11 +331,7 @@ Our code is ready and now it is time to run it.
 
 This command will transpile `populate.ts` into a plain javascript file and run it in Node.
 
-<<<<<<< HEAD 2. To void the error saying that “–jsx” flag is not set, change the `saleor.tsx` file to `saleor.ts`.
-=======
-`pnpm populate`
-
-> > > > > > > 9ef89a4 (Change yarn to pnpm, make other text improvements.)
+2. To void the error saying that “–jsx” flag is not set, change the `saleor.tsx` file to `saleor.ts`.
 
 3. Run the script in your terminal:
 

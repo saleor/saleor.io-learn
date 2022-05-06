@@ -23,7 +23,7 @@ pnpm add @types/react-instantsearch-dom
 pnpm add -D typesense-instantsearch-adapter
 ```
 
-After a successful install, we need to connect the search client to Typescript server. Go to the main page in `index.tsx` in the `pages` folder and add the configuration for `searchClient`:
+2. Go to the main page in `index.tsx` in the `pages` folder and add the configuration for `searchClient`:
 
 ```js
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
@@ -109,14 +109,9 @@ The root widget is responsible for communication between our application and Typ
 
 4. Change `<Products />` to `<Hits />`.
 
-<<<<<<< HEAD
 This widget is responsible for displaying the results of a given search. `<Hits />` takes a component as an attribute which is responsible for rendering a single product.
 
 5. Create a `<Hit />` component. The example component may look like that:
-
-=======
-
-> > > > > > > 9ef89a4 (Change yarn to pnpm, make other text improvements.)
 
 ```tsx
 type Props = { hit: any };
