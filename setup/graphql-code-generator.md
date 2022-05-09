@@ -1,6 +1,6 @@
 ---
 pos: 4
-title: GraphQL Code Generator 
+title: GraphQL Code Generator
 description:
 prev:
   path: /setup/configure-graphql-client-nextjs/
@@ -8,13 +8,13 @@ next:
   path: /setup/typescript-path-aliases/
 ---
 
-[GraphQL Code Generator](https://www.graphql-code-generator.com/) is a command-line tool that generates TypeScript typings along with helpers such as React Hooks from a GraphQL schema. With this approach, we not only have the TypeScript types on the client that corresponds to the GraphQL ones from the Saleor API, but we also automate the process of transforming the GraphQL statement definitions (queries, mutations) into ready-to-execute code pieces provided as React Hooks. 
+[GraphQL Code Generator](https://www.graphql-code-generator.com/) is a command-line tool that generates TypeScript typings along with helpers such as React Hooks from a GraphQL schema. With this approach, we not only have the TypeScript types on the client that corresponds to the GraphQL ones from the Saleor API, but we also automate the process of transforming the GraphQL statement definitions (queries, mutations) into ready-to-execute code pieces provided as React Hooks.
 
-GraphQL Code Generator will automatically generate types representing all *the commerce notions* available in the Saleor API. It connects to a GraphQL endpoint and locates the API schema to execute the process of generating the corresponding TypeScript types.
+GraphQL Code Generator will automatically generate types representing all _the commerce notions_ available in the Saleor API. It connects to a GraphQL endpoint and locates the API schema to execute the process of generating the corresponding TypeScript types.
 
 ## Configure GraphQL Code Generator
 
-Let's start by installing the GraphQL Code Generator command-line tool along with few plugins, namely the TypeScript, Apollo and React integrations, as development dependencies 
+Let's start by installing the GraphQL Code Generator command-line tool along with few plugins, namely the TypeScript, Apollo and React integrations, as development dependencies.
 
 ```
 npm install -D @graphql-codegen/cli \
@@ -50,7 +50,7 @@ generates:
       - "typescript-react-apollo"
       - "typescript-apollo-client-helpers"
     config:
-      dedupeOperationSuffix: true 
+      dedupeOperationSuffix: true
   ./graphql.schema.json:
     plugins:
       - "introspection"
@@ -77,12 +77,12 @@ query ThreeProducts {
 }
 ```
 
-## Trigger Code Generation & Watch 
+## Trigger Code Generation & Watch
 
 We can now run the generation process using the following command:
 
 ```bash
-npx graphql-codegen --config codegen.yml 
+npx graphql-codegen --config codegen.yml
 ```
 
 For convenience, we can put this command in `package.json` under the `scripts` section as `generate`
@@ -110,8 +110,4 @@ npm run generate
 pnpm generate
 ```
 
-Once the command executes, you should have a relatively large file generated at `saleor/api.tsx`. We will be using it as a main point to import React Hooks that interact with our Saleor API endpoint. 
-
-
-
-
+Once the command executes, you should have a relatively large file generated at `saleor/api.tsx`. We will be using it as a main point to import React Hooks that interact with our Saleor API endpoint.
