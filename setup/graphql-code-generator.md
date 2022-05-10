@@ -14,7 +14,39 @@ GraphQL Code Generator will automatically generate types representing all _the c
 
 ## Configure GraphQL Code Generator
 
-Let's start by installing the GraphQL Code Generator command-line tool along with few plugins, namely the TypeScript, Apollo and React integrations, as development dependencies.
+### Using Initialization Wizard
+
+GraphQL Code Generator ships with a variety of plugins that will suit most of the stacks out there. Because of that, it is best to try the Initialization Wizard, which simplifies the configuration process.
+
+First, we need to install the GraphQL Code Generator and its command-line tool.
+
+```
+npm install graphql
+npm install @graphql-codegen/cli
+```
+
+```
+pnpm add graphql
+pnpm add @graphql-codegen/cli
+```
+
+Then, run the Initialization Wizard:
+
+```
+npm run graphql-codegen init
+```
+
+```
+pnpm graphql-codegen init
+```
+
+You'll be asked a few questions about setting up a schema, selecting and installing plugins and picking a destination to where your files are generated.
+After completing the wizard, install the plugins running: `npm install` or `pnpm install`.
+
+### Manual setup
+
+If you want to have a better understanding of what's being installed during the initialization process, you can set `codegen` up manually.
+Start by installing the GraphQL Code Generator command-line tool along with few plugins, namely the TypeScript, Apollo and React integrations, as development dependencies.
 
 ```
 npm install -D @graphql-codegen/cli \
