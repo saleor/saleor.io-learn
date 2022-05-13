@@ -45,9 +45,9 @@ You'll be asked a few questions about the setup:
 - schema url: `https://vercel.saleor.cloud/graphql/`,
 - path to query documents / fragments: `graphql/*.graphql`
 - selecting and installing plugins: let's leave the preselected ones,
-- destination to where your files should be generated: `generated/graphql.ts`
+- destination to where your files should be generated: `saleor/api.ts`
 
-The Initialization Wizard creates a `codegen.yaml` config file with the above information specified. You can leave it as it is, but we suggest changing the file to a more robust alternative provided by GraphQL Config library, as described in the Manual setup section below.
+The Initialization Wizard creates a `codegen.yaml` config file with the above information specified. You can leave it as it is, but we suggest using a more robust alternative provided by GraphQL Config library, as described in the Manual setup section below.
 
 After completing the wizard, install the plugins running: `npm install` or `pnpm install`.
 
@@ -86,7 +86,7 @@ extensions:
   codegen:
     overwrite: true
     generates:
-      generated/graphql.ts:
+      saleor/api.ts:
         plugins:
           - typescript
           - typescript-operations
@@ -97,7 +97,7 @@ extensions:
           - introspection
 ```
 
-In a nutshell, this configuration file instructs the code generator to use the `graphql/` directory as the place where GraphQL statements are stored, to generate the resulting TypeScript types in `generated/graphql.ts`, and to use the Saleor API endpoint as the location for the schema of our API.
+In a nutshell, this configuration file instructs the code generator to use the `graphql/` directory as the place where GraphQL statements are stored, to generate the resulting TypeScript types in `saleor/api.ts`, and to use the Saleor API endpoint as the location for the schema of our API.
 
 ## Location for GraphQL Statements
 
@@ -151,4 +151,4 @@ npm run generate
 pnpm generate
 ```
 
-Once the command executes, you should have a relatively large file generated at `generated/graphql.ts`. We will be using it as a main point to import React Hooks that interact with our Saleor API endpoint.
+Once the command executes, you should have a relatively large file generated at `saleor/api.ts`. We will be using it as a main point to import React Hooks that interact with our Saleor API endpoint.
