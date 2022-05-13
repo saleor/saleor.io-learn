@@ -40,13 +40,13 @@ npm run graphql-codegen init
 pnpm graphql-codegen init
 ```
 
-You'll be asked a few questions about setting up a schema, selecting and installing plugins and picking a destination to where your files are generated.
+You'll be asked a few questions about setting up a schema, selecting and installing plugins and picking a destination to where your files should be generated.
 After completing the wizard, install the plugins running: `npm install` or `pnpm install`.
 
 ### Manual setup
 
-If you want to have a better understanding of what's being installed during the initialization process, you can set `codegen` up manually.
-Start by installing the GraphQL Code Generator command-line tool along with few plugins, namely the TypeScript, Apollo and React integrations, as development dependencies.
+If you want to have a better understanding of what's being installed during the initialization process, you can set GraphQL Code Generator up manually.
+Start by installing the command-line tool along with a few plugins, namely TypeScript, Apollo and React integrations, as development dependencies.
 
 ```
 npm install -D @graphql-codegen/cli \
