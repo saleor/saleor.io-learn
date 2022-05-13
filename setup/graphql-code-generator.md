@@ -40,7 +40,15 @@ npm run graphql-codegen init
 pnpm graphql-codegen init
 ```
 
-You'll be asked a few questions about setting up a schema, selecting and installing plugins and picking a destination to where your files should be generated.
+You'll be asked a few questions about the setup:
+
+- schema url: `https://vercel.saleor.cloud/graphql/`,
+- path to query documents / fragments: `graphql/*.graphql`
+- selecting and installing plugins: let's leave the preselected ones,
+- destination to where your files should be generated: `generated/graphql.ts`
+
+The Initialization Wizard creates a `codegen.yaml` config file with the above information specified. You can leave it as it is, but we suggest changing the file to a more robust alternative provided by GraphQL Config library, as described in the Manual setup section below.
+
 After completing the wizard, install the plugins running: `npm install` or `pnpm install`.
 
 ### Manual setup
@@ -68,31 +76,32 @@ pnpm add -D @graphql-codegen/cli \
 
 The Apollo integration allows us to automatically generate React Hooks from GraphQL queries and mutations. We will be using this feature a lot in this tutorial.
 
-Finally, we need to configure the generator using the `codegen.yml` configuration file that should be stored in the root of our project:
+Finally, we need to configure the generator. To do that, we'll use another great tool built by the creators of GraphQL Code Generator, namely [GraphQL Config](https://www.graphql-config.com/). This tool provides one configuration for all GraphQL tools in the project, which will gain more and more importance once the project grows.
+Let's create a `.graphqlrc.yaml` file in the root of our project:
 
 ```yaml
-overwrite: true
-schema: "https://vercel.saleor.cloud/graphql/"
-documents: "graphql/**/*.{ts,graphql}"
-generates:
-  saleor/api.tsx:
-    plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-react-apollo"
-      - "typescript-apollo-client-helpers"
-    config:
-      dedupeOperationSuffix: true
-  ./graphql.schema.json:
-    plugins:
-      - "introspection"
+schema: https://vercel.saleor.cloud/graphql/
+documents: graphql/**/*.graphql
+extensions:
+  codegen:
+    overwrite: true
+    generates:
+      generated/graphql.ts:
+        plugins:
+          - typescript
+          - typescript-operations
+          - typescript-react-apollo
+          - typescript-apollo-client-helpers
+      ./graphql.schema.json:
+        plugins:
+          - introspection
 ```
 
-In a nutshell, this configuration file instructs the code generator to use the `graphql/` directory as the place where GraphQL statements are stored, to generate the resulting TypeScript types in `saleor/api.tsx`, and to use the Saleor API endpoint as the location for the schema of our API.
+In a nutshell, this configuration file instructs the code generator to use the `graphql/` directory as the place where GraphQL statements are stored, to generate the resulting TypeScript types in `generated/graphql.ts`, and to use the Saleor API endpoint as the location for the schema of our API.
 
 ## Location for GraphQL Statements
 
-We will be putting all GraphQL statements (queries, mutations, and fragments) inside the `graphql/`. Additionally, each query or mutation will be put in a separate file, so it's easier to locate in the filesystem.
+We will be putting all GraphQL statements (queries, mutations, and fragments) inside the `graphql/`. Additionally, each query or mutation will be put in a separate file, so that it's easier to locate them in the filesystem.
 
 For starters, let's use a basic GraphQL query as a placeholder for the GraphQL code generator. Put the following query in `graphql/queries/ThreeProducts.graphql`:
 
@@ -114,7 +123,7 @@ query ThreeProducts {
 We can now run the generation process using the following command:
 
 ```bash
-npx graphql-codegen --config codegen.yml
+npx graphql-codegen --config .graphqlrc.yaml
 ```
 
 For convenience, we can put this command in `package.json` under the `scripts` section as `generate`
@@ -127,7 +136,7 @@ For convenience, we can put this command in `package.json` under the `scripts` s
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate": "graphql-codegen --config codegen.yml -w"
+    "generate": "graphql-codegen --config .graphqlrc.yaml -w"
   }
 }
 ```
@@ -142,4 +151,4 @@ npm run generate
 pnpm generate
 ```
 
-Once the command executes, you should have a relatively large file generated at `saleor/api.tsx`. We will be using it as a main point to import React Hooks that interact with our Saleor API endpoint.
+Once the command executes, you should have a relatively large file generated at `generated/graphql.ts`. We will be using it as a main point to import React Hooks that interact with our Saleor API endpoint.
