@@ -1,4 +1,10 @@
-# Building Abandoned Carts App using Saleor CLI
+---
+pos: 3
+title: Building a Saleor App for Abandoned Carts 
+description: 
+prev:
+  path: /cli/creating-apps/
+---
 
 By now, you know how to install the template App into Saleor Cloud. Now, you are ready to build its new features. This guide will show you a rather simple workflow of building new functionality for your App. Yet, it is a good starting point for developing more complex things.
 
