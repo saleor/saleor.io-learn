@@ -15,7 +15,7 @@ In order to use the functionality of instantSearch.js we need to install a coupl
 - React InstantSearch with types
 - Typesense-instantsearch-adapter
 
-In the terminal run:
+1. In the terminal run:
 
 ```
 pnpm add react-instantsearch-dom
@@ -23,7 +23,7 @@ pnpm add @types/react-instantsearch-dom
 pnpm add -D typesense-instantsearch-adapter
 ```
 
-After a successful install, we need to connect the search client to Typescript server. Go to the main page in `index.tsx` in the `pages` folder and add the configuration for `searchClient`:
+2. Go to the main page in `index.tsx` in the `pages` folder and add the configuration for `searchClient`:
 
 ```js
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
@@ -53,7 +53,7 @@ Algolia's Instant Search library gives us a handful of components we can use to 
 In this step we are going to integrate our first widget with already-existing page with products.
 ![](https://lh3.googleusercontent.com/SpKwM4gB3ebXcDG8m1NhnxrbnBhYNvx1B0YT2ievsF27S2oauF_daYk5Kpoynl5gQniLmUgThcKiYRGJwDwMe0ZFI3iJZzf4_zZuWsC2obPoHZ5VrqLsIeKubZvgsdlQo9kK3RR-)
 
-Go to `index.tsx` and inspect the code responsible for rendering the products view.
+1. Go to `index.tsx` and inspect the code responsible for rendering the products view.
 
 ```js
 ...
@@ -75,7 +75,8 @@ Go to `index.tsx` and inspect the code responsible for rendering the products vi
 ```
 
 Inside the `main` tag, there is a custom React component `<Products />` which is responsible for rendering the list of all the products. In our search UI we want to change this behaviour so that only the products that are the result of the search are rendered. For this purpose we are going to implement our first search component from Instant Search Library called the `<SearchBar />`.
-First, we need the Instant Search root widget, which is responsible for communication between our application and Typesense. This widget wraps all the other React InstantSearch components. Let's add it to the existing code:
+
+2. Add the Instant Search root widget to the existing code and the `<aside>` tag which we will need in the next steps.
 
 ```javascript
 ...
@@ -93,8 +94,9 @@ First, we need the Instant Search root widget, which is responsible for communic
 ...
 ```
 
-We have added the root widget which takes the name of our collection and the `searchClient` instance as attributes. We have also slightly modified the construction of the page by adding the `<aside>` which we will need in the next steps.
-Let's now add the `<SearchBox />` in the `main` section of the page.
+The root widget is responsible for communication between our application and Typesense. It wraps all the other React InstantSearch components. It takes in the name of our collection and the `searchClient` instance as attributes.
+
+3.  Add the `<SearchBox />` in the `main` section of the page.
 
 ```javascript
 <div className="px-8 mx-auto max-w-7xl">
@@ -105,8 +107,11 @@ Let's now add the `<SearchBox />` in the `main` section of the page.
 </div>
 ```
 
-Instead of the `<Products />` we will now render `<Hits />`, a widget responsible for displaying the results of a given search. `<Hits />` takes a component as an attribute which is responsible for rendering a single product.
-The example code of the component may look like that:
+4. Change `<Products />` to `<Hits />`.
+
+This widget is responsible for displaying the results of a given search. `<Hits />` takes a component as an attribute which is responsible for rendering a single product.
+
+5. Create a `<Hit />` component. The example component may look like that:
 
 ```tsx
 type Props = { hit: any };
@@ -137,9 +142,7 @@ const Hit = ({ hit }: Props) => {
 export default Hit;
 ```
 
-If we try to run `pnpm dev` to start the development server, there is going to be an issue with Next.js:
-![](https://lh6.googleusercontent.com/mvMPVE6ulhfUTBVSSbVW7qBichMzb8SkTRRvgBVLn8EaIL1wkdi1xutRVy2zw6U4F9ifreULigECf5AXMhLkwqKqAVh2lxdpI3uvpdyvAmkW15NyrlOXUjPtMJKBqEpPbU-t5YWi)
-We need to add the `vercel.saleor.cloud` domain to the images source in `next.config.js.` So, let's do that:
+6. Add the `vercel.saleor.cloud` domain to the images source in `next.config.js.`
 
 `next.config.js`
 
