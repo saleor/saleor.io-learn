@@ -76,29 +76,6 @@ pnpm add -D @graphql-codegen/cli \
 
 The Apollo integration allows us to automatically generate React Hooks from GraphQL queries and mutations. We will be using this feature a lot in this tutorial.
 
-Finally, we need to configure the generator. To do that, we'll use another great tool built by the creators of GraphQL Code Generator, namely [GraphQL Config](https://www.graphql-config.com/). This tool provides one configuration for all GraphQL tools in the project, which will gain more and more importance once the project grows.
-Let's create a `.graphqlrc.yaml` file in the root of our project:
-
-```yaml
-schema: https://vercel.saleor.cloud/graphql/
-documents: graphql/**/*.graphql
-extensions:
-  codegen:
-    overwrite: true
-    generates:
-      saleor/api.ts:
-        plugins:
-          - typescript
-          - typescript-operations
-          - typescript-react-apollo
-          - typescript-apollo-client-helpers
-      ./graphql.schema.json:
-        plugins:
-          - introspection
-```
-
-In a nutshell, this configuration file instructs the code generator to use the `graphql/` directory as the place where GraphQL statements are stored, to generate the resulting TypeScript types in `saleor/api.ts`, and to use the Saleor API endpoint as the location for the schema of our API.
-
 ## Location for GraphQL Statements
 
 We will be putting all GraphQL statements (queries, mutations, and fragments) inside the `graphql/`. Additionally, each query or mutation will be put in a separate file, so that it's easier to locate them in the filesystem.
