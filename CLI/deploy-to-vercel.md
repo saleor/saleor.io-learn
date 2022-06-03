@@ -1,11 +1,14 @@
 # Deploy your Saleor App to Vercel with Github
 
+Vercel is a robust platform that enables hosting of static sites and frontend frameworks. It is built to integrate with a headless content, commerce, or database. It provides a smooth integration with Next.js and thus in this guide we'll try and set up the Saleor template App to be hosted on this platform.
+The most convenient way (although not [the only one](https://vercel.com/docs/concepts/deployments/overview#making-deployments)) of deploying an App to Vercel is by using Git.
+
 ## Prerequisites
 
 In order to proceed with the deployment, please make sure you have:
 
 - Registered a Github account.
-- Registered a Vercel account (you should authenticate with Github).
+- Registered a Vercel account (it is best to authenticate with Github).
 - Haved Saleor CLI installed.
 
 ## Step 1. Creating a template App.
