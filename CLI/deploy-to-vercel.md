@@ -43,4 +43,4 @@ git push -u origin main
 
 Your App should be deployed, and you can visit it.
 ![deployed app](./deploy-to-vercel.png)
-You can also use the url of your deployed App in the process of App installation as described in [Creating Apps with Saleor CLI](#path-to-article).
+You can also use the url of your deployed App in the process of App installation as described in [Creating Apps with Saleor CLI](#).
