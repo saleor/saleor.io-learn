@@ -1,6 +1,6 @@
 ---
 pos: 6
-title: Tailwind CSS for Styling 
+title: Tailwind CSS for Styling
 description:
 prev:
   path: /setup/typescript-path-aliases/
@@ -11,7 +11,6 @@ next:
 <p class="lead">
 We will use <a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a> for the styling in this application. Let's see how we can set it up in a Next.js project.
 </p>
-
 
 Let's start by installing Tailwind and its dependencies, i.e. PostCSS and autoprefixer:
 
@@ -28,6 +27,7 @@ Next, generate the configuration files for Tailwind and PostCSS:
 ```
 npx tailwindcss init -p
 ```
+
 ```
 pnpm dlx tailwindcss init -p
 ```
@@ -37,10 +37,10 @@ In newly generated `tailwind.config.js`, configure the `purge` option with the p
 ```js{3,4}
 module.exports = {
   purge: [
-    './pages/**/*.{js,ts,jsx,tsx}', 
+    './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}'
   ],
-  darkMode: false, 
+  darkMode: false,
   theme: {
     extend: {},
   },
@@ -51,7 +51,7 @@ module.exports = {
 }
 ```
 
-Next, go to `styles/main.css` and replace the file content with the following snippet:
+Next, go to `styles/globals.css` and replace the file content with the following snippet:
 
 ```css
 @tailwind base;
@@ -83,9 +83,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
 With such a setup, the Tailwind classes should work in any React component across the whole application.
 
-Let's finish off by defining some custom, global styles that will be also available from any component. Using Tailwind's built-in `@apply` directive, we will define one style for links and two styles for buttons (primary & regular). 
+Let's finish off by defining some custom, global styles that will be also available from any component. Using Tailwind's built-in `@apply` directive, we will define one style for links and two styles for buttons (primary & regular).
 
-Open `styles/main.css` and adjust it so it has the following content:
+Open `styles/globals.css` and adjust it so it has the following content:
 
 ```css
 @tailwind base;
