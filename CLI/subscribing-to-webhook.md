@@ -4,6 +4,10 @@ title:
 description: Subscribing To a HTTPS Webhook
 prev:
   path: /cli/subscribing-to-webhook/
+question: Choose correct answer. Which command generates the webhook handler?
+answerOptions:
+  - { answer: saleor app generate webhook, isCorrect: true }
+  - { answer: saleor webhook create }
 ---
 
 # Subscribing To a HTTPS Webhook

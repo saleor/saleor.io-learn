@@ -1,10 +1,20 @@
 ---
 pos: 3
-title: Building a Saleor App for Abandoned Carts 
-description: 
+title: Building Abandoned Carts App using Saleor CLI
+description:
 prev:
-  path: /cli/creating-apps/
+  path: /api/abandoned-checkouts/
+next:
+  path: /api/subscribing-to-webhook/
+question: Tick all correct answers. Which steps are necessary to properly fetch checkouts?
+answerOptions:
+  - { answer: create GraphQL query, isCorrect: true }
+  - { answer: set permissions for the App, isCorrect: true }
+  - { answer: run pnpm generate, isCorrect: true }
+  - { answer: create sample checkouts in the database, isCorrect: true }
 ---
+
+# Building Abandoned Carts App using Saleor CLI
 
 By now, you know how to install the template App into Saleor Cloud. Now, you are ready to build its new features. This guide will show you a rather simple workflow of building new functionality for your App. Yet, it is a good starting point for developing more complex things.
 
@@ -32,7 +42,7 @@ extensions: [
 		label:  "Abandoned Checkouts",
 		mount:  "NAVIGATION_ORDERS",
 		target:  "APP_PAGE",
-		permissions: ["MANAGE_PRODUCTS"],
+		permissions: ["MANAGE_ORDERS"],
 		url:  "/abandoned-checkouts",
 	},
 ],
