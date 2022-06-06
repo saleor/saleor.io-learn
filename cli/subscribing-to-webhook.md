@@ -27,7 +27,6 @@ After finishing this guide, you'll have accomplished the following:
 
 1. Generated a webhook handler using CLI.
 2. Created a webhook for the installed App.
-   <<<<<<< HEAD
 3. Tested and verified the webhook endpoint of type HTTPS.
 
 ## What will I build?
