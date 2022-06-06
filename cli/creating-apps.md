@@ -1,12 +1,19 @@
 ---
 pos: 2
-title: Creating Saleor Apps with CLI 
-description: 
+title: Creating Apps with Saleor CLI
+description:
 prev:
-  path: /cli/getting-started/
+  path: /api/getting-started/
 next:
-  path: /cli/abandoned-checkouts/
+  path: /api/abandoned-checkouts/
+question: Choose correct answer. Which command in Saleor CLI will install the App in the Dashboard?
+answerOptions:
+  - { answer: saleor app create }
+  - { answer: saleor app list }
+  - { answer: saleor app install, isCorrect: true }
 ---
+
+# Creating Apps with Saleor CLI
 
 ## Overview
 
@@ -64,7 +71,7 @@ extensions: [
 		label: "Show Abandoned Carts",
 		mount: "NAVIGATION_ORDERS",
 		target: "APP_PAGE",
-		permissions: ["MANAGE_PRODUCTS"],
+		permissions: ["MANAGE_ORDERS"],
 		url: "/",
 	},
 ],

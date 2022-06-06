@@ -1,10 +1,16 @@
 ---
 pos: 1
-title: Getting started with Saleor CLI 
-description: 
+title: Getting Started with Saleor CLI
+description:
 next:
-  path: /cli/creating-apps/
+  path: /api/creating-apps/
+question: True or False. Saleor CLI enables you to easily create your organisation, project and environment.
+answerOptions:
+  - { answer: Yes, isCorrect: true }
+  - { answer: No }
 ---
+
+# Getting Started with Saleor CLI
 
 Saleor provides you with a quick way to set up the platform for your business client. Instead of forking the repository or resorting to the web version you may use the command-line interface (CLI), which gives you a quick access to many actions, like registering an account, logging in or handling your projects and environments from the level of a terminal.
 
