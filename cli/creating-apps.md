@@ -1,5 +1,6 @@
 ---
 pos: 2
+<<<<<<< HEAD
 <<<<<<< HEAD:CLI/creating-apps.md
 title: Creating Apps with Saleor CLI
 description:
@@ -20,12 +21,23 @@ quizQuestions:
 =======
 title: Creating Saleor Apps with CLI 
 description: 
+=======
+title: Creating Apps with Saleor CLI
+description:
+>>>>>>> 596ffe4 (Add quiz questions frontmatter.)
 prev:
-  path: /cli/getting-started/
+  path: /api/getting-started/
 next:
-  path: /cli/abandoned-checkouts/
+  path: /api/abandoned-checkouts/
+question: Choose correct answer. Which command in Saleor CLI will install the App in the Dashboard?
+answerOptions:
+  - { answer: saleor app create }
+  - { answer: saleor app list }
+  - { answer: saleor app install, isCorrect: true }
 ---
 >>>>>>> 09669fe (Add front matter to the CLI articles):cli/creating-apps.md
+
+# Creating Apps with Saleor CLI
 
 ## Overview
 
