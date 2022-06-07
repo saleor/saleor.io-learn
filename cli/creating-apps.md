@@ -6,11 +6,13 @@ prev:
   path: /api/getting-started/
 next:
   path: /api/abandoned-checkouts/
-question: Choose correct answer. Which command in Saleor CLI will install the App in the Dashboard?
-answerOptions:
-  - { answer: saleor app create }
-  - { answer: saleor app list }
-  - { answer: saleor app install, isCorrect: true }
+quizQuestions:
+ - question: Choose correct answer. Which command in Saleor CLI will install the App in the Dashboard?
+   answerOptions:
+    - answer: saleor app create 
+    - answer: saleor app list 
+    - answer: saleor app install
+	  isCorrect: true 
 ---
 
 # Creating Apps with Saleor CLI

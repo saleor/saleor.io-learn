@@ -4,10 +4,12 @@ title: Getting Started with Saleor CLI
 description:
 next:
   path: /api/creating-apps/
-question: True or False. Saleor CLI enables you to easily create your organisation, project and environment.
-answerOptions:
-  - { answer: Yes, isCorrect: true }
-  - { answer: No }
+quizQuestions:
+  - question: True or False. Saleor CLI enables you to easily create your organisation, project and environment.
+    answerOptions:
+      - answer: Yes
+        isCorrect: true
+      - answer: No
 ---
 
 # Getting Started with Saleor CLI
