@@ -6,12 +6,17 @@ prev:
   path: /api/abandoned-checkouts/
 next:
   path: /api/subscribing-to-webhook/
-question: Tick all correct answers. Which steps are necessary to properly fetch checkouts?
-answerOptions:
-  - { answer: create GraphQL query, isCorrect: true }
-  - { answer: set permissions for the App, isCorrect: true }
-  - { answer: run pnpm generate, isCorrect: true }
-  - { answer: create sample checkouts in the database, isCorrect: true }
+quizQuestions:
+  - question: Tick all correct answers. Which steps are necessary to properly fetch checkouts?
+    answerOptions:
+      - answer: create GraphQL query
+        isCorrect: true
+      - answer: set permissions for the App
+        isCorrect: true
+      - answer: run pnpm generate
+        isCorrect: true
+      - answer: create sample checkouts in the database
+        isCorrect: true
 ---
 
 # Building Abandoned Carts App using Saleor CLI
