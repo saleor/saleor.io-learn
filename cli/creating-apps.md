@@ -1,5 +1,6 @@
 ---
 pos: 2
+<<<<<<< HEAD:CLI/creating-apps.md
 title: Creating Apps with Saleor CLI
 description:
 prev:
@@ -16,6 +17,15 @@ quizQuestions:
 ---
 
 # Creating Apps with Saleor CLI
+=======
+title: Creating Saleor Apps with CLI 
+description: 
+prev:
+  path: /cli/getting-started/
+next:
+  path: /cli/abandoned-checkouts/
+---
+>>>>>>> 09669fe (Add front matter to the CLI articles):cli/creating-apps.md
 
 ## Overview
 
