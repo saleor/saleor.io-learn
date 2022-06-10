@@ -4,12 +4,22 @@ title:
 description: Subscribing To a HTTPS Webhook
 prev:
   path: /cli/subscribing-to-webhook/
+quizQuestions:
+  - question: Which command generates the webhook handler?
+    answerType: radio
+    answerOptions:
+      - answer: saleor app generate webhook
+        isCorrect: true
+      - answer: saleor webhook create
+    feedback: With saleor webhook create you create and active the webhook at Saleor.
 ---
 
 # Subscribing To a HTTPS Webhook
 
+SALEOR VERSION
+3.4.2
+
 After you have installed your first App and learned how to developed its new features, it is time to extend its capabilities. Saleor platform allows developers to use webhooks, which can be set to notify the App about certain events, i.e. creating a new order, updating a category, sending an invoice and many more. The architectural details of webhooks and the complete list of webhook events are available in the [docs](https://docs.saleor.io/docs/3.x/developer/extending/apps/asynchronous-webhooks).
-With the use of Saleor CLI the setup is going to be a breeze.
 
 ## What will I learn?
 
@@ -17,11 +27,11 @@ After finishing this guide, you'll have accomplished the following:
 
 1. Generated a webhook handler using CLI.
 2. Created a webhook for the installed App.
-3. Test and verify the webhook endpoint of type HTTPS.
+3. Tested and verified the webhook endpoint of type HTTPS.
 
 ## What will I build?
 
-You will extend the Saleor template App with the use of a webhook that will send notifications over the HTTPS every time a new order is created.
+You will extend the Saleor template App with the use of a webhook that sends notifications over the HTTPS every time a new order is created.
 
 ## Prerequisites
 
@@ -32,7 +42,7 @@ You will extend the Saleor template App with the use of a webhook that will send
 
 ## Step 1. Creating a webhook handler.
 
-In this step you're going to generate a boilerplate code to handle incoming webhook notifications in your App. The data is going to be displayed in the console.
+In this step you're going to generate a boilerplate code to handle incoming webhook notifications in your App.
 
 1. In your Terminal type in: `saleor app generate webhook`.
 2. Using arrow keys navigate to `ORDER_CREATED` event and press Enter.
