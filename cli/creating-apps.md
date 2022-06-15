@@ -13,7 +13,7 @@ quizQuestions:
     - answer: saleor app create 
     - answer: saleor app list 
     - answer: saleor app install
-	  isCorrect: true 
+      isCorrect: true 
    feedback: "The correct answer is: saleor app install."
 ---
 
