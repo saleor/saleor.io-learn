@@ -17,8 +17,6 @@ quizQuestions:
 	    isCorrect: true 
 ---
 
-# Creating Apps with Saleor CLI
-
 SALEOR VERSION
 3.4.2
 
