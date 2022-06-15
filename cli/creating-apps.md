@@ -17,8 +17,6 @@ quizQuestions:
    feedback: "The correct answer is: saleor app install."
 ---
 
-# Creating Apps with Saleor CLI
-
 SALEOR VERSION
 3.4.2
 
