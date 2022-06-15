@@ -14,8 +14,6 @@ quizQuestions:
     feedback: "You cannot create your organisation using CLI."
 ---
 
-# Getting Started with Saleor CLI
-
 SALEOR VERSION
 3.4.2
 
