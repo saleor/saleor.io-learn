@@ -21,8 +21,6 @@ quizQuestions:
     feedback: You need to get through all of these steps to fetch checkouts.
 ---
 
-# Building Abandoned Carts App using Saleor CLI
-
 SALEOR VERSION
 3.4.2
 
