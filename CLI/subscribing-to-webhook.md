@@ -1,7 +1,7 @@
 ---
 pos: 4
-title:
-description: Subscribing To a HTTPS Webhook
+title: Subscribing To a HTTPS Webhook
+description:
 prev:
   path: /cli/subscribing-to-webhook/
 quizQuestions:
@@ -13,8 +13,6 @@ quizQuestions:
       - answer: saleor webhook create
     feedback: With saleor webhook create you create and active the webhook at Saleor.
 ---
-
-# Subscribing To a HTTPS Webhook
 
 SALEOR VERSION
 3.4.2
