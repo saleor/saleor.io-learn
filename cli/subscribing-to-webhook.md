@@ -42,7 +42,7 @@ You will extend the Saleor template App with the use of a webhook that sends not
 
 ## Step 1. Creating a webhook handler.
 
-In this step you're going to generate a boilerplate code to handle incoming webhook notifications in your App.
+In this step you're going to generate a boilerplate code to handle incoming webhook notifications in your App. The data is going to be displayed in the console.
 
 1. In your Terminal type in: `saleor app generate webhook`.
 2. Using arrow keys navigate to `ORDER_CREATED` event and press Enter.
