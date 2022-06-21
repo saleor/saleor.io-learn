@@ -23,7 +23,7 @@ pnpm add @types/react-instantsearch-dom
 pnpm add -D typesense-instantsearch-adapter
 ```
 
-2. Go to the main page in `index.tsx` in the `pages` folder and add the configuration for `searchClient`:
+After a successful install, we need to connect the search client to Typescript server. Go to the main page in `index.tsx` in the `pages` folder and add the configuration for `searchClient`:
 
 ```js
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
