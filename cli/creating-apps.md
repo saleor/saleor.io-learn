@@ -1,4 +1,12 @@
-# Creating Apps with Saleor CLI
+---
+pos: 2
+title: Creating Saleor Apps with CLI
+description:
+prev:
+  path: /cli/getting-started/
+next:
+  path: /cli/abandoned-checkouts/
+---
 
 ## Overview
 
