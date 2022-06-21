@@ -8,6 +8,9 @@ next:
   path: /cli/abandoned-checkouts/
 ---
 
+SALEOR VERSION
+3.4.2
+
 ## Overview
 
 Saleor platform gives developers a powerful way to extend its capabilities by building `Apps`, which can then be integrated with the Saleor store. By developing Apps you can add new features to the store, create a better user experience or pull Saleor store data in response to webhook notifications or user input. To read more about Apps architecture and integration with Saleor, [read the Saleor docs](https://docs.saleor.io/docs/3.x/developer/extending/apps/key-concepts).

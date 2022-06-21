@@ -6,6 +6,9 @@ prev:
   path: /cli/creating-apps/
 ---
 
+SALEOR VERSION
+3.4.2
+
 By now, you know how to install the template App into Saleor Cloud. Now, you are ready to build its new features. This guide will show you a rather simple workflow of building new functionality for your App. Yet, it is a good starting point for developing more complex things.
 
 ## What will I learn?

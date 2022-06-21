@@ -6,7 +6,10 @@ next:
   path: /cli/creating-apps/
 ---
 
-Saleor provides you with a quick way to set up the platform for your business client. Instead of forking the repository or resorting to the web version you may use the command-line interface (CLI), which gives you a quick access to many actions, like registering an account, logging in or handling your projects and environments from the level of a terminal.
+SALEOR VERSION
+3.4.2
+
+Saleor provides you with a quick way to set up the platform for your client. Instead of forking the repository or resorting to the web version you may use the command-line interface (CLI), which gives you a quick access to many actions, like registering an account, logging in or handling your projects and environments from the level of a terminal.
 
 This page guides you through a list of the Saleor CLI commands, alongside their optional parameters for additional behavior. It will get you up and running with your Saleor Cloud instance in no time.
 
