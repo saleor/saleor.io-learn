@@ -8,7 +8,8 @@ next:
   path: /cli/checkout-integration/
 ---
 
-# Deploy your Saleor App to Vercel with Github
+SALEOR VERSION
+3.4.2
 
 Vercel is a robust platform that enables hosting of static sites and frontend frameworks. It is built to integrate with a headless content, commerce, or database. It provides a smooth integration with Next.js and thus in this guide we'll try and set up the Saleor template App to be hosted on this platform.
 The most convenient way (although not [the only one](https://vercel.com/docs/concepts/deployments/overview#making-deployments)) of deploying an App to Vercel is by using Git.
@@ -51,6 +52,6 @@ git push -u origin main
 3. At the configuration page, override the install command to `pnpm install`.
 4. Hit Deploy button.
 
-Your App should be deployed, and you can visit it.
-![deployed app](/images/deploy-to-vercel.png)
-You can also use the url of your deployed App in the process of App installation as described in [Creating Apps with Saleor CLI](#).
+After a while, your App should be deployed, and you can click `Visit` to see it live.
+
+You can also use the `url` of your deployed App in the process of App installation as described in [Creating Apps with Saleor CLI](#).
