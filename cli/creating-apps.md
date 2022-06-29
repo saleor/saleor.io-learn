@@ -136,9 +136,5 @@ After setting up your tunnelling software, go to the App's root folder in the Te
 _[yourdomain-set-with-tunneling-app]/api/manifest_
 
 After a successful install, you can go to your Admin Dashboard and inspect your new App in the Apps tab and inside the Orders tab.
-<<<<<<< HEAD
-![Admin Dashboard with App installed](./app-installed.png)
-=======
-![Admin Dashboard with App installed](./app-installed.jpg)
 
-> > > > > > > 8deaaf6 (Fix frontmatter paths in CLI articles)
+![Admin Dashboard with App installed](./app-installed.png)
