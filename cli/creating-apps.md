@@ -15,7 +15,6 @@ quizQuestions:
     - answer: saleor app list 
     - answer: saleor app install
       isCorrect: true 
-   feedback: "The correct answer is: saleor app install."
 ---
 
 SALEOR VERSION
