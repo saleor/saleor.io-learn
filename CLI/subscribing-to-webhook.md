@@ -3,7 +3,9 @@ pos: 4
 title: Subscribing To a HTTPS Webhook
 description:
 prev:
-  path: /cli/subscribing-to-webhook/
+  path: /cli/abandoned-checkouts/
+next:
+  path: /cli/deploy-to-vercel/
 quizQuestions:
   - question: Which command generates the webhook handler?
     answerType: radio

@@ -3,9 +3,9 @@ pos: 3
 title: Building Abandoned Checkouts App using Saleor CLI
 description:
 prev:
-  path: /api/abandoned-checkouts/
+  path: /cli/creating-apps/
 next:
-  path: /api/subscribing-to-webhook/
+  path: /cli/subscribing-to-webhook/
 quizQuestions:
   - question: Tick all correct answers. Which steps are necessary to properly fetch checkouts?
     answerType: checkbox
