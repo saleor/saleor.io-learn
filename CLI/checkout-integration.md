@@ -1,4 +1,12 @@
-# Integrating Saleor Storefront with Saleor Checkout using CLI
+---
+pos: 3 
+title: Integrating Saleor Storefront with Saleor Checkout using CLI
+description: 
+prev:
+  path: /cli/checkout-page/
+next:
+  path: /cli/displaying-cart-content/
+---
 
 Saleor platform comprises many powerful parts that can be easily combined and integrated using CLI tool. This guide will show you how you can swiftly add Saleor checkout to an existing storefront.
 
