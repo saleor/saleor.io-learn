@@ -1,11 +1,20 @@
 ---
 pos: 2
-title: Creating Saleor Apps with CLI
+title: Creating Apps with Saleor CLI
 description:
 prev:
   path: /cli/getting-started/
 next:
   path: /cli/abandoned-checkouts/
+quizQuestions:
+  - question: Which command in Saleor CLI will install the App in the Dashboard?
+    answerType: radio
+    feedback: "The correct answer is saleor app install."
+    answerOptions:
+      - answer: saleor app create
+      - answer: saleor app list
+      - answer: saleor app install
+        isCorrect: true
 ---
 
 SALEOR VERSION
@@ -85,4 +94,5 @@ Installing your App in the Dashboard using CLI is pretty straightforward. Go to 
 3. Provide the `url` to the app's manifest: _[yourdomain-set-with-tunneling-app]/api/manifest_
 
 After a successful install, you can go to your Admin Dashboard and inspect your new App in the Apps tab and inside the Orders tab.
+
 ![Admin Dashboard with App installed](./app-installed.jpg)
