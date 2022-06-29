@@ -3,7 +3,7 @@ pos: 1
 title: Getting Started with Saleor CLI
 description:
 next:
-  path: /api/creating-apps/
+  path: /cli/creating-apps/
 quizQuestions:
   - question: Saleor CLI enables you to easily create your organisation, project and environment.
     answerType: radio
