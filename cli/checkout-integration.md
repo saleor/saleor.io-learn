@@ -33,6 +33,10 @@ After finishing this guide, you'll have accomplished the following:
 
 2. If you wish to integrate the Checkout with a third-party payment gateway, Saleor enables that with two payment gateways: [Mollie](https://www.mollie.com/) and [Adyen](https://www.adyen.com/). Please follow their Getting Started pages and make sure to set up test accounts.
 
+3. In Dashboard -> Configuration -> Shipping Methods, click on Europe and on the right side of the panel pick Global under Warehouse.
+
+![europe](./europe.png)
+
 ## Step 1. Creating Saleor Storefront.
 
 You can integrate Saleor Checkout with any existing storefront. Yet, for the simplicity sake let us use a ready-made storefront example provided by Saleor.
@@ -62,8 +66,8 @@ After a while, you will have two apps deployed to Vercel:
 - `my-checkout` - the frontend part - a SPA React 18 project, ready to be extended/modified
   ![vercel](./vercel.png)
 
-2. Copy the `url` of your Checkout App from Vercel to `.env` file in your storefront code.
-   ![env](./env.png)
+2. Copy the `url` of your Checkout SPA from Vercel and paste it into the `.env` file in your storefront code under `NEXT_PUBLIC_CHECKOUT_URL=` variable.
+   ![address](./env.png)
    ![env variable](./env-variable.png)
 
 Restart the develpment server.
