@@ -4,6 +4,8 @@ title: Integrating Saleor Storefront with Saleor Checkout using CLI
 description:
 prev:
   path: /cli/deploy-to-vercel/
+next:
+  path: /cli/extend-with-stripe.md
 ---
 
 SALEOR VERSION
