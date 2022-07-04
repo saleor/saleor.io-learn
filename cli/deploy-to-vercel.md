@@ -54,4 +54,4 @@ git push -u origin main
 
 After a while, your App should be deployed, and you can click `Visit` to see it live.
 
-You can also use the `url` of your deployed App in the process of App installation as described in [Creating Apps with Saleor CLI](#).
+You can also use the `url` of your deployed App in the process of App installation as described in [Creating Apps with Saleor CLI](./creating-apps.md).

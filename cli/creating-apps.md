@@ -40,7 +40,7 @@ Before you create your first App using CLI, you need to make sure to:
 2. Register an account in Saleor Cloud and be logged in
 3. Create an organisation, a project and an environment
 
-You may find the instructions for every of these steps in the [Getting Started with Saleor CLI guide](#).
+You may find the instructions for every of these steps in the [Getting Started with Saleor CLI guide](./getting-started.md).
 
 ## What will I build?
 
@@ -95,4 +95,4 @@ Installing your App in the Dashboard using CLI is pretty straightforward. Go to 
 
 After a successful install, you can go to your Admin Dashboard and inspect your new App in the Apps tab and inside the Orders tab.
 
-![Admin Dashboard with App installed](./app-installed.jpg)
+![Admin Dashboard with App installed](/images/app-installed.png)
