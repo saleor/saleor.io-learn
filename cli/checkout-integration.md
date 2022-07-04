@@ -35,7 +35,7 @@ After finishing this guide, you'll have accomplished the following:
 
 3. In Dashboard -> Configuration -> Shipping Methods, click on Europe and on the right side of the panel pick Global under Warehouse.
 
-![europe](./europe.png)
+![europe](/images/europe.png)
 
 ## Step 1. Creating Saleor Storefront.
 
@@ -47,7 +47,7 @@ You can integrate Saleor Checkout with any existing storefront. Yet, for the sim
 `saleor storefront create my-storefront-with-checkout`
 
 This command will install the Saleor Storefront project called `my-storefront-with-checkout` on your machine and start the local server.
-![storefront](./storefront-installed.png)
+![storefront](/images/storefront-installed.png)
 
 For now, you can stop the server with `CTRL+C`.
 
@@ -58,17 +58,17 @@ Thanks to the CLI, the deployment process is very straightforward.
 1. Being in your Terminal, type in:
    `saleor checkout deploy my-checkout`
 
-![deploy to Vercel](./deploy.png)
+![deploy to Vercel](/images/deploy.png)
 
 After a while, you will have two apps deployed to Vercel:
 
 - `my-checkout-app` - a Next.js Saleor App installed in Dashboard for managing settings and theme, backend for checkout SPA, ready to be extended/modified
 - `my-checkout` - the frontend part - a SPA React 18 project, ready to be extended/modified
-  ![vercel](./vercel.png)
+  ![vercel](/images/vercel.png)
 
 2. Copy the `url` of your Checkout SPA from Vercel and paste it into the `.env` file in your storefront code under `NEXT_PUBLIC_CHECKOUT_URL=` variable.
-   ![address](./env.png)
-   ![env variable](./env-variable.png)
+   ![address](/images/env.png)
+   ![env variable](/images/env-variable.png)
 
 Restart the develpment server.
 
@@ -77,13 +77,13 @@ Restart the develpment server.
 You need to enable shipping methods for Europe region to be able to choose them in your checkout. So, go to your Dashboard and:
 
 1. Click the Configuration button.
-   ![dashobard configuration button](./warehouse-1.png)
+   ![dashobard configuration button](/images/warehouse-1.png)
 2. Scroll down to Shipping methods and click the card.
-   ![Shipping methods](./warehouse-2.png)
+   ![Shipping methods](/images/warehouse-2.png)
 3. On the list of Shipping Zones click Europe.
-   ![Europe Shipping Zone](./warehouse-3.png)
+   ![Europe Shipping Zone](/images/warehouse-3.png)
 4. In the right bottom corner, select Global from the Select Warehouse list.
-   ![Global warehouse](./warehouse-4.png)
+   ![Global warehouse](/images/warehouse-4.png)
 
 Got to your storefront and try to go through the process of adding a product to cart. After clicking the Checkout button you'll be redirected to the checkout SPA view, where you can fill in the form and select the shipping methods.
 
@@ -92,7 +92,7 @@ Got to your storefront and try to go through the process of adding a product to 
 Saleor Checkout ships with a pre-built simple test payment gateway that will always return a successful payment.
 Just type in any card number and other random payment details and click pay.
 
-![dummy payment](./dummy-payment.png)
+![dummy payment](/images/dummy-payment.png)
 
 However, it is also possible to integrate Checkout with a third-party payment gateway, which you can do by following a guide in the next section.
 
@@ -102,13 +102,13 @@ For the purpose of this tutorial, we will focus on integration with Mollie.
 
 1. Go to your Dashobard and inside the `Apps` click on the `Checkout App`.
 2. Toggle, `Mollie` payment gateway for each payment option.
-   ![Mollie toggle](./mollie-1.png)
+   ![Mollie toggle](/images/mollie-1.png)
 3. Click the `Settings` icon at the channel configuration page.
-   ![configuration cogwheel](./mollie-2.png)
+   ![configuration cogwheel](/images/mollie-2.png)
 4. Provide the credentials obtained from your Mollie account.
-   ![mollie credentials](./mollie-3.png)
-   ![mollie credentials in Checkout](./mollie-saleor-keys.png)
+   ![mollie credentials](/images/mollie-3.png)
+   ![mollie credentials in Checkout](/images/mollie-saleor-keys.png)
 5. Go to your Mollie Dashboard and in Settings -> Website Profiles -> Payment methods, toggle Payment methods.
-   ![enable payment methods](./mollie-4.png)
+   ![enable payment methods](/images/mollie-4.png)
 
 Done! You can now test the functionality of the Mollie gateway in your Storefront's Checkout.

@@ -31,12 +31,6 @@ After finishing this guide, you'll have accomplished the following:
 
 ## What will I build?
 
-# You will extend the Saleor template App with the use of a webhook that sends notifications over the HTTPS every time a new order is created.
-
-3. Test and verify the webhook endpoint of type HTTPS.
-
-## What will I build?
-
 You will extend the Saleor template App with the use of a webhook that will send notifications over the HTTPS every time a new order is created.
 
 ## Prerequisites

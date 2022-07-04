@@ -21,7 +21,7 @@ This page guides you through a list of the Saleor CLI commands, alongside their 
 ## Prerequisites
 
 In order to utilise the features of Saleor CLI, you need to be aware of the main concepts that Saleor Cloud is built on.
-![Saleor Cloud Setup Structure Diagram](./StructureOrganization.png)
+![Saleor Cloud Setup Structure Diagram](/images/cloud-structure.png)
 
 #### Organisation
 
