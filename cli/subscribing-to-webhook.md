@@ -1,6 +1,6 @@
 ---
 pos: 4
-title: Subscribing To a HTTPS Webhook
+title: Subscribing to a HTTPS Webhook
 description:
 prev:
   path: /cli/abandoned-checkouts/
