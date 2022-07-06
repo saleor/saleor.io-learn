@@ -14,33 +14,38 @@ You need to configure a GraphQL client in our Next.js application in order to se
 
 ## Configure Apollo Client
 
-Install Apollo Client:
+1. In your Terminal, go to the root folder of the storefront project and install the Apollo Client:
 
 ```
 npm install @apollo/client graphql
 ```
 
+or
+
 ```
 pnpm add @apollo/client graphql
 ```
 
-Let's start by creating an Apollo client instance that points to the Saleor GraphQL API. In this tutorial, we will use the following API endpoint provided by the Saleor Cloud. Feel free to change it to your own Saleor server instance.
-
+Let's start by creating an Apollo client instance that points to the Saleor GraphQL API. In this tutorial, we will use the following API endpoint provided by the Saleor Cloud.
 
 ```
 https://tutorial.saleor.cloud/graphql/
 ```
 
-The GraphQL client will be provided to our application via the `ApolloProvider` component that wraps the application with the connection to the GraphQL endpoint. We wrap our application with the Apollo provider at the highest level in the component tree so that it's available for any child component below. 
+Feel free to change it to your own Saleor server instance. You can find the url of your instance on the list of environments in your Saleor account.
 
-In our case, this will be `pages/_app.tsx`: 
+![saleor server instance url](/images/graphql-url.png)
+
+The GraphQL client is available in the application via the `ApolloProvider` component which provides the connection to the GraphQL endpoint. We wrap our application with the Apollo provider at the highest level in the component tree so that it's available for any child component below.
+
+Go to `pages/_app.tsx` file in your storefront project and update the existing code with changes below:
 
 ```tsx
-import type { AppProps } from 'next/app'
+import type { AppProps } from "next/app";
 
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
-import '../styles/globals.css'
+import "../styles/globals.css";
 
 const client = new ApolloClient({
   uri: "https://tutorial.saleor.cloud/graphql/",
@@ -52,7 +57,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <ApolloProvider client={client}>
       <Component {...pageProps} />
     </ApolloProvider>
-  )
+  );
 }
 ```
 

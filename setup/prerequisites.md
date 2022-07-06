@@ -1,35 +1,64 @@
 ---
 pos: 1
-title: Prerequisites 
-description: 
-stackblitz: saleor-tutorial-start
+title: Installing Saleor Storefront
+description:
 next:
-  path: /setup/saleor-graphql-playground/ 
+  path: /setup/saleor-graphql-playground/
 ---
 
-In this tutorial, we will be using Stackblitz, a development environment in the browser. This way, you won't need to install anything locally on your computer. After each section, we will finish with a working example as described in that section. The example will contain all the code required to run it, and once opened, it will launch the working application side by side.
+This tutorial provides two ways of installing the storefront:
 
-Click the **Launch Editor** button at the top to launch the initial step of this tutorial. This is a Next.js application that displays the Saleor image in the center.
+1. Creating Saleor Storefront using Saleor CLI (as easy as can be).
+2. Installing Next.js, Typescript and other libraries manually (medium difficulty).
 
-The Stackblitz environemnt for this setup only works in Chrome, Edge and Brave; the browser support for Firefox and Safari is coming soon.
+## Using Saleor CLI
 
-## Local Development
+Building a storefront from ground up may seem like a drudgery. Thus, Saleor provides an excellent tool to speed up the process - the Saleor CLI tool. With the help of CLI, creating a sample storefront is quick and painless:
 
-If you prefer to use your own computer for development, you need to setup Node.js and Next.js on your computer. For that you need:
+1. Make sure you have the [Node.js](https://nodejs.org/) runtime installed on your machine.
+2. In the terminal, run `npm i -g saleor-cli` to install [the Saleor CLI tool](https://docs.saleor.io/docs/3.x/cli).
+3. Login or register to Saleor and create the environment. You can do it in your Saleor account in the web browser or by using the CLI. For more details, please follow the guide in [Getting Started with Saleor CLI](/cli/getting-started/).
+4. Navigate to the directory you want to install your storefront in.
+5. Run
 
-* the Node.js runtime
-* the `create-next-app` wizard - it will be automatically installed when running `npx create-next-app`
+`saleor storefront create my-storefront`
 
-Initialize the application using the following command:
+6. Choose the environment in which you want to install this storefront instance and hit Enter.
+
+This command will install a Saleor Storefront project called `my-storefront` on your machine and start the local server. The application will already be preinstalled with:
+
+- [Typescript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [GraphQL Code Generator](https://www.graphql-code-generator.com/)
+- [Apollo GraphQL client](https://www.apollographql.com/docs/react/)
+
+...and other goodies that will support you in extending the storefront further.
+
+![saleor cli creating storefront](/images/saleor-cli-storefront.png)
+
+Now, you can skip the remaining steps in the setup and jump straight into the next section. However, if you wish you can choose to go through the manual setup and configure all the nuts and bolts on your own, so that you have a better understanding of the base for building e-commerce applications with Next.js & Saleor using TypeScript.
+
+## Doing the Manual Setup
+
+If you prefer to set up your development environment manually, first you need to install Node.js and Next.js on your computer:
+
+1. Install the [Node.js](https://nodejs.org/) runtime.
+2. Head over to the directory you want to install your storefront in and initialize the application using the following command:
 
 With `npm`:
 
 ```
-npx create-next-app --typescript saleor-tutorial
+npx create-next-app@latest --ts my-storefront
 ```
 
-With `pnpm` (you need version `6.13.0` or higher):
+or with `pnpm` (you need version `6.13.0` or higher):
 
 ```
-pnpm dlx create-next-app --typescript saleor-tutorial
+pnpm create next-app --ts my-storefront
 ```
+
+This command will bootstrap the latest version of Next.js template app wired with Typescript. For more details on specifying different options when using Create Next App head over to the [docs](https://nextjs.org/docs/api-reference/create-next-app).
+
+![create next app](/images/create-next-app.png)
+
+Please follow the next steps in this section to finish the manual setup.

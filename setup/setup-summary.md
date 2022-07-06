@@ -1,6 +1,6 @@
 ---
 pos: 7
-title: Setup Summary 
+title: Setup Summary
 description:
 prev:
   path: /setup/tailwind-css-styling/
@@ -8,15 +8,8 @@ next:
   path: /product/overview/
 ---
 
-At this point we have configured all the nuts and bolts so that we have a base for building e-commerce applications with Next.js & Saleor using TypeScript.
+At this point we have joined all the pieces together so that we have a minimum e-commerce application build with Next.js & Saleor using TypeScript.
 
-Saleor provides the `create-storefront` application wizard that teleports you directly to this point by generating everything that was described in the setup section.
+![storefront after setup](/images/storefront-after-setup.png)
 
-Use it with `npx`:
-
-```
-npx create-storefront react-storefront
-```
-```
-pnpm dlx create-storefront react-storefront
-```
+We are ready to explore the Saleor API.

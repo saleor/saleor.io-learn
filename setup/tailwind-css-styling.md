@@ -12,31 +12,36 @@ next:
 We will use <a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a> for the styling in this application. Let's see how we can set it up in a Next.js project.
 </p>
 
-Let's start by installing Tailwind and its dependencies, i.e. PostCSS and autoprefixer:
+1. Install Tailwind and its dependencies, i.e. PostCSS and autoprefixer:
 
 ```
 npm install -D tailwindcss postcss autoprefixer
 ```
 
+or
+
 ```
 pnpm add -D tailwindcss postcss autoprefixer
 ```
 
-Next, generate the configuration files for Tailwind and PostCSS:
+2. Generate the configuration files for Tailwind and PostCSS:
 
 ```
 npx tailwindcss init -p
 ```
 
+or
+
 ```
 pnpm dlx tailwindcss init -p
 ```
 
-In newly generated `tailwind.config.js`, configure the `purge` option with the paths to Next.js pages and React.js components. This will allow Tailwind to tree-shake unused styles in production builds:
+3. Configure your template paths.
+   Add the paths to all of your template files in your `tailwind.config.js` file.
 
 ```js{3,4}
 module.exports = {
-  purge: [
+  content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}'
   ],
@@ -51,7 +56,7 @@ module.exports = {
 }
 ```
 
-Next, go to `styles/globals.css` and replace the file content with the following snippet:
+4. Go to `styles/globals.css` and replace the file content with the following snippet:
 
 ```css
 @tailwind base;
@@ -59,7 +64,7 @@ Next, go to `styles/globals.css` and replace the file content with the following
 @tailwind utilities;
 ```
 
-Finally, include this main stylesheet in `pages/_app.tsx`:
+5. Finally, include this main stylesheet in `pages/_app.tsx`:
 
 ```tsx{4}
 import type { AppProps } from 'next/app'
