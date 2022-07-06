@@ -1,18 +1,19 @@
 ---
 pos: 2
-title: Checkout Creation 
-description: 
+title: Checkout Creation
+description:
 prev:
   path: /checkout/overview/
 next:
   path: /checkout/checkout-page/
 ---
 
-## Creating an empty checkout 
+## Creating an empty checkout
 
 You can create a checkout in Saleor using the `createCheckout` mutation. We need to specify the `email` address of the owner of this checkout, its initial content provided via `lines` (this is a list of product variants along with their quantities) and the `channel`.
 
-In the following example, we are creating an empty cart 
+1. In your code editor, direct to the `graphql` folder and create a `mutations` folder inside it.
+2. There, create a `CreateCheckout.graphql` file and copy/paste the mutation below.
 
 ```graphql
 # graphql/mutations/CreateCheckout.graphql
@@ -35,43 +36,48 @@ mutation CreateCheckout {
 }
 ```
 
-In response to this checkout creation, we want to return the `token` that will be used to refer to this checkout from the client.  We also specify that the mutation should return errors if there are any.
+When you execute this mutation, an empty checkout will be created. In response to this checkout creation, we want to return the `token` that will be used to refer to this checkout from the client. We also specify that the mutation should return errors if there are any.
 
-Open the GraphQL Playground and try to execute this mutation.
+3. Run the `generate` script in the Terminal or make sure it's running in the `watch` mode.
 
-**IMAGE**
+4. Open the GraphQL Playground and execute this mutation. You will see the token in the query results.
 
-Let's put this mutation in `graphql/mutations/CreateCheckout.graphql`. Don't forget to run your `generate` script or make sure it's running in the `watch` mode.
+![checkout created in the playground](/images/checkout-create-playground.png)
 
 ## Initializing the checkout in React.js
 
-In our React.js application we need to trigger either create a new checkout or reuse the existing one. In order to distinguish between new and returning user, we will keep the checkout `token` client-side in the local storage. If the local storage is empty, it means there is no checkout yet and it must be created. Otherwise, we will use the `token` that found in the local storage to ask the Saleor server to fetch an existing checkout.
+In our React.js application we need to trigger either creating a new checkout or reusing the existing one. In order to distinguish between new and returning user, we will keep the checkout `token` client-side in the local storage. If the local storage is empty, it means there is no checkout yet and it must be created. Otherwise, we will use the `token` that is kept in the local storage to ask the Saleor server to fetch an existing checkout.
 
 For local storage management we will adopt `useLocalStorage` hook from the `react-use` which is a collection of essential React Hooks.
+
+1. In your Terminal, in the root of your project, run:
 
 ```
 npm install react-use
 ```
 
+or
+
 ```
 pnpm add react-use
 ```
 
+Let's use `pages/_app.tsx` as a place to initialize the checkout in our React application. Since the checkout creation is performed via a GraphQL mutation, we need the GraphQL client to be already available within the React component tree. For that, we will create a _pass-through_ component called `Root` that wraps the built-in `Component` provided by Next.js. With such setup in place we will be able to use GraphQL queries and mutations at the top level.
 
-Let's use `pages/_app.tsx` as a place to initialize the checkout in our React application. Since the checkout creation is performed via a GraphQL mutation, we need that the GraphQL client is already available within the React component tree. For that, we will create a *pass-through* component called `Root` that wraps the built-in `Component` provided by Next.js. With such setup in place we will be able to use GraphQL queries and mutations at the top level. 
+2. In your code editor, navigate to `pages/_app.tsx` file and update its contents:
 
 ```tsx
 // pages/_app.tsx
-import type { AppProps } from 'next/app'
-import { ApolloProvider } from '@apollo/client';
+import type { AppProps } from "next/app";
+import { ApolloProvider } from "@apollo/client";
 
 import { useEffect } from "react";
 import { useLocalStorage } from "react-use";
 
-import '../styles/main.css';
+import "../styles/main.css";
 
-import { apolloClient } from '@/lib';
-import { useCreateCheckoutMutation } from '@/saleor/api';
+import { apolloClient } from "@/lib";
+import { useCreateCheckoutMutation } from "@/saleor/api";
 
 const Root = ({ Component, pageProps }: AppProps) => {
   const [token, setToken] = useLocalStorage("token");
@@ -91,10 +97,11 @@ const Root = ({ Component, pageProps }: AppProps) => {
   return <Component {...pageProps} token={token} />;
 };
 
-const MyApp = (props: AppProps) => 
+const MyApp = (props: AppProps) => (
   <ApolloProvider client={apolloClient}>
     <Root {...props} />
   </ApolloProvider>
+);
 
 export default MyApp;
 ```
