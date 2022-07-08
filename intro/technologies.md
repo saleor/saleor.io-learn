@@ -37,3 +37,13 @@ Tailwind CSS is a utility-first CSS framework that allows you to build complex c
 ## React InstantSearch
 
 With [InstantSearch.js](https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/js/) UI library from Algolia, we can quickly build a search interface in our front-end app. It equips you with a complete production-ready search ecosystem based on widgets that are fully customizable. Moreover, InstantSearch.js comes with many flavours, one of them being React Instant Search, which we will use in this guide.
+
+## PNPM
+
+[PNPM](https://pnpm.io/) is a modern, community-made package manager. It handles the installation, upgrading, and removal of computer software packages. It is considered an alternative to [NPM](https://www.npmjs.com/). It was built on top of it to simplify the installation process of packages in Node applications. PNPM follows the same principles as NPM but it has some additional features that makes it more powerful than its predecessor:
+
+1. PNPM is faster and more efficient. The algorithm of PNPM does not use a flatten dependency tree. It groups all dependencies by symlinks (or junctions in Windows), but retains all the dependencies. This approach makes it easier to implement, maintain, and requires less computation. Files inside node_modules are linked from a single content-addressable storage.
+2. It is more secure. PNPM uses checksums and verifies the integrity of its code before executing it.
+3. PNPM has built-in support for monorepos: multiple packages in a repository.
+
+You can easily install PNPM in your Terminal with `npm install -g pnpm`.
