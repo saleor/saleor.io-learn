@@ -14,6 +14,10 @@ React is a JavaScript library for building user interfaces. It makes creating in
 
 Next.js is a React.js framework built on top of Node.js. It enables functionalities such as server-side rendering and generating static websites. The Next.js framework utilizes JAMstack architecture, which distinguishes between front-end and back-end and allows for efficient front-end development that is independent of any back-end APIs.
 
+## Netlify
+
+[Netlify](https://www.netlify.com/) is a platform that offers comprehensive automation of modern web projects. It simplifies the process for developers to deploy and host a website with the focus on website performance. Netlify supports continuous delivery and continuous integration. It integrates with Github repository to automatically build the site, run plugins, and deploy. It also provides serverless functions (AWS Lambda Functions) to add additional back-end functionality. It is cost-effective, yet delivering rich features. It is considered the main alternative to Vercel.
+
 ## TypeScript
 
 TypeScript is a strongly typed programming language that builds on JavaScript. It is a superset of JavaScript that provides optional static typing, classes, and interfaces. One of the biggest benefits of using TypeScript is to make IDEs provide a richer environment so that you can see common errors as you type the code easier and faster.
