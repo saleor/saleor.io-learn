@@ -6,7 +6,7 @@ prev:
   path: /cli/deploy-to-vercel/
 ---
 
-SALEOR VERSION
+MINIMUM SALEOR VERSION
 3.4.5
 
 Saleor platform comprises many powerful parts that can be easily combined and integrated using CLI tool. This guide will show you how you can swiftly add Saleor checkout to an existing storefront.
@@ -21,19 +21,23 @@ After finishing this guide, you'll have accomplished the following:
 
 ## Prerequisites
 
-1. In order to be successful with adding the Checkout you need to integrate CLI with Vercel and Github.
+1. Install `saleor CLI` with `npm i -g saleor`.
+2. In order to be successful with adding the Checkout you need to integrate CLI with Vercel and Github.
    In your Terminal, run:
 
    ```
    saleor vercel login
+   ```
+
+   ```
    saleor github login
    ```
 
-   You will be redirected to dedicated pages where you can finish the integration process.
+   In each case, you will be redirected to a dedicated page where you can finish the integration process.
 
-2. If you wish to integrate the Checkout with a third-party payment gateway, Saleor enables that with two payment gateways: [Mollie](https://www.mollie.com/) and [Adyen](https://www.adyen.com/). Please follow their Getting Started pages and make sure to set up test accounts.
+3. If you wish to integrate the Checkout with a third-party payment gateway, Saleor enables that with two payment gateways: [Mollie](https://www.mollie.com/) and [Adyen](https://www.adyen.com/). Please follow their Getting Started pages and make sure to set up test accounts.
 
-3. In Dashboard -> Configuration -> Shipping Methods, click on Europe and on the right side of the panel pick Global under Warehouse.
+4. In Dashboard -> Configuration -> Shipping Methods, click on Europe and on the right side of the panel pick Global under Warehouse.
 
 ![europe](/images/europe.png)
 
@@ -46,7 +50,7 @@ You can integrate Saleor Checkout with any existing storefront. Yet, for the sim
 
 `saleor storefront create my-storefront-with-checkout`
 
-This command will install the Saleor Storefront project called `my-storefront-with-checkout` on your machine and start the local server.
+In the installation wizard select your Saleor organization and the environment. After a few moments, the script will install the Saleor Storefront project called `my-storefront-with-checkout` on your machine and start the local server.
 ![storefront](/images/storefront-installed.png)
 
 For now, you can stop the server with `CTRL+C`.
@@ -55,10 +59,16 @@ For now, you can stop the server with `CTRL+C`.
 
 Thanks to the CLI, the deployment process is very straightforward.
 
+<!-- **SALEOR-7568 Add parapgraph about Vercel depplyment ** -->
+
+In a nutshell, the script deploys the Checkout App to Vercel using Github and
+
 1. Being in your Terminal, type in:
    `saleor checkout deploy my-checkout`
 
 ![deploy to Vercel](/images/deploy.png)
+
+2. In the installation wizard, select your Saleor organization and the environment.
 
 After a while, you will have two apps deployed to Vercel:
 
@@ -66,7 +76,9 @@ After a while, you will have two apps deployed to Vercel:
 - `my-checkout` - the frontend part - a SPA React 18 project, ready to be extended/modified
   ![vercel](/images/vercel.png)
 
-2. Copy the `url` of your Checkout SPA from Vercel and paste it into the `.env` file in your storefront code under `NEXT_PUBLIC_CHECKOUT_URL=` variable.
+The CLI will inform you about some useful links, i.e. to your Dashboard and GraphQL Playground. Also, it will print out the steps for connecting to Checkout from your storefront app.
+
+3. Copy the `url` of your Checkout SPA from Vercel and paste it into the `.env` file in your storefront code under `NEXT_PUBLIC_CHECKOUT_URL=` variable.
    ![address](/images/env.png)
    ![env variable](/images/env-variable.png)
 
