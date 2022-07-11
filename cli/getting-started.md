@@ -41,11 +41,11 @@ To download and install Saleor CLI, run the following command:
 
 `npm i -g saleor-cli@latest`
 
-## Getting -help
+## Getting Help
 
 Typing `saleor` in the terminal will display a list of possible commands and their descriptions. Typing `saleor <command>` will display additional comands list for this particular command. This way, you can navigate over the interface to trigger specific actions.
 
-## Logging in / Registering
+## Logging in or Registering
 
 Firstly, you need to login into an existing Saleor Cloud account or create a new one. In order to log in let's type:
 
