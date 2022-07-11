@@ -16,25 +16,31 @@ GraphQL Code Generator will automatically generate types representing all _the c
 
 ### Using Initialization Wizard
 
-GraphQL Code Generator ships with a variety of plugins that will suit most of the stacks out there. Because of that, it is best to try the Initialization Wizard, which simplifies the configuration process.
+GraphQL Code Generator ships with a variety of plugins that will suit most of the stacks out there. Because of that, it is best to try the Initialization Wizard, which simplifies the configuration process:
 
-First, we need to install the GraphQL Code Generator and its command-line tool.
+1. Open your Terminal and go to the root folder of your storefront project. Type in:
 
 ```
 npm install graphql
 npm install @graphql-codegen/cli
 ```
 
+or
+
 ```
 pnpm add graphql
 pnpm add @graphql-codegen/cli
 ```
 
-Then, run the Initialization Wizard:
+This will install the GraphQL Code Generator and its command-line tool.
+
+2. Run the Initialization Wizard:
 
 ```
 npm run graphql-codegen init
 ```
+
+or
 
 ```
 pnpm graphql-codegen init
@@ -42,14 +48,14 @@ pnpm graphql-codegen init
 
 You'll be asked a few questions about the setup:
 
-- schema url: `https://vercel.saleor.cloud/graphql/`,
+- schema url: `https://tutorial.saleor.cloud/graphql/`,
 - path to query documents / fragments: `graphql/*.graphql`
 - selecting and installing plugins: let's leave the preselected ones,
 - destination to where your files should be generated: `saleor/api.ts`
 
 The Initialization Wizard creates a `codegen.yaml` config file with the above information specified. You can leave it as it is, but we suggest using a more robust alternative provided by GraphQL Config library, as described in the Manual setup section below.
 
-After completing the wizard, install the plugins running: `npm install` or `pnpm install`.
+3. After completing the wizard, install the plugins running: `npm install` or `pnpm install`.
 
 ### Manual setup
 
@@ -64,6 +70,8 @@ npm install -D @graphql-codegen/cli \
   @graphql-codegen/typescript-react-apollo \
   @graphql-codegen/typescript-apollo-client-helpers
 ```
+
+or
 
 ```
 pnpm add -D @graphql-codegen/cli \
@@ -80,7 +88,7 @@ Finally, we need to configure the generator. To do that, we'll use another great
 Let's create a `.graphqlrc.yaml` file in the root of our project:
 
 ```yaml
-schema: https://vercel.saleor.cloud/graphql/
+schema: https://tutorial.saleor.cloud/graphql/
 documents: graphql/**/*.graphql
 extensions:
   codegen:
@@ -146,6 +154,8 @@ Now we can run it as simply as this:
 ```
 npm run generate
 ```
+
+or
 
 ```
 pnpm generate
