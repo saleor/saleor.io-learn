@@ -6,7 +6,7 @@ prev:
   path: /cli/deploy-to-vercel/
 ---
 
-MINIMUM SALEOR VERSION
+MINIMAL SALEOR VERSION
 3.4.5
 
 Saleor platform comprises many powerful parts that can be easily combined and integrated using CLI tool. This guide will show you how you can swiftly add Saleor checkout to an existing storefront.
@@ -22,8 +22,7 @@ After finishing this guide, you'll have accomplished the following:
 ## Prerequisites
 
 1. Install `saleor CLI` with `npm i -g saleor`.
-2. In order to be successful with adding the Checkout you need to integrate CLI with Vercel and Github.
-   In your Terminal, run:
+2. Integrate CLI with Vercel and Github. In your Terminal, run:
 
    ```
    saleor vercel login
@@ -46,22 +45,16 @@ After finishing this guide, you'll have accomplished the following:
 You can integrate Saleor Checkout with any existing storefront. Yet, for the simplicity sake let us use a ready-made storefront example provided by Saleor.
 
 1. Open your Terminal in the directory you want to install your storefront.
-2. Run
-
-`saleor storefront create my-storefront-with-checkout`
+2. Run `saleor storefront create my-storefront-with-checkout`
 
 In the installation wizard select your Saleor organization and the environment. After a few moments, the script will install the Saleor Storefront project called `my-storefront-with-checkout` on your machine and start the local server.
 ![storefront](/images/storefront-installed.png)
 
 For now, you can stop the server with `CTRL+C`.
 
-## Step 2. Deploying Saleor Checkout SPA and Checkout App. Installing Checkout App in Dashboard.
+## Step 2. Deploying Saleor Checkout App and Checkout SPA. Installing Checkout App in Dashboard.
 
 Thanks to the CLI, the deployment process is very straightforward.
-
-<!-- **SALEOR-7568 Add parapgraph about Vercel depplyment ** -->
-
-In a nutshell, the script deploys the Checkout App to Vercel using Github and
 
 1. Being in your Terminal, type in:
    `saleor checkout deploy my-checkout`
@@ -70,19 +63,26 @@ In a nutshell, the script deploys the Checkout App to Vercel using Github and
 
 2. In the installation wizard, select your Saleor organization and the environment.
 
-After a while, you will have two apps deployed to Vercel:
+Saleor Checkout consinsts of two projects:
 
-- `my-checkout-app` - a Next.js Saleor App installed in Dashboard for managing settings and theme, backend for checkout SPA, ready to be extended/modified
-- `my-checkout` - the frontend part - a SPA React 18 project, ready to be extended/modified
-  ![vercel](/images/vercel.png)
+- a Next.js Saleor App installed in Dashboard for managing settings and theme and backend for checkout SPA, in this tutorial named `my-checkout-app`
+- the frontend part - a SPA React 18 project, in this tutorial named `my-checkout`
+
+The script creates a project in Vercel and deploys the Checkout App. The url of the deployed Checkout App is then set in the environment variable inside the Checkout App. Next, the Checkout App is redeployed. It is also installed in your Dashboard. Lastly, the script creates a project in Vercel for Checkout SPA and deploys it.
+
+After a while, you will have both apps deployed to Vercel, and the Checkout App will also be installed in your Saleor Dashboard.
+
+![vercel](/images/vercel.png)
+![checkout app in Dashboard](/images/checkout-dashboard.png)
 
 The CLI will inform you about some useful links, i.e. to your Dashboard and GraphQL Playground. Also, it will print out the steps for connecting to Checkout from your storefront app.
 
-3. Copy the `url` of your Checkout SPA from Vercel and paste it into the `.env` file in your storefront code under `NEXT_PUBLIC_CHECKOUT_URL=` variable.
-   ![address](/images/env.png)
+![checkout deploy in CLI](/images/cli-deploy.png)
+
+3. Copy the `url` of your Checkout SPA from the CLI summary message and paste it into the `.env` file in your storefront code under `NEXT_PUBLIC_CHECKOUT_URL=` variable.
    ![env variable](/images/env-variable.png)
 
-Restart the develpment server.
+Restart the development server.
 
 ## Step 4. Setting the shipping methods for Europe region.
 
@@ -99,20 +99,20 @@ You need to enable shipping methods for Europe region to be able to choose them 
 
 Got to your storefront and try to go through the process of adding a product to cart. After clicking the Checkout button you'll be redirected to the checkout SPA view, where you can fill in the form and select the shipping methods.
 
-## Step 3. Using the dummy payment gateway.
+## Step 3. The default dummy payment gateway.
 
-Saleor Checkout ships with a pre-built simple test payment gateway that will always return a successful payment.
+Saleor Storefront ships with a pre-built simple test payment gateway that will always return a successful payment.
 Just type in any card number and other random payment details and click pay.
 
 ![dummy payment](/images/dummy-payment.png)
 
-However, it is also possible to integrate Checkout with a third-party payment gateway, which you can do by following a guide in the next section.
+However, having set the `NEXT_PUBLIC_CHECKOUT_URL` environmental variable in the storefront you are able to integrate it with a third-party payment gateway with the use of the Checkout App.
 
 ## Step 4. Configuring a custom payment gateway.
 
 For the purpose of this tutorial, we will focus on integration with Mollie.
 
-1. Go to your Dashobard and inside the `Apps` click on the `Checkout App`.
+1. Go to your Dashobard and inside the `Apps` click on the `Checkout` app.
 2. Toggle, `Mollie` payment gateway for each payment option.
    ![Mollie toggle](/images/mollie-1.png)
 3. Click the `Settings` icon at the channel configuration page.
