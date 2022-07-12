@@ -1,6 +1,6 @@
 ---
 pos: 6
-title: Integrating Saleor Storefront with Saleor Checkout using CLI
+title: Integrating React Storefront with Saleor Checkout using CLI
 description:
 prev:
   path: /cli/deploy-to-vercel/
@@ -9,13 +9,13 @@ prev:
 MINIMAL SALEOR VERSION
 3.4.5
 
-Saleor platform comprises many powerful parts that can be easily combined and integrated using CLI tool. This guide will show you how you can swiftly add Saleor checkout to an existing storefront.
+Saleor platform comprises many powerful parts that can be easily combined and integrated using CLI tool. This guide will show you how you can swiftly add Saleor Checkout to an existing React Storefront.
 
 ## What will I learn?
 
 After finishing this guide, you'll have accomplished the following:
 
-1. Created a Saleor sample storefront.
+1. Created a sample React Storefront.
 2. Deployed Saleor Checkout SPA and Saleor Checkout App to Vercel.
 3. Configure a custom payment gateway to be used with the Checkout App.
 
@@ -40,14 +40,14 @@ After finishing this guide, you'll have accomplished the following:
 
 ![europe](/images/europe.png)
 
-## Step 1. Creating Saleor Storefront.
+## Step 1. Creating React Storefront.
 
 You can integrate Saleor Checkout with any existing storefront. Yet, for the simplicity sake let us use a ready-made storefront example provided by Saleor.
 
 1. Open your Terminal in the directory you want to install your storefront.
 2. Run `saleor storefront create my-storefront-with-checkout`
 
-In the installation wizard select your Saleor organization and the environment. After a few moments, the script will install the Saleor Storefront project called `my-storefront-with-checkout` on your machine and start the local server.
+In the installation wizard select your Saleor organization and the environment. After a few moments, the script will install the React Storefront project called `my-storefront-with-checkout` on your machine and start the local server.
 ![storefront](/images/storefront-installed.png)
 
 For now, you can stop the server with `CTRL+C`.
@@ -63,7 +63,7 @@ Thanks to the CLI, the deployment process is very straightforward.
 
 2. In the installation wizard, select your Saleor organization and the environment.
 
-Saleor Checkout consinsts of two projects:
+Saleor Checkout consists of two projects:
 
 - a Next.js Saleor App installed in Dashboard for managing settings and theme and backend for checkout SPA, in this tutorial named `my-checkout-app`
 - the frontend part - a SPA React 18 project, in this tutorial named `my-checkout`
@@ -75,16 +75,16 @@ After a while, you will have both apps deployed to Vercel, and the Checkout App 
 ![vercel](/images/vercel.png)
 ![checkout app in Dashboard](/images/checkout-dashboard.png)
 
-The CLI will inform you about some useful links, i.e. to your Dashboard and GraphQL Playground. Also, it will print out the steps for connecting to Checkout from your storefront app.
+The CLI will inform you about some useful links, i.e. to your Dashboard and GraphQL Playground. Also, it will print out the steps for connecting to Checkout from your storefront.
 
 ![checkout deploy in CLI](/images/cli-deploy.png)
 
-3. Copy the `url` of your Checkout SPA from the CLI summary message and paste it into the `.env` file in your storefront code under `NEXT_PUBLIC_CHECKOUT_URL=` variable.
+3. Copy the `url` of your Checkout SPA from the CLI summary message and paste it into the `.env` file in React Storefront code under `NEXT_PUBLIC_CHECKOUT_URL=` variable.
    ![env variable](/images/env-variable.png)
 
 Restart the development server.
 
-## Step 4. Setting the shipping methods for Europe region.
+## Step 3. Setting the shipping methods for Europe region.
 
 You need to enable shipping methods for Europe region to be able to choose them in your checkout. So, go to your Dashboard and:
 
@@ -99,14 +99,14 @@ You need to enable shipping methods for Europe region to be able to choose them 
 
 Got to your storefront and try to go through the process of adding a product to cart. After clicking the Checkout button you'll be redirected to the checkout SPA view, where you can fill in the form and select the shipping methods.
 
-## Step 3. The default dummy payment gateway.
+### The default dummy payment gateway.
 
-Saleor Storefront ships with a pre-built simple test payment gateway that will always return a successful payment.
+React Storefront ships with a pre-built simple test payment gateway that will always return a successful payment.
 Just type in any card number and other random payment details and click pay.
 
 ![dummy payment](/images/dummy-payment.png)
 
-However, having set the `NEXT_PUBLIC_CHECKOUT_URL` environmental variable in the storefront you are able to integrate it with a third-party payment gateway with the use of the Checkout App.
+However, having set the `NEXT_PUBLIC_CHECKOUT_URL` environmental variable in the React Storefront you are able to integrate it with a third-party payment gateway with the use of the Checkout App.
 
 ## Step 4. Configuring a custom payment gateway.
 
