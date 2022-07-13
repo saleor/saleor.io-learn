@@ -16,7 +16,7 @@ Our storefront will be built in React.js using the Next.js framework. Those two 
 
 ## Vercel
 
-[Vercel](https://vercel.com/docs) is a deployment platform known for its great developer experience. It takes care of the hard things: deploying instantly, scaling automatically, and serving personalized content around the globe. As Vercel team also created Next.js, Vercel provides production-grade hosting for Next.js websites with zero configuration. What's more, it has a rich library of templates developers can start with and enables continuous deployment setup with a github repository within a few clicks.
+[Vercel](https://vercel.com/docs) is a deployment platform known for its great developer experience. It takes care of the hard things: deploying instantly, scaling automatically, and serving personalized content around the globe. As Vercel team also created Next.js, Vercel provides production-grade hosting for Next.js websites with zero configuration. What's more, it has a rich library of templates developers can start with and enables continuous deployment setup with a Github repository within a few clicks.
 
 ## Netlify
 
