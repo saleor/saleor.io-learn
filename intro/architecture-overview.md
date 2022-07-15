@@ -1,7 +1,7 @@
 ---
 pos: 2
 title: Architecture overview
-description: Build a high performing ecommerce Storefront
+description: Build a high performing ecommerce storefront
 ---
 
 Saleor is a GraphQL API that provides the backend for your frontend applications. It comes with all the notions needed to develop flexible e-commerce solutions. [Explore Saleor GraphQL API.](https://docs.saleor.io/docs/3.x/developer/getting-started/graphql)

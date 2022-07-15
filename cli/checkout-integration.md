@@ -1,6 +1,6 @@
 ---
 pos: 6
-title: Integrating React Storefront with Saleor Checkout using CLI
+title: Integrating Saleor React Storefront with Saleor Checkout using CLI
 description:
 prev:
   path: /cli/deploy-to-vercel/
@@ -9,13 +9,13 @@ prev:
 MINIMAL SALEOR VERSION
 3.4.5
 
-Saleor platform comprises many powerful parts that can be easily combined and integrated using CLI tool. This guide will show you how you can swiftly add Saleor Checkout to an existing React Storefront.
+Saleor platform comprises many powerful parts that can be easily combined and integrated using CLI tool. This guide will show you how you can swiftly add Saleor Checkout to an existing Saleor React Storefront (SRS).
 
 ## What will I learn?
 
 After finishing this guide, you'll have accomplished the following:
 
-1. Created a sample React Storefront.
+1. Created an instance of Saleor React Storefront.
 2. Deployed Saleor Checkout SPA and Saleor Checkout App to Vercel.
 3. Configure a custom payment gateway to be used with the Checkout App.
 
@@ -40,14 +40,14 @@ After finishing this guide, you'll have accomplished the following:
 
 ![europe](/images/europe.png)
 
-## Step 1. Creating React Storefront.
+## Step 1. Creating Saleor React Storefront (SRS).
 
-You can integrate Saleor Checkout with any existing storefront. Yet, for the simplicity sake let us use a ready-made storefront example provided by Saleor.
+You can integrate Saleor Checkout with any existing storefront. Yet, for the simplicity sake let us use a ready-made [React Storefront](https://github.com/saleor/react-storefront) instance provided by Saleor.
 
 1. Open your Terminal in the directory you want to install your storefront.
 2. Run `saleor storefront create my-storefront-with-checkout`
 
-In the installation wizard select your Saleor organization and the environment. After a few moments, the script will install the React Storefront project called `my-storefront-with-checkout` on your machine and start the local server.
+In the installation wizard select your Saleor organization and the environment. After a few moments, the script will install the SRS project called `my-storefront-with-checkout` on your machine and start the local server.
 ![storefront](/images/storefront-installed.png)
 
 For now, you can stop the server with `CTRL+C`.
@@ -75,11 +75,11 @@ After a while, you will have both apps deployed to Vercel, and the Checkout App 
 ![vercel](/images/vercel.png)
 ![checkout app in Dashboard](/images/checkout-dashboard.png)
 
-The CLI will inform you about some useful links, i.e. to your Dashboard and GraphQL Playground. Also, it will print out the steps for connecting to Checkout from your storefront.
+The CLI will inform you about some useful links, i.e. to your Dashboard and GraphQL Playground. Also, it will print out the steps for connecting the SRS with the Saleor Checkout.
 
 ![checkout deploy in CLI](/images/cli-deploy.png)
 
-3. Copy the `url` of your Checkout SPA from the CLI summary message and paste it into the `.env` file in React Storefront code under `NEXT_PUBLIC_CHECKOUT_URL=` variable.
+3. Copy the `url` of your Checkout SPA from the CLI summary message and paste it into the `.env` file in the SRS code under `NEXT_PUBLIC_CHECKOUT_URL=` variable.
    ![env variable](/images/env-variable.png)
 
 Restart the development server.
@@ -101,12 +101,12 @@ Got to your storefront and try to go through the process of adding a product to 
 
 ### The default dummy payment gateway.
 
-React Storefront ships with a pre-built simple test payment gateway that will always return a successful payment.
+Saleor React Storefront ships with a pre-built simple test payment gateway that will always return a successful payment.
 Just type in any card number and other random payment details and click pay.
 
 ![dummy payment](/images/dummy-payment.png)
 
-However, having set the `NEXT_PUBLIC_CHECKOUT_URL` environmental variable in the React Storefront you are able to integrate it with a third-party payment gateway with the use of the Checkout App.
+However, having set the `NEXT_PUBLIC_CHECKOUT_URL` environmental variable in the SRS you are able to integrate it with a third-party payment gateway with the use of the Checkout App.
 
 ## Step 4. Configuring a custom payment gateway.
 
@@ -123,4 +123,4 @@ For the purpose of this tutorial, we will focus on integration with Mollie.
 5. Go to your Mollie Dashboard and in Settings -> Website Profiles -> Payment methods, toggle Payment methods.
    ![enable payment methods](/images/mollie-4.png)
 
-Done! You can now test the functionality of the Mollie gateway in your Storefront's Checkout.
+Done! You can now test the functionality of the Mollie gateway in your storefront's checkout.
