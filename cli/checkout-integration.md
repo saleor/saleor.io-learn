@@ -4,6 +4,8 @@ title: Integrating Saleor React Storefront with Saleor Checkout using CLI
 description:
 prev:
   path: /cli/deploy-to-vercel/
+next:
+  path: /cli/deploy-templates/
 ---
 
 MINIMAL SALEOR VERSION
