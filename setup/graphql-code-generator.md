@@ -27,14 +27,14 @@ GraphQL Code Generator ships with a variety of plugins that will suit most of th
 
 ```
 npm install graphql
-npm install @graphql-codegen/cli
+npm install -D @graphql-codegen/cli
 ```
 
 or
 
 ```
 pnpm add graphql
-pnpm add @graphql-codegen/cli
+pnpm add -D @graphql-codegen/cli
 ```
 
 These two commands will install the GraphQL Code Generator and its command-line tool.
@@ -42,19 +42,19 @@ These two commands will install the GraphQL Code Generator and its command-line 
 2. Run the Initialization Wizard:
 
 ```
-npm run graphql-codegen init
+npx graphql-code-generator init
 ```
 
 or
 
 ```
-pnpm graphql-codegen init
+pnpm graphql-code-generator init
 ```
 
 You'll be asked a few questions about the setup:
 
 - type of application: Application built with React,
-- schema url: `https://tutorial.saleor.cloud/graphql`,
+- schema URL: `https://tutorial.saleor.cloud/graphql/`,
 - path to query documents / fragments: `graphql/**/*.graphql`
 - selecting and installing plugins: let's leave the preselected ones,
 - destination to where your files should be generated: `saleor/api.ts`
