@@ -5,7 +5,7 @@ description:
 prev:
   path: /cli/subscribing-to-webhook/
 next:
-  path: /cli/checkout-integration/
+  path: /cli/deploy-to-netlify/
 ---
 
 MINIMAL SALEOR VERSION
@@ -82,7 +82,7 @@ git push -u origin main
 #### Step 3. Set the environment variable.
 
 1. In your code editor, navigate to `.env` file and copy the `NEXT_PUBLIC_SALEOR_HOST_URL` variable.
-2. Go bbck to Vercel and add the environment variable `NEXT_PUBLIC_SALEOR_HOST_URL` and its value taken from your app project.
+2. Go back to Vercel and add the environment variable `NEXT_PUBLIC_SALEOR_HOST_URL` and its value taken from your app project.
 3. Hit Deploy button.
    ![change variables in Vercel](/images/vercel3.png)
 
