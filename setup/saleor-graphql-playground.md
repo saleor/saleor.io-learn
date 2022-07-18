@@ -8,7 +8,7 @@ next:
   path: /setup/configure-graphql-client-nextjs/
 ---
 
-Saleor's GraphQL Playground is a web application that provides a convenient user interface for interacting with the Saleor API.
+Saleor's GraphQL Playground is a web application that provides a convenient user interface for interacting with the Saleor API. The Playgorund is available for every environment you [set in your Saleor Dashboard](/cli/getting-started/). On top of that, there is a [demo of Saleor Playground](https://demo.saleor.io/graphql/) that you can explore without any initial setup.
 
 ![GraphQL Playground](/images/setup-graphql-playground.png)
 
@@ -23,3 +23,5 @@ The operation input section allows you to type GraphQL operations (queries, muta
 The result section simply shows the result of the GraphQL operation.
 
 The sidebar is available when clicked on the docs or the schema labels. The docs provide a quick way to find GraphQL operation available in Saleor API. The schema provides a more structured description of the available types. It can be used to auto-generate your client interface. We will discuss it later in this tutorial.
+
+Curious about GraphQL query language? Don't forget to read more at the [Technologies](/intro/technologies/) section.
