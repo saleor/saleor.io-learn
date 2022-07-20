@@ -1,6 +1,6 @@
 ---
-pos: 6
-title: Integrating Saleor React Storefront with Saleor Checkout using CLI
+pos: 7
+title: Integrating React Storefront with Saleor Checkout using CLI
 description:
 prev:
   path: /cli/deploy-to-vercel/
