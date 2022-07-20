@@ -34,7 +34,7 @@ https://tutorial.saleor.cloud/graphql/
 
 Feel free to change it to your own Saleor server instance. You can find the url of your instance on the list of environments in your Saleor account.
 
-![saleor server instance url](/images/graphql-url.png)
+![Saleor server instance URL.](/images/graphql-url.png)
 
 The GraphQL client is available in the application via the `ApolloProvider` component which provides the connection to the GraphQL endpoint. We wrap our application with the Apollo provider at the highest level in the component tree so that it's available for any child component below.
 

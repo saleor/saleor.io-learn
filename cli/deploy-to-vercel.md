@@ -34,12 +34,12 @@ Vercel is a robust platform that enables hosting of static sites and frontend fr
 
 ## Step 1. Creating a template App.
 
-1. In your Terminal, go to a directory on your computer you'd like to install the App in and type: `saleor app create my-saleor-app`.
+1. In your Terminal, go to a directory in your computer you'd like to install the App in and type: `saleor app create my-saleor-app`.
 2. Select your organisation and environment.
 
 After a few moments, you'll have your app named `my-saleor-app` created locally, and your developer environment set up. Also, the CLI will automatically run the development server. You may stop the server with `CTRL+C`.
 
-![saleor app created](/images/app-created.png)
+![Saleor App created.](/images/app-created.png)
 
 ## Step 2. Deploying to Vercel.
 
@@ -50,7 +50,7 @@ After a few moments, you'll have your app named `my-saleor-app` created locally,
 
 The CLI will create a repository with the app on your Github account. Then, it will create a project in Vercel and deploy the app there. Lastly, it will take the `NEXT_PUBLIC_SALEOR_HOST_URL=` variable from `.env` file in your app and set it in the environmental variables in Vercel.
 
-![saleor app deployed to Vercel](/images/app-deployed.png)
+![Saleor App deployed to Vercel.](/images/app-deployed.png)
 
 The URL to your Saleor App deployed to Vercel is displayed in CLI in the summary message.
 
@@ -75,18 +75,22 @@ git push -u origin main
 
 1. In Vercel, click New Project.
 2. Choose to Import a Github repository with the name of your App.
-   ![new project in Vercel](/images/vercel1.png)
+
+![New project in Vercel.](/images/vercel1.png)
+
 3. At the configuration page, override the install command to `pnpm install`.
-   ![override install command](/images/vercel2.png)
+
+![Override the install command.](/images/vercel2.png)
 
 #### Step 3. Set the environment variable.
 
 1. In your code editor, navigate to `.env` file and copy the `NEXT_PUBLIC_SALEOR_HOST_URL` variable.
 2. Go back to Vercel and add the environment variable `NEXT_PUBLIC_SALEOR_HOST_URL` and its value taken from your app project.
 3. Hit Deploy button.
-   ![change variables in Vercel](/images/vercel3.png)
+
+![Change environment variables in Vercel.](/images/vercel3.png)
 
 After a while, your App should be deployed, and you can go to dashboard and click `Visit` to see it live.
-![visit live page](/images/vercel4.png)
+![The App is live.](/images/vercel4.png)
 
 You can now use the URL of your deployed App in the process of i.e. Saleor App installation as described in [Creating Apps with Saleor CLI](./creating-apps.md).

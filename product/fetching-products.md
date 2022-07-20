@@ -404,4 +404,4 @@ export const ProductCollection = () => {
 
 Refactoring `ProductElement` out of `ProductCollection` doesn't change anything visually in our application at this stage. It should look like on the following image:
 
-![Refactored Product Collection](/images/product-overview.png)
+![Refactored Product Collection.](/images/product-overview.png)

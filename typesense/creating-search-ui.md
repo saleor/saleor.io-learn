@@ -51,7 +51,7 @@ We are now connected to Typesense server and ready to build the search UI.
 
 Algolia's Instant Search library gives us a handful of components we can use to build the search experience for the users. In the React flavour of the Instant Search library, widgets are custom components. The full list of them can be found in [the docs.](https://www.algolia.com/doc/guides/building-search-ui/widgets/showcase/js/)
 In this step we are going to integrate our first widget with already-existing page with products.
-![](https://lh3.googleusercontent.com/SpKwM4gB3ebXcDG8m1NhnxrbnBhYNvx1B0YT2ievsF27S2oauF_daYk5Kpoynl5gQniLmUgThcKiYRGJwDwMe0ZFI3iJZzf4_zZuWsC2obPoHZ5VrqLsIeKubZvgsdlQo9kK3RR-)
+![Saleor Storefront.](https://lh3.googleusercontent.com/SpKwM4gB3ebXcDG8m1NhnxrbnBhYNvx1B0YT2ievsF27S2oauF_daYk5Kpoynl5gQniLmUgThcKiYRGJwDwMe0ZFI3iJZzf4_zZuWsC2obPoHZ5VrqLsIeKubZvgsdlQo9kK3RR-)
 
 1. Go to `index.tsx` and inspect the code responsible for rendering the products view.
 
@@ -161,7 +161,7 @@ After restarting the server we should have our search box ready and functional o
 ## Adding more widgets
 
 From a great number of available widgets let us take a few to complete our sample search UI. We would like to accomplish a similiar look and feel as in the photo below:
-![](https://lh4.googleusercontent.com/U9NYywJ353DoGqcHF_k840Mp6Rh-88lweFQRtdaylyDh8fO2-DxMws_SEC0y55_BvutGABTNnZk4MCaGOttDkkmHtKOEnPE3AYOQRrnBhc6ytYkiTSBjnD6ZW6ttUUV4YTjVZ_L4)
+![Saleor Storefront with a complete search UI.](https://lh4.googleusercontent.com/U9NYywJ353DoGqcHF_k840Mp6Rh-88lweFQRtdaylyDh8fO2-DxMws_SEC0y55_BvutGABTNnZk4MCaGOttDkkmHtKOEnPE3AYOQRrnBhc6ytYkiTSBjnD6ZW6ttUUV4YTjVZ_L4)
 
 Hence, we will implement:
 
@@ -249,7 +249,7 @@ For now, we have all the components we need to make a pretty nice search UI. The
 ## Styling the widgets
 
 All components under the react-instantsearch-dom namespace come with predefined CSS class names, which you can inspect in Dev Tools:
-![](https://lh6.googleusercontent.com/sMEoDTx1Zyv1tlKaIckVjBkBq00SgdUCvv9tQQs3YCuVlTIatRL8uAXy4eMyxIoPEAVE5DkEL7jc_OZDl3wyJW5SQIKApsLePH_KoEcZzpXPEgLVlOHmqsIv4wM-1LCgWyXv1qge)
+![Components with predefined namespaces.](https://lh6.googleusercontent.com/sMEoDTx1Zyv1tlKaIckVjBkBq00SgdUCvv9tQQs3YCuVlTIatRL8uAXy4eMyxIoPEAVE5DkEL7jc_OZDl3wyJW5SQIKApsLePH_KoEcZzpXPEgLVlOHmqsIv4wM-1LCgWyXv1qge)
 
 The library doesn't load any CSS by default but it is possible to manually install a theme. There are two avaliable:
 

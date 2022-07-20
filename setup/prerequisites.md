@@ -31,7 +31,7 @@ This command will install a Saleor React Storefront project called `my-storefron
 
 ...and other goodies that will support you in extending the storefront further.
 
-![saleor cli creating storefront](/images/saleor-cli-storefront.png)
+![Saleor CLI creating storefront.](/images/saleor-cli-storefront.png)
 
 Now, you can skip the remaining steps in the setup and jump straight into the next sections of this tutorial. However, if you wish you can choose to go through the manual setup and configure all the nuts and bolts on your own, so that you have a better understanding of the base for building e-commerce applications with Next.js & Saleor using TypeScript.
 
@@ -61,6 +61,6 @@ After the successful installation, you will be able to start the development ser
 1. In your Terminal, run `npm dev` or `pnpm dev` .
 2. Visit `http://localhost:3000` in your browser to see it live.
 
-![create next app](/images/create-next-app.png)
+![Create Next App.](/images/create-next-app.png)
 
 Please follow the next steps in this section to finish the manual setup.
