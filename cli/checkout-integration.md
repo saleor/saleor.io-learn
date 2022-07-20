@@ -138,6 +138,6 @@ For the purpose of this tutorial, we will focus on integration with Mollie.
 
 5. Go to your Mollie Dashboard and in Settings -> Website Profiles -> Payment methods, toggle Payment methods.
 
-![ Enable payment methods in Mollie Dashboard.](/images/mollie-4.png)
+![Enable payment methods in Mollie Dashboard.](/images/mollie-4.png)
 
 Done! You can now test the functionality of the Mollie gateway in your storefront's checkout.
