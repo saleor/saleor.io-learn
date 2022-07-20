@@ -40,7 +40,7 @@ After finishing this guide, you'll have accomplished the following:
 
 4. In Dashboard -> Configuration -> Shipping Methods, click on Europe and on the right side of the panel pick Global under Warehouse.
 
-![europe](/images/europe.png)
+![Click Global under Warehouse in Shipping Methods for Europe.](/images/europe.png)
 
 ## Step 1. Creating Saleor React Storefront (SRS).
 
@@ -50,7 +50,7 @@ You can integrate Saleor Checkout with any existing storefront. Yet, for the sim
 2. Run `saleor storefront create my-storefront-with-checkout`
 
 In the installation wizard select your Saleor organization and the environment. After a few moments, the script will install the SRS project called `my-storefront-with-checkout` on your machine and start the local server.
-![storefront](/images/storefront-installed.png)
+![Saleor React Storefront installed in your Terminal.](/images/storefront-installed.png)
 
 For now, you can stop the server with `CTRL+C`.
 
@@ -61,7 +61,7 @@ Thanks to the CLI, the deployment process is very straightforward.
 1. Being in your Terminal, type in:
    `saleor checkout deploy my-checkout`
 
-![deploy to Vercel](/images/deploy.png)
+![Deploying Checkout to Vercel.](/images/deploy.png)
 
 2. In the installation wizard, select your Saleor organization and the environment.
 
@@ -74,15 +74,16 @@ The script creates a project in Vercel and deploys the Checkout App. The url of 
 
 After a while, you will have both apps deployed to Vercel, and the Checkout App will also be installed in your Saleor Dashboard.
 
-![vercel](/images/vercel.png)
-![checkout app in Dashboard](/images/checkout-dashboard.png)
+![Checkout SPA and Checkout App deployed to Vercel.](/images/vercel.png)
+![Checkout App installed in Dashboard.](/images/checkout-dashboard.png)
 
 The CLI will inform you about some useful links, i.e. to your Dashboard and GraphQL Playground. Also, it will print out the steps for connecting the SRS with the Saleor Checkout.
 
-![checkout deploy in CLI](/images/cli-deploy.png)
+![Saleor CLI deploy summary message.](/images/cli-deploy.png)
 
 3. Copy the `url` of your Checkout SPA from the CLI summary message and paste it into the `.env` file in the SRS code under `NEXT_PUBLIC_CHECKOUT_URL=` variable.
-   ![env variable](/images/env-variable.png)
+
+![Paste the environment variable into .env file in SRS.](/images/env-variable.png)
 
 Restart the development server.
 
@@ -91,13 +92,20 @@ Restart the development server.
 You need to enable shipping methods for Europe region to be able to choose them in your checkout. So, go to your Dashboard and:
 
 1. Click the Configuration button.
-   ![dashobard configuration button](/images/warehouse-1.png)
+
+![Dashboard configuration button.](/images/warehouse-1.png)
+
 2. Scroll down to Shipping methods and click the card.
-   ![Shipping methods](/images/warehouse-2.png)
+
+![Shipping methods.](/images/warehouse-2.png)
+
 3. On the list of Shipping Zones click Europe.
-   ![Europe Shipping Zone](/images/warehouse-3.png)
+
+![Europe Shipping Zone.](/images/warehouse-3.png)
+
 4. In the right bottom corner, select Global from the Select Warehouse list.
-   ![Global warehouse](/images/warehouse-4.png)
+
+![Global warehouse.](/images/warehouse-4.png)
 
 Got to your storefront and try to go through the process of adding a product to cart. After clicking the Checkout button you'll be redirected to the checkout SPA view, where you can fill in the form and select the shipping methods.
 
@@ -106,7 +114,7 @@ Got to your storefront and try to go through the process of adding a product to 
 Saleor React Storefront ships with a pre-built simple test payment gateway that will always return a successful payment.
 Just type in any card number and other random payment details and click pay.
 
-![dummy payment](/images/dummy-payment.png)
+![Dummy payment gateway.](/images/dummy-payment.png)
 
 However, having set the `NEXT_PUBLIC_CHECKOUT_URL` environmental variable in the SRS you are able to integrate it with a third-party payment gateway with the use of the Checkout App.
 
@@ -116,13 +124,20 @@ For the purpose of this tutorial, we will focus on integration with Mollie.
 
 1. Go to your Dashobard and inside the `Apps` click on the `Checkout` app.
 2. Toggle, `Mollie` payment gateway for each payment option.
-   ![Mollie toggle](/images/mollie-1.png)
+
+![Toggle Mollie payment gateway.](/images/mollie-1.png)
+
 3. Click the `Settings` icon at the channel configuration page.
-   ![configuration cogwheel](/images/mollie-2.png)
+
+![Checkout App configuration cogwheel.](/images/mollie-2.png)
+
 4. Provide the credentials obtained from your Mollie account.
-   ![mollie credentials](/images/mollie-3.png)
-   ![mollie credentials in Checkout](/images/mollie-saleor-keys.png)
+
+![Mollie credentials.](/images/mollie-3.png)
+![Mollie credentials in the Checkout.](/images/mollie-saleor-keys.png)
+
 5. Go to your Mollie Dashboard and in Settings -> Website Profiles -> Payment methods, toggle Payment methods.
-   ![enable payment methods](/images/mollie-4.png)
+
+![ Enable payment methods in Mollie Dashboard.](/images/mollie-4.png)
 
 Done! You can now test the functionality of the Mollie gateway in your storefront's checkout.

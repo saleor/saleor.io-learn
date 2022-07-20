@@ -15,4 +15,4 @@ We will craft a product search solution step-by-step in two main parts :
 
 Here's the final result for this section:
 
-![](https://lh4.googleusercontent.com/U9NYywJ353DoGqcHF_k840Mp6Rh-88lweFQRtdaylyDh8fO2-DxMws_SEC0y55_BvutGABTNnZk4MCaGOttDkkmHtKOEnPE3AYOQRrnBhc6ytYkiTSBjnD6ZW6ttUUV4YTjVZ_L4)
+![Saleor Storefront with the search UI.](https://lh4.googleusercontent.com/U9NYywJ353DoGqcHF_k840Mp6Rh-88lweFQRtdaylyDh8fO2-DxMws_SEC0y55_BvutGABTNnZk4MCaGOttDkkmHtKOEnPE3AYOQRrnBhc6ytYkiTSBjnD6ZW6ttUUV4YTjVZ_L4)

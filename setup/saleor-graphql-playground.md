@@ -10,7 +10,7 @@ next:
 
 Saleor's GraphQL Playground is a web application that provides a convenient user interface for interacting with the Saleor API. The Playgorund is available for every environment you [set in your Saleor Dashboard](/cli/getting-started/). On top of that, there is a [demo of Saleor Playground](https://demo.saleor.io/graphql/) that you can explore without any initial setup.
 
-![GraphQL Playground](/images/setup-graphql-playground.png)
+![GraphQL Playground.](/images/setup-graphql-playground.png)
 
 The playground consists of three main sections:
 

@@ -42,7 +42,7 @@ When you execute this mutation, an empty checkout will be created. In response t
 
 4. Open the GraphQL Playground and execute this mutation. You will see the token in the query results.
 
-![checkout created in the playground](/images/checkout-create-playground.png)
+![Checkout created in the Playground.](/images/checkout-create-playground.png)
 
 ## Initializing the checkout in React.js
 

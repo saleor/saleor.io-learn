@@ -1,18 +1,18 @@
 ---
 pos: 2
-title: Pricing Range 
-description: 
+title: Pricing Range
+description:
 prev:
   path: /prices/overview/
 next:
   path: /prices/pricing-variants/
 ---
 
-Since products have variants, the product price may be different dependening on the particular variant. For that reason, it is not possible to ask for a product price. Instead, the product exposes a **range of prices** as the `pricing` field on the `Product` type. The range is represented as a tuple with the lowest and the highest price in that range.  If all the variants have the same price, the both elements of the tuple are equal.
+Since products have variants, the product price may be different dependening on the particular variant. For that reason, it is not possible to ask for a product price. Instead, the product exposes a **range of prices** as the `pricing` field on the `Product` type. The range is represented as a tuple with the lowest and the highest price in that range. If all the variants have the same price, the both elements of the tuple are equal.
 
 ## Getting the price range of a product
 
-Let's use the `products` query again, but this time we will only list the lowest and the highst price for each product in the collection. 
+Let's use the `products` query again, but this time we will only list the lowest and the highst price for each product in the collection.
 
 ```graphql{6-18}
 {
@@ -88,9 +88,9 @@ Try this query in the GraphQL Playground. In response you will get a collection 
               }
             }
           }
-        },
+        }
         // ...
-      ],
+      ]
     }
   }
 }
@@ -195,4 +195,4 @@ export const ProductElement = ({ id, name, thumbnail, category, pricing }: Props
 
 As a result, you should see the price displayed on the right side of each product element in the collection, as shown in the image below:
 
-![Product Collection with Prices](/images/products-price-range.png)
+![Product Collection with Prices.](/images/products-price-range.png)

@@ -1,8 +1,8 @@
 ---
 pos: 6
-title: Pagination 
-description: 
-stackblitz: saleor-tutorial-pagination 
+title: Pagination
+description:
+stackblitz: saleor-tutorial-pagination
 prev:
   path: /product/sorting/
 next:
@@ -56,24 +56,24 @@ We are not only returning the product `node`, but also the `totalCount` and `pag
 
 Additionally, the `products` query has the `after` argument that takes the value of `startCursor` and `endCursor` as input.
 
-Let's re-write the `ProductCollection` by adding the pagination as a *Fetch More* button.
+Let's re-write the `ProductCollection` by adding the pagination as a _Fetch More_ button.
 
 ```tsx
 // components/ProductCollection.tsx
-import React from 'react';
+import React from "react";
 
-import { Product, useFilterProductsQuery } from '@/saleor/api';
-import { Pagination, ProductElement } from '@/components';
+import { Product, useFilterProductsQuery } from "@/saleor/api";
+import { Pagination, ProductElement } from "@/components";
 
 const styles = {
-  grid: 'grid gap-4 grid-cols-4',
-}
+  grid: "grid gap-4 grid-cols-4",
+};
 
 export const ProductCollection = () => {
   const { loading, error, data, fetchMore } = useFilterProductsQuery({
     variables: {
       filter: {},
-    }
+    },
   });
 
   if (loading) return <p>Loading...</p>;
@@ -96,37 +96,37 @@ export const ProductCollection = () => {
       <>
         <ul role="list" className={styles.grid}>
           {products?.length > 0 &&
-            products.map(
-              ({ node }) => <ProductElement key={node.id} {...node as Product} />,
-            )}
+            products.map(({ node }) => (
+              <ProductElement key={node.id} {...(node as Product)} />
+            ))}
         </ul>
-        {pageInfo?.hasNextPage &&
+        {pageInfo?.hasNextPage && (
           <Pagination
             onLoadMore={onLoadMore}
             itemCount={products.length}
             totalCount={totalCount || NaN}
           />
-        }
+        )}
       </>
     );
   }
 
   return null;
-}
+};
 ```
 
-There are a couple of changes here. First of all, we add the `Pagination` component that is responsible for displaying the *Fetch More* button and handling the request for more data in the product collection. Then, we use Apollo's `fetchMore` helper method to construct the `onClick` event handler. This helper accepts the same variables as the auto-generated React Hook itself. As we request the next elements in the collection, we set the `after` argument to the end cursor (the last element) in the current subset of the product collection. Finally, we conditionally display the `Pagination` component depending on the value of `pageInfo.hasNextPage`.
+There are a couple of changes here. First of all, we add the `Pagination` component that is responsible for displaying the _Fetch More_ button and handling the request for more data in the product collection. Then, we use Apollo's `fetchMore` helper method to construct the `onClick` event handler. This helper accepts the same variables as the auto-generated React Hook itself. As we request the next elements in the collection, we set the `after` argument to the end cursor (the last element) in the current subset of the product collection. Finally, we conditionally display the `Pagination` component depending on the value of `pageInfo.hasNextPage`.
 
-The `Pagination` component is straightforward. We have a button with the passed in handler attached to the `onClick` event along with the information about the current count and total count. 
+The `Pagination` component is straightforward. We have a button with the passed in handler attached to the `onClick` event along with the information about the current count and total count.
 
 ```tsx
 // components/Pagination.tsx
-import React from 'react';
+import React from "react";
 
 const styles = {
-  nav: 'my-8 flex justify-center flex-col items-center',
-  info: 'text-sm text-gray-500 mt-2' 
-}
+  nav: "my-8 flex justify-center flex-col items-center",
+  info: "text-sm text-gray-500 mt-2",
+};
 
 interface Props {
   onLoadMore: () => void;
@@ -134,17 +134,10 @@ interface Props {
   itemCount: number;
 }
 
-export const Pagination = ({
-  onLoadMore,
-  itemCount,
-  totalCount,
-}: Props) => {
+export const Pagination = ({ onLoadMore, itemCount, totalCount }: Props) => {
   return (
     <nav className={styles.nav}>
-      <a
-        onClick={onLoadMore}
-        className="button"
-      >
+      <a onClick={onLoadMore} className="button">
         Load More
       </a>
       {itemCount && totalCount && (
@@ -199,7 +192,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 }
 ```
 
-We end up with the following page that displays four products along with the button to fetch more; once the button is clicked, four more products will be displayed: 
+We end up with the following page that displays four products along with the button to fetch more; once the button is clicked, four more products will be displayed:
 
-![Products Pagination](/images/products-pagination.png)
-
+![Products Pagination.](/images/products-pagination.png)
