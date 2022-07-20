@@ -40,7 +40,7 @@ Before you create your first App using CLI, you need to make sure to:
 2. Register an account in Saleor Cloud and be logged in
 3. Create an organisation, a project and an environment
 
-You may find the instructions for every of these steps in the [Getting Started with Saleor CLI guide](./getting-started.md).
+You may find the instructions for every of these steps in the [Getting Started with Saleor CLI guide](/cli/getting-started).
 
 ## What will I build?
 
