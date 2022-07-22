@@ -57,7 +57,7 @@ extensions: [
 ```
 
 2. At the time of writing this guide, the functionality of Saleor Apps is in the preview mode. You need to make sure the App you want to develop is installed and activated in Saleor Cloud. It is the only context in which the App is functional. So, **you develop the App locally but can see the results only in the Dashboard**, not the `localhost.`
-   You may find the instructions for installing an App in [Creating Apps with Saleor CLI](#) guide.
+   You may find the instructions for installing an App in [Creating Apps with Saleor CLI](/cli/creating-apps/) guide.
 3. The App fetches data that is not present in the Saleor example database by default. Hence, if you want to see the results of the query, it is best to go to your environment GraphQL Playground and insert a few entities of checkout:
 
 ```graphql
