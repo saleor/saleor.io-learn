@@ -64,13 +64,13 @@ module.exports = {
 @tailwind utilities;
 ```
 
-5. Finally, include this main stylesheet in `pages/_app.tsx`:
+5. Finally, make sure this global stylesheet is included in `pages/_app.tsx`:
 
 ```tsx{4}
 import type { AppProps } from 'next/app'
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 
-import '../styles/main.css';
+import '../styles/globals.css';
 
 const client = new ApolloClient({
   uri: "https://tutorial.saleor.cloud/graphql/",
