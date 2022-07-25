@@ -1,7 +1,7 @@
 ---
 pos: 4
 title: Filtering with variables
-description: 
+description:
 stackblitz: saleor-tutorial-filtering-variables
 prev:
   path: /product/basic-filtering/
@@ -9,9 +9,9 @@ next:
   path: /product/sorting/
 ---
 
-Often the filtering criteria come from the users. Those criteria cannot be put as-is into the GraphQL query. We must dynamically set them using the query variables.
+Often the filtering criteria come from the users. We cannot put these criteria as-is into the GraphQL query. We must dynamically set them using the query variables.
 
-Let's rewrite the previous query that fetches T-shirts so that the `filter` argument is set via a GraphQL query variable:
+1. Go to the `graphql/queries` folder and create a `FilterProducts.graphql` file. Copy/paste the query below:
 
 ```graphql{1,2}
 # graphql/queries/FilterProducts.graphql
@@ -33,13 +33,25 @@ query FilterProducts($filter: ProductFilterInput!) {
 }
 ```
 
-In the example above, we are setting the `filter` argument using the `$filter` variable with a precisely defined type of `ProductFilterInput`. The exclamation mark signifies that query variable definition is *required*. 
+In the example above, we are setting the `filter` argument using the `$filter` variable with a precisely defined type of `ProductFilterInput`. The exclamation mark signifies that the query variable definition is _required_.
 
-Notice also that we change the name of the query to `FilterProducts`. This will generate the `useFilterProductsQuery` React Hook.
+2. In the Terminal, run:
+
+```
+npm run generate
+```
+
+or
+
+```
+pnpm run generate
+```
+
+It will generate the `useFilterProductsQuery` React Hook.
 
 Such defined GraphQL query accepts its input via the `variables` field. This transformation is done automatically by the Apollo library along with the code generation and is available as input in its React Hook.
 
-In `components/ProductCollection.tsx`, we can replace the `useFetchTwelveProductsQuery` with the newly generated `useFilterProductsQuery` as the shape of the elements in the product collection doesn't change.
+3. In `components/ProductCollection.tsx`, replace the `useFetchTwelveProductsQuery` with the newly generated `useFilterProductsQuery` as the shape of the elements in the product collection doesn't change.
 
 ```tsx{4,12-16}
 // components/ProductCollection.tsx
@@ -55,7 +67,7 @@ const styles = {
 export const ProductCollection = () => {
   const { loading, error, data } = useFilterProductsQuery({
     variables: {
-      filter: { search: 'T-Shirt' }
+      filter: { search: 'juice' }
     }
   });
 
@@ -80,8 +92,8 @@ export const ProductCollection = () => {
 
 ```
 
-Thanks to GraphQL variables we can parametrize our queries directly from the React components. 
+Thanks to GraphQL variables we can parametrize our queries directly from the React components.
 
-Here's the result for filtering with `search` set to `T-Shirt`:
+Here's the result for filtering with `search` set to `juice`:
 
-**IMAGE**
+![Search filter in action.](/images/filter-product.png)
