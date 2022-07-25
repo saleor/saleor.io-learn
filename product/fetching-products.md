@@ -267,9 +267,11 @@ query FetchTwelveProducts {
 }
 ```
 
-Let's use this query to replace the previous one inside the `FetchTwelveProducts.graphql` that is located in `graphql/`.
+Let's use this query to replace the previous one:
 
-Modify the `ProductCollection.tsx` component to display the product thumbnails along with their categories:
+1. Paste the abovementioned query into the `FetchTwelveProducts.graphql` that is located in `graphql/`.
+2. If you have enabled the `watch` mode in your `generate` script, the Code Generator will now regenerate the types and update hooks for the new query. If you haven't, run `npm generate` or `pnpm generate` in your Terminal to trigger the regeneration.
+3. Head over to the `components` folder and modify the `ProductCollection.tsx` component to display the product thumbnails along with their categories:
 
 ```tsx
 // components/ProductCollection.tsx
@@ -327,11 +329,14 @@ export const ProductCollection = () => {
 };
 ```
 
+You can now inspect the changes in the browser:
+![Products grid with thumbnails.](/images/product-thumbnails.png)
+
 ## The `ProductElement` component
 
 Before we dive into other Saleor features, let's take a moment to slightly refactor the `ProductCollection` component. We can take each product element in the list and put it into a separate component.
 
-Call this component `ProductElement` and put it in `components/`
+1. In the `components/` folder create a `ProductElement.tsx` and copy/paste the code below:
 
 ```tsx
 // components/ProductElement.tsx
@@ -369,7 +374,7 @@ export const ProductElement = ({ id, name, thumbnail, category }: Props) => {
 };
 ```
 
-Let's also add the `export` statement for this component to `components/index.ts`:
+2. Add the `export` statement for this component to `components/index.ts`:
 
 ```tsx{4}
 // components/index.ts
@@ -378,7 +383,7 @@ export { Layout } from './Layout';
 export { ProductElement } from './ProductElement';
 ```
 
-Now, we can reorganize the `ProductCollection` component in the following way:
+3.Reorganize the `ProductCollection` component in the following way:
 
 ```tsx
 // components/ProductCollection.tsx
@@ -414,6 +419,4 @@ export const ProductCollection = () => {
 };
 ```
 
-Refactoring `ProductElement` out of `ProductCollection` doesn't change anything visually in our application at this stage. It should look like on the following image:
-
-![Refactored Product Collection.](/images/product-overview.png)
+Refactoring `ProductElement` out of `ProductCollection` doesn't change anything visually in our application at this stage. However, the code is organized a bit better.
