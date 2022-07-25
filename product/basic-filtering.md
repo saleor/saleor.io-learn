@@ -1,7 +1,7 @@
 ---
 pos: 3
-title: Basic filtering 
-description: 
+title: Basic filtering
+description:
 stackblitz: saleor-tutorial-basic-filtering
 prev:
   path: /product/fetching-products/
@@ -9,16 +9,18 @@ next:
   path: /product/filtering-with-variables/
 ---
 
-When fetching products using the `products` query, we can also filter them using various criteria provided via the `filter` argument. 
+When fetching products using the `products` query, we can also filter them using various criteria provided via the `filter` argument.
 
-The most basic form of filtering can be done using the `search` field. It takes a string value as input that is matched against the product title and description. In the following example, we want to find all the t-shirts available in our store. 
+The most basic form of filtering can be done using the `search` field. It takes a string value as input that is matched against the product title and description. In the following example, we want to find all the t-shirts available in our store.
 
 ```graphql
 # graphql/queries/TShirtProducts.graphql
 query TShirtProducts {
-  products(first: 12,
-           channel: "default-channel",
-           filter: { search: "t-shirt" }) {
+  products(
+    first: 12
+    channel: "default-channel"
+    filter: { search: "t-shirt" }
+  ) {
     edges {
       node {
         id
@@ -41,6 +43,12 @@ If the code generation is running in the watch mode, the corresponding React.js 
 
 ```
 npm run generate
+```
+
+or
+
+```
+pnpm generate
 ```
 
 In `components/ProductCollection.tsx`, we can replace the `useFetchTwelveProductsQuery` with the newly generated `useTShirtProductsQuery` as the shape of the elements in the product collection doesn't change.
@@ -78,3 +86,6 @@ export const ProductCollection = () => {
   return null;
 }
 ```
+
+As a result of the search, we will render the T-shirts only.
+![The results of product search.](/images/product-search.png)
