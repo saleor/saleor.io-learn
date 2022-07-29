@@ -383,7 +383,7 @@ export { Layout } from './Layout';
 export { ProductElement } from './ProductElement';
 ```
 
-3.Reorganize the `ProductCollection` component in the following way:
+3. Reorganize the `ProductCollection` component in the following way:
 
 ```tsx
 // components/ProductCollection.tsx
