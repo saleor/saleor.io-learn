@@ -8,7 +8,7 @@ next:
   path: /prices/overview/
 ---
 
-A product may be available in different variants, e.g., a particular T-shirt may be available in different sizes, and each size is a variant of that T-shirt. The notion of variants is available in Saleor out of the box. You can access it on the product via the `variants` field.
+A product may be available in different variants, e.g., a particular T-shirt comes in different sizes, and each size is a variant of that T-shirt. The notion of variants is available in Saleor out of the box. You can access it on the product via the `variants` field.
 
 ## Fetching variants of a product
 
