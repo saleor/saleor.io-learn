@@ -13,7 +13,9 @@ The `products` query from the Saleor API returns a paginated collection. Once we
 
 It's not a good idea to keep this information within the entity itself as it's unrelated to the business model. For that, we introduce a layer of indirection. In GraphQL, this layer is usually known as `edges`.
 
-Let's adapt the query for fetching products so that it can be paginated.
+Let us now go through the process of adding pagination to our storefront.
+
+1. Adapt the query for fetching products so that it can be paginated. Open the `graphql/queries/FilterProducts.graphql` file and update its contents with the changes below:
 
 ```graphql{5,12,26-32}
 # graphql/queries/FilterProducts.graphql
@@ -56,7 +58,9 @@ We are not only returning the product `node`, but also the `totalCount` and `pag
 
 Additionally, the `products` query has the `after` argument that takes the value of `startCursor` and `endCursor` as input.
 
-Let's re-write the `ProductCollection` by adding the pagination as a _Fetch More_ button.
+2. Run the `generate` script in your Terminal or have it run in the `watch` mode, as described in the previous sections.
+
+3. Update the `ProductCollection` component by adding the pagination as a _Fetch More_ button.
 
 ```tsx
 // components/ProductCollection.tsx
@@ -119,6 +123,8 @@ There are a couple of changes here. First of all, we add the `Pagination` compon
 
 The `Pagination` component is straightforward. We have a button with the passed in handler attached to the `onClick` event along with the information about the current count and total count.
 
+4. In the `components` folder create a new file called `Pagination.tsx` and copy/paste the code below:
+
 ```tsx
 // components/Pagination.tsx
 import React from "react";
@@ -150,7 +156,7 @@ export const Pagination = ({ onLoadMore, itemCount, totalCount }: Props) => {
 };
 ```
 
-Let's not forget to export the `Pagination` component from `components/index.ts`:
+5. Export the `Pagination` component from `components/index.ts`:
 
 ```tsx{5}
 // components/index.ts
@@ -160,7 +166,7 @@ export { ProductElement } from './ProductElement';
 export { Pagination } from './Pagination';
 ```
 
-Lastly, we must define the type policy for the `products` query. In `pages/_app.tsx` while defining the Apollo client instance, we communicate to the Apollo cache that the `products` query has the Relay style pagination.
+6. Lastly, we must define the type policy for the `products` query. In `pages/_app.tsx` while defining the Apollo client instance, we communicate to the Apollo cache that the `products` query has the Relay style pagination. Open `_app.tsx` file and update its contents with the changes below:
 
 ```tsx{4,11-17}
 // pages/_app.tsx
@@ -168,7 +174,7 @@ import type { AppProps } from 'next/app'
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import { relayStylePagination } from "@apollo/client/utilities";
 
-import '../styles/main.css';
+import '../styles/globals.css';
 
 const client = new ApolloClient({
   uri: "https://vercel.saleor.cloud/graphql/",
