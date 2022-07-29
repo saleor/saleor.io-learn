@@ -1,7 +1,7 @@
 ---
 pos: 7
-title: Fetching single product 
-description: 
+title: Fetching single product
+description:
 prev:
   path: /product/pagination/
 next:
@@ -12,7 +12,7 @@ Sometimes you may need to fetch a specific product. Usually, you display the mos
 
 ## GraphQL Query for Single Product
 
-Let's call our query `ProductByID` to make it explicit that it is about fetching product details by ID:
+Let's call our query `ProductByID` to make it explicit that it is about fetching product details by ID. In the `graphql/queries/` folder create a `ProductByID.graphql` file and copy/paste the code below:
 
 ```graphql
 # graphql/queries/ProductByID.graphql
@@ -31,13 +31,13 @@ query ProductByID($id: ID!) {
 }
 ```
 
-The `product` query requires a value for the `id` argument, which is the product we want to fetch. We can then use the generated `useProductByIdQuery` hook in React components with the product `id` specified via the `variables` as shown below:
+The `product` query requires a value for the `id` argument, which is the product we want to fetch. After you run the `generate` script, you can use the `useProductByIdQuery` hook in React components with the product `id` specified via the `variables`, like so:
 
 ```js
-const { loading, error, data } = useProductByIdQuery({ 
-  variables: { 
-    id: 'UHJvZHVjdDoxMTE=' 
-  } 
+const { loading, error, data } = useProductByIdQuery({
+  variables: {
+    id: "UHJvZHVjdDoxMTE=",
+  },
 });
 ```
 
@@ -47,29 +47,25 @@ Let's start by creating a dedicated page for a single product. This page will ge
 
 Since Next.js provides a file-based routing, we can simply create the `product/` directory within `pages` along with the `[id].tsx` file inside that directory. The `[id].tsx` is a special format in Next.js for handling dynamic routes. Once the page gets generated, the dynamic section, i.e., `[id]`, will be replaced with the ID of an actual element. In our case, this will be a product ID.
 
-Let's focus on the React component first. Let's name it `ProductPage`:
+Let's focus on the React component first. Let's name it `ProductPage`. In the `pages` directory create a folder called `product` and inside it create a `[id].tsx` file. Update the file with the contents below:
 
 ```tsx
 // pages/product/[id].tsx
-import {
-  useProductByIdQuery,
-} from "@/saleor/api";
-import {
-  Layout
-} from '@/components';
+import { useProductByIdQuery } from "@/saleor/api";
+import { Layout } from "@/components";
 
 const styles = {
-  columns: 'grid grid-cols-2 gap-x-10 items-start',
+  columns: "grid grid-cols-2 gap-x-10 items-start",
   image: {
-    aspect: 'aspect-w-1 aspect-h-1 bg-white rounded',
-    content: 'object-center object-cover'
+    aspect: "aspect-w-1 aspect-h-1 bg-white rounded",
+    content: "object-center object-cover",
   },
   details: {
-    title: 'text-4xl font-bold tracking-tight text-gray-800',
-    category: 'text-lg mt-2 font-medium text-gray-500',
-    description: 'prose lg:prose-s'
-  }
-}
+    title: "text-4xl font-bold tracking-tight text-gray-800",
+    category: "text-lg mt-2 font-medium text-gray-500",
+    description: "prose lg:prose-s",
+  },
+};
 
 interface Props {
   id: string;
@@ -96,9 +92,7 @@ const ProductPage = ({ id }: Props) => {
 
           <div className="space-y-8">
             <div>
-              <h1 className={styles.details.title}>
-                {product?.name}
-              </h1>
+              <h1 className={styles.details.title}>{product?.name}</h1>
               <p className={styles.details.category}>
                 {product?.category?.name}
               </p>
@@ -114,17 +108,16 @@ const ProductPage = ({ id }: Props) => {
   }
 
   return null;
-}
+};
 
 export default ProductPage;
-
 ```
 
 `ProductPage` has the product identifier passed in, and then it uses that to fetch details for a particular product using the auto-generated `useProductByIdQuery`. Then, we display the product data we received. The flow is similar to the page that displays the collection of products, except that here we need an `id` of a product to display as input for this React component.
 
 Next.js provides two special functions for React components that are used as pages (i.e., the ones located in `pages/` directory) with dynamic routes: `getStaticPaths` and `getStaticProps`.
 
-`getStaticPaths` generates all the possible values for parameters in dynamic routes ahead of time when the website is being built. In our case, this function will return a collection of identifiers for all products provided by our Saleor API. Let's write it down:
+`getStaticPaths` generates all the possible values for parameters in dynamic routes ahead of time when the website is being built. In our case, this function will return a collection of identifiers for all products provided by our Saleor API. Let's create it in our `[id].tsx` file below the code for the `ProductPage` component:
 
 ```tsx{2,3,20-35}
 // pages/product/[id].tsx
@@ -174,11 +167,11 @@ First, we are executing a GraphQL query to fetch a collection of products. We ar
 
 The response data is a collection of products. We extract just the identifier of each product using the built-in `map` function and return the result as a collection of paths.
 
-Since we are re-using the instance of the Apollo client, let's move the initialization of that client to a separate file: `lib/graphql.ts`
+Since we are re-using the instance of the Apollo client, let's move the initialization of that client to a separate file. Create a folder named `lib` and make a `graphql.ts` file inside it.
 
 ```ts
 // lib/graphql.ts
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { relayStylePagination } from "@apollo/client/utilities";
 
 export const apolloClient = new ApolloClient({
@@ -190,19 +183,19 @@ export const apolloClient = new ApolloClient({
           products: relayStylePagination(),
         },
       },
-    }
+    },
   }),
 });
 ```
 
-For convenience, let's define the export statement in `lib/index.ts` so that we can import directly from `@/lib` anywhere in our codebase.
+For convenience, let's define the export statement in `lib/index.ts` so that we can import directly from `@/lib` anywhere in our codebase. In the `lib` folder, create the `index.ts` file and add the import below:
 
 ```ts
 // lib/index.ts
-export { apolloClient } from './graphql';
+export { apolloClient } from "./graphql";
 ```
 
-The second function provided by Next.js for pages is `getStaticProps` - it returns the props that will be passed to the React component during the build. In our context, we return an identifier of a product to display. `getStaticProps` is invoked for each element of the collection returned by `getStaticPaths`. Let's add it to the single product page at `pages/product/[id].tsx`:
+The second function provided by Next.js for pages is `getStaticProps` - it returns the props that will be passed to the React component during the build. In our context, we return an identifier of a product to display. `getStaticProps` is invoked for each element of the collection returned by `getStaticPaths`. Let's add it to the single product page in `pages/product/[id].tsx`:
 
 ```tsx{2,26-32}
 // pages/product/[id].tsx
@@ -285,14 +278,14 @@ We use `Link` from the official `next/link` package to define the route to go wh
 
 ## Refactor the App Component
 
-Since we moved the Apollo client initialization to `lib/graphql.ts`, the root component at `pages/_app.tsx` can be simplified:
+Since we moved the Apollo client initialization to `lib/graphql.ts`, the root component at `pages/_app.tsx` can be simplified. Open the file and adjust it as follows:
 
 ```tsx{3,11}
 // pages/_app.tsx
 import type { AppProps } from 'next/app'
 import { ApolloProvider } from '@apollo/client';
 
-import '../styles/main.css';
+import '../styles/globals.css';
 
 import { apolloClient } from '@/lib';
 
@@ -307,7 +300,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
 ## Define the Navbar
 
-Let's finish off by defining a navbar with a link that gets us back to the collection page whenever we click on it. This way we can navigate to a product and then back to the collection without using the back button in the browser.
+Let's finish off by defining a navbar with a link that gets us back to the collection page whenever we click on it. This way we can navigate to a product and then back to the collection without using the back button in the browser. In the `components` folder create a file called `Navbar.tsx` and copy/paste the code below:
 
 ```tsx
 // components/Navbar.tsx
@@ -315,12 +308,13 @@ import React from "react";
 import Link from "next/link";
 
 const styles = {
-  background: 'bg-white shadow-sm',
-  container: 'max-w-7xl mx-auto px-8',
-  menu: 'flex justify-between h-16',
-  menuSection: 'flex space-x-8 h-full',
-  menuLink: 'font-bold text-gray-700 hover:text-blue-400 z-10 flex items-center text-sm'
-}
+  background: "bg-white shadow-sm",
+  container: "max-w-7xl mx-auto px-8",
+  menu: "flex justify-between h-16",
+  menuSection: "flex space-x-8 h-full",
+  menuLink:
+    "font-bold text-gray-700 hover:text-blue-400 z-10 flex items-center text-sm",
+};
 
 export const Navbar = () => {
   return (
@@ -330,13 +324,12 @@ export const Navbar = () => {
           <div className={styles.menuSection}>
             <Link href="/">
               <a className={styles.menuLink} aria-expanded="false">
-                All Products 
+                All Products
               </a>
             </Link>
           </div>
 
-          <div className={styles.menuSection}>
-          </div>
+          <div className={styles.menuSection}></div>
         </div>
       </div>
     </div>
@@ -387,51 +380,45 @@ export const Layout = ({ children }: Props) => {
 
 ## Refactor the Product Page
 
-Currently, the product page has several responsibilities, from getting the product details to conforming to rules required by Next.js components located in the `pages/` directory. Let's simplify it by splitting the product details into a separate component, named `ProductDetails`:
+Currently, the product page has several responsibilities, from getting the product details to conforming to rules required by Next.js components located in the `pages/` directory. Let's simplify it by splitting the product details into a separate component. Create a file called `ProductDetails.tsx` in the `components`:
 
 ```tsx
 // components/ProductDetails.tsx
-import React from 'react';
+import React from "react";
 
-import {
-  Product
-} from "@/saleor/api";
+import { Product } from "@/saleor/api";
 
 const styles = {
-  columns: 'grid grid-cols-2 gap-x-10 items-start',
+  columns: "grid grid-cols-2 gap-x-10 items-start",
   image: {
-    aspect: 'aspect-w-1 aspect-h-1 bg-white rounded',
-    content: 'object-center object-cover'
+    aspect: "aspect-w-1 aspect-h-1 bg-white rounded",
+    content: "object-center object-cover",
   },
   details: {
-    title: 'text-4xl font-bold tracking-tight text-gray-800',
-    category: 'text-lg mt-2 font-medium text-gray-500',
-    description: 'prose lg:prose-s'
-  }
-}
+    title: "text-4xl font-bold tracking-tight text-gray-800",
+    category: "text-lg mt-2 font-medium text-gray-500",
+    description: "prose lg:prose-s",
+  },
+};
 
 interface Props {
-  product: Pick<Product, 'id' | 'name' | 'description' | 'thumbnail' | 'category' | 'media'>;
+  product: Pick<
+    Product,
+    "id" | "name" | "description" | "thumbnail" | "category" | "media"
+  >;
 }
 
 export const ProductDetails = ({ product }: Props) => {
   return (
     <div className={styles.columns}>
       <div className={styles.image.aspect}>
-        <img
-          src={product?.media![0]?.url}
-          className={styles.image.content}
-        />
+        <img src={product?.media![0]?.url} className={styles.image.content} />
       </div>
 
       <div className="space-y-8">
         <div>
-          <h1 className={styles.details.title}>
-            {product?.name}
-          </h1>
-          <p className={styles.details.category}>
-            {product?.category?.name}
-          </p>
+          <h1 className={styles.details.title}>{product?.name}</h1>
+          <p className={styles.details.category}>{product?.category?.name}</p>
         </div>
 
         <article className={styles.details.description}>
@@ -440,7 +427,7 @@ export const ProductDetails = ({ product }: Props) => {
       </div>
     </div>
   );
-}
+};
 ```
 
 Let's not forget to add it to `components/index.ts` so that we can import it directly from `@/components`:
@@ -455,7 +442,7 @@ export { Navbar } from './Navbar';
 export { ProductDetails } from './ProductDetails';
 ```
 
-Now, we are ready to significantly reduce the size of `ProductPage` located at `pages/product/[id].tsx` as shown below:
+Now, we are ready to significantly reduce the size of `ProductPage`. Head over to `[id].tsx` file located at `pages/product/` and rewrite its contents as shown below:
 
 ```tsx{6,19}
 // pages/product/[id].tsx
