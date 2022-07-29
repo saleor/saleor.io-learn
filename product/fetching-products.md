@@ -71,23 +71,32 @@ Another way of controlling the number of elements to fetch is through pagination
 
 ## Autogenerate a React Hook for Products
 
-Now we can put this query in our application under the `graphql/queries` directory as `FetchTwelveProducts.graphql`.
+1. Put the abovementioned query in your storefront under the `graphql/queries` directory as `FetchTwelveProducts.graphql`.
 
-Run `generate` to generate the corresponding React.js hooks:
+2. In the Terminal, run the `generate` script to generate the corresponding React.js hooks:
 
 ```
 npm run generate
 ```
 
+or
+
+```
+pnpm run generate
+```
+
 <Notice>
-The `generate` script we configured in the setup section uses the `-w` option that instructs the code generation to keep running and watch for changes in GraphQL files. You can leave it running in a terminal for convenience.
+If you haven't already, you can add the `-w` option at the end of the `generate` script in the `package.json` file which we configured in the setup section. This option instructs the code generation to keep running and watch for changes in GraphQL files. You can leave it running in a terminal for convenience.
 </Notice>
 
 ## React Component for Product Collection
 
-Let's create our first React component for displaying available products as a grid. Name this component `ProductCollection.tsx` and place the file in `components/`.
+Let's create our first React component for displaying available products as a grid.
 
-```tsx{3}
+1. Create the `components` folder in the root folder of your storefront.
+2. Create a file called `ProductCollection.tsx` there and copy/paste the code below:
+
+```tsx{3,15}
 // components/ProductCollection.tsx
 import React from 'react';
 import { useFetchTwelveProductsQuery } from '@/saleor/api';
@@ -135,7 +144,7 @@ export const ProductCollection = () => {
 
 The GraphQL Code Generator alongside the Apollo React plugin automatically generates the `useFetchTwelveProductsQuery` React hook.
 
-Once the `data` is available, we display the product names as a list. It's important to notice that the product collection is available as a GraphQL edge as it stores information that goes beyond what's in each object, e.g., the count, and then each collection element is a node.
+Once the data is available, we display the product names as a list. It's worth noticing that the product collection exists as a GraphQL edge as it stores information that goes beyond what's in each object, e.g., the count. Each collection element is a node.
 
 Let's define the export statement in `components/index.ts` for this component, so we can directly import it from `@/components` later on.
 
@@ -174,9 +183,12 @@ export default Home;
 
 As a result when navigating to `localhost:3000/`, you should see a grid of product names as shown below:
 
-> **IMAGE**
+![A grid of products.](/images/products-grid.png)
 
-Additionally, we can standardize the structure for each Next.js page with a fixed layout using the following component:
+Additionally, we can standardize the structure for each Next.js page with a fixed layout.
+
+1. Create a `Layout.tsx` file in the `components` folder.
+2. Copy the code below and paste it into the `Layout.tsx` file:
 
 ```tsx
 // components/Layout.tsx
@@ -200,7 +212,7 @@ export const Layout = ({ children }: Props) => {
 };
 ```
 
-Now, let's define the export statement for this component in `components/index.ts`, so we can import it directly from `@/components` later on.
+3. Go to `components/index.ts` and define the export statement for this component.
 
 ```tsx{3}
 // components/index.ts
@@ -208,7 +220,7 @@ export { ProductCollection } from './ProductCollection';
 export { Layout } from './Layout';
 ```
 
-With `Layout` we can rewrite the `Home` page in the following way:
+4. Rewrite the `Home` page in the following way:
 
 ```tsx
 // pages/index.tsx
@@ -255,9 +267,11 @@ query FetchTwelveProducts {
 }
 ```
 
-Let's use this query to replace the previous one inside the `FetchTwelveProducts.graphql` that is located in `graphql/`.
+Let's use this query to replace the previous one:
 
-Modify the `ProductCollection.tsx` component to display the product thumbnails along with their categories:
+1. Paste the abovementioned query into the `FetchTwelveProducts.graphql` that is located in `graphql/`.
+2. If you have enabled the `watch` mode in your `generate` script, the Code Generator will now regenerate the types and update hooks for the new query. If you haven't, run `npm generate` or `pnpm generate` in your Terminal to trigger the regeneration.
+3. Head over to the `components` folder and modify the `ProductCollection.tsx` component to display the product thumbnails along with their categories:
 
 ```tsx
 // components/ProductCollection.tsx
@@ -315,11 +329,14 @@ export const ProductCollection = () => {
 };
 ```
 
+You can now inspect the changes in the browser:
+![Products grid with thumbnails.](/images/product-thumbnails.png)
+
 ## The `ProductElement` component
 
 Before we dive into other Saleor features, let's take a moment to slightly refactor the `ProductCollection` component. We can take each product element in the list and put it into a separate component.
 
-Call this component `ProductElement` and put it in `components/`
+1. In the `components/` folder create a `ProductElement.tsx` and copy/paste the code below:
 
 ```tsx
 // components/ProductElement.tsx
@@ -357,7 +374,7 @@ export const ProductElement = ({ id, name, thumbnail, category }: Props) => {
 };
 ```
 
-Let's also add the `export` statement for this component to `components/index.ts`:
+2. Add the `export` statement for this component to `components/index.ts`:
 
 ```tsx{4}
 // components/index.ts
@@ -366,7 +383,7 @@ export { Layout } from './Layout';
 export { ProductElement } from './ProductElement';
 ```
 
-Now, we can reorganize the `ProductCollection` component in the following way:
+3. Reorganize the `ProductCollection` component in the following way:
 
 ```tsx
 // components/ProductCollection.tsx
@@ -402,6 +419,4 @@ export const ProductCollection = () => {
 };
 ```
 
-Refactoring `ProductElement` out of `ProductCollection` doesn't change anything visually in our application at this stage. It should look like on the following image:
-
-![Refactored Product Collection.](/images/product-overview.png)
+Refactoring `ProductElement` out of `ProductCollection` doesn't change anything visually in our application at this stage. However, the code is organized a bit better.
