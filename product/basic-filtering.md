@@ -14,8 +14,8 @@ When fetching products using the `products` query, we can also filter them using
 The most basic form of filtering can be done using the `search` field. It takes a string value as input that is matched against the product title and description. In the following example, we want to find all the t-shirts available in our store.
 
 ```graphql
-# graphql/queries/TShirtProducts.graphql
-query TShirtProducts {
+# graphql/queries/ProductSearchTShirt.graphql
+query ProductSearchTShirt {
   products(
     first: 12
     channel: "default-channel"
@@ -37,7 +37,7 @@ query TShirtProducts {
 }
 ```
 
-Let's put this query as `TShirtProducts.graphql` in the `graphql/queries` directory.
+Let's put this query as `ProductSearchTShirt.graphql` in the `graphql/queries` directory.
 
 If the code generation is running in the watch mode, the corresponding React.js hook will be created automatically. Otherwise, run the `generate` script:
 
@@ -51,13 +51,13 @@ or
 pnpm generate
 ```
 
-In `components/ProductCollection.tsx`, we can replace the `useFetchTwelveProductsQuery` with the newly generated `useTShirtProductsQuery` as the shape of the elements in the product collection doesn't change.
+In `components/ProductCollection.tsx`, we can replace the `useProductGetTwelveElementsQuery` with the newly generated `useProductSearchTShirtQuery` as the shape of the elements in the product collection doesn't change.
 
 ```tsx{4,12}
 // components/ProductCollection.tsx
 import React from 'react';
 
-import { Product, useTShirtProductsQuery } from '@/saleor/api';
+import { Product, useProductSearchTShirtQuery } from '@/saleor/api';
 import { ProductElement } from '@/components';
 
 const styles = {
@@ -65,7 +65,7 @@ const styles = {
 }
 
 export const ProductCollection = () => {
-  const { loading, error, data } = useTShirtProductsQuery();
+  const { loading, error, data } = useProductSearchTShirtQuery();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;

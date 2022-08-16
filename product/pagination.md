@@ -15,11 +15,11 @@ It's not a good idea to keep this information within the entity itself as it's u
 
 Let us now go through the process of adding pagination to our storefront.
 
-1. Adapt the query for fetching products so that it can be paginated. Open the `graphql/queries/FilterProducts.graphql` file and update its contents with the changes below:
+1. Adapt the query for fetching products so that it can be paginated. Open the `graphql/queries/ProductFilterByName.graphql` file and update its contents with the changes below:
 
 ```graphql{5,12,26-32}
-# graphql/queries/FilterProducts.graphql
-query FilterProducts(
+# graphql/queries/ProductFilterByName.graphql
+query ProductFilterByName(
   $filter: ProductFilterInput!
   $sortBy: ProductOrder
   $after: String
@@ -66,7 +66,7 @@ Additionally, the `products` query has the `after` argument that takes the value
 // components/ProductCollection.tsx
 import React from "react";
 
-import { Product, useFilterProductsQuery } from "@/saleor/api";
+import { Product, useProductFilterByNameQuery } from "@/saleor/api";
 import { Pagination, ProductElement } from "@/components";
 
 const styles = {
@@ -74,7 +74,7 @@ const styles = {
 };
 
 export const ProductCollection = () => {
-  const { loading, error, data, fetchMore } = useFilterProductsQuery({
+  const { loading, error, data, fetchMore } = useProductFilterByNameQuery({
     variables: {
       filter: {},
     },

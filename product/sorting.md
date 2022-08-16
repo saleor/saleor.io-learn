@@ -13,11 +13,11 @@ The `products` query also enables us to change the order of the returned product
 
 Let's rework our previous query so that it also specifies the sorting:
 
-1. Navigate to `graphql/queries/FilterProducts.graphql` file and update the query:
+1. Navigate to `graphql/queries/ProductFilterByName.graphql` file and update the query:
 
 ```graphql{2-7}
-# graphql/queries/FilterProducts.graphql
-query FilterProducts($filter: ProductFilterInput!, $sortBy: ProductOrder) {
+# graphql/queries/ProductFilterByName.graphql
+query ProductFilterByName($filter: ProductFilterInput!, $sortBy: ProductOrder) {
   products(
     first: 12
     channel: "default-channel"
@@ -41,7 +41,7 @@ query FilterProducts($filter: ProductFilterInput!, $sortBy: ProductOrder) {
 
 ```
 
-As with filtering, we use the `$sortBy` variable on our `FilterProducts` query so that the sorting can be specified dynamically in a React component as input to its React hook.
+As with filtering, we use the `$sortBy` variable on our `ProductFilterByName` query so that the sorting can be specified dynamically in a React component as input to its React hook.
 
 2. Run the `generate` script in your Terminal or have it run in the `watch` mode, as described in the previous sections.
 3. Update the `ProductCollection.tsx` component with the changes below:
@@ -51,12 +51,12 @@ As with filtering, we use the `$sortBy` variable on our `FilterProducts` query s
 ...
 import {
   Product,
-  useFilterProductsQuery,
+  useProductFilterByNameQuery,
   OrderDirection,
   ProductOrderField
 } from '@/saleor/api';
 ...
-  const { loading, error, data } = useFilterProductsQuery({
+  const { loading, error, data } = useProductFilterByNameQuery({
     variables: {
       filter: { search: 'juice' },
       sortBy: {

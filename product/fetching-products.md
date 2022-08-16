@@ -22,8 +22,8 @@ The first operation also enables you to filter and sort a collection of products
 Let's start with a simple collection of 12 elements that returns a product `id` and `name`. Put the following GraphQL query inside the GraphQL Playground of your Saleor endpoint and execute it using the play button in the middle.
 
 ```graphql
-# graphql/queries/FetchTwelveProducts.graphql
-query FetchTwelveProducts {
+# graphql/queries/ProductGetTwelveElements.graphql
+query ProductGetTwelveElements {
   products(first: 12, channel: "default-channel") {
     edges {
       node {
@@ -71,7 +71,7 @@ Another way of controlling the number of elements to fetch is through pagination
 
 ## Autogenerate a React Hook for Products
 
-1. Put the abovementioned query in your storefront under the `graphql/queries` directory as `FetchTwelveProducts.graphql`.
+1. Put the abovementioned query in your storefront under the `graphql/queries` directory as `ProductGetTwelveElements.graphql`.
 
 2. In the Terminal, run the `generate` script to generate the corresponding React.js hooks:
 
@@ -99,7 +99,7 @@ Let's create our first React component for displaying available products as a gr
 ```tsx{3,15}
 // components/ProductCollection.tsx
 import React from 'react';
-import { useFetchTwelveProductsQuery } from '@/saleor/api';
+import { useProductGetTwelveElementsQuery } from '@/saleor/api';
 
 const styles = {
   grid: 'grid gap-4 grid-cols-4',
@@ -111,7 +111,7 @@ const styles = {
 }
 
 export const ProductCollection = () => {
-  const { loading, error, data } = useFetchTwelveProductsQuery();
+  const { loading, error, data } = useProductGetTwelveElementsQuery();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
@@ -142,7 +142,7 @@ export const ProductCollection = () => {
 
 ```
 
-The GraphQL Code Generator alongside the Apollo React plugin automatically generates the `useFetchTwelveProductsQuery` React hook.
+The GraphQL Code Generator alongside the Apollo React plugin automatically generates the `useProductGetTwelveElementsQuery` React hook.
 
 Once the data is available, we display the product names as a list. It's worth noticing that the product collection exists as a GraphQL edge as it stores information that goes beyond what's in each object, e.g., the count. Each collection element is a node.
 
@@ -248,8 +248,8 @@ We need to slightly modify our GraphQL query to also include the product thumbna
 Here's the modified query:
 
 ```graphql{8-13}
-# graphql/queries/FetchTwelveProducts.graphql
-query FetchTwelveProducts {
+# graphql/queries/ProductGetTwelveElements.graphql
+query ProductGetTwelveElements {
   products(first: 12, channel: "default-channel") {
     edges {
       node {
@@ -269,14 +269,14 @@ query FetchTwelveProducts {
 
 Let's use this query to replace the previous one:
 
-1. Paste the abovementioned query into the `FetchTwelveProducts.graphql` that is located in `graphql/`.
+1. Paste the abovementioned query into the `ProductGetTwelveElements.graphql` that is located in `graphql/`.
 2. If you have enabled the `watch` mode in your `generate` script, the Code Generator will now regenerate the types and update hooks for the new query. If you haven't, run `npm generate` or `pnpm generate` in your Terminal to trigger the regeneration.
 3. Head over to the `components` folder and modify the `ProductCollection.tsx` component to display the product thumbnails along with their categories:
 
 ```tsx
 // components/ProductCollection.tsx
 import React from "react";
-import { useFetchTwelveProductsQuery } from "@/saleor/api";
+import { useProductGetTwelveElementsQuery } from "@/saleor/api";
 
 const styles = {
   grid: "grid gap-4 grid-cols-4",
@@ -293,7 +293,7 @@ const styles = {
 };
 
 export const ProductCollection = () => {
-  const { loading, error, data } = useFetchTwelveProductsQuery();
+  const { loading, error, data } = useProductGetTwelveElementsQuery();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
@@ -389,7 +389,7 @@ export { ProductElement } from './ProductElement';
 // components/ProductCollection.tsx
 import React from "react";
 
-import { Product, useFetchTwelveProductsQuery } from "@/saleor/api";
+import { Product, useProductGetTwelveElementsQuery } from "@/saleor/api";
 import { ProductElement } from "@/components";
 
 const styles = {
@@ -397,7 +397,7 @@ const styles = {
 };
 
 export const ProductCollection = () => {
-  const { loading, error, data } = useFetchTwelveProductsQuery();
+  const { loading, error, data } = useProductGetTwelveElementsQuery();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
