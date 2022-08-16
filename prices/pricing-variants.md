@@ -1,7 +1,7 @@
 ---
 pos: 3
-title: Pricing for variants 
-description: 
+title: Pricing for variants
+description:
 prev:
   path: /prices/pricing-range/
 next:
@@ -83,7 +83,7 @@ interface Props {
 export const ProductDetails = ({ product }: Props) => {
   const router = useRouter();
 
-  const queryVariant = process.browser
+  const queryVariant = typeof window
     ? router.query.variant?.toString()
     : undefined;
   const selectedVariantID = queryVariant || product?.variants![0]!.id!;
