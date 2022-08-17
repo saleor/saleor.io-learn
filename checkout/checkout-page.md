@@ -1,7 +1,7 @@
 ---
 pos: 3
 title: Checkout Page
-description: 
+description:
 prev:
   path: /checkout/checkout-creation/
 next:
@@ -12,35 +12,29 @@ In a typical storefront, there is a page that displays the current content of a 
 
 ## Setting up the cart page
 
-Let's start by creating `pages/cart.tsx` with just the visual structure of the cart. There will be the website navbar along with the cart header and a list of product variants currently in the cart.
+Let's start by creating the `cart.tsx` file inside the `pages` with just the visual structure of the cart. It will consist of the navbar, the cart header, and the list of product variants currently in the cart.
 
 ```tsx
 // pages/cart.tsx
 import React from "react";
 import Link from "next/link";
 
-import {
-  Layout,
-} from "@/components";
+import { Layout } from "@/components";
 
 const styles = {
-  header: 'flex justify-between',
-  title: 'text-3xl font-extrabold tracking-tight text-gray-900',
-  grid: 'grid grid-cols-3 gap-8',
-}
+  header: "flex justify-between",
+  title: "text-3xl font-extrabold tracking-tight text-gray-900",
+  grid: "grid grid-cols-3 gap-8",
+};
 
 const Cart = () => {
   return (
     <Layout>
       <header className={styles.header}>
-        <h1 className={styles.title}>
-          Your Cart
-        </h1>
+        <h1 className={styles.title}>Your Cart</h1>
         <div>
           <Link href="/">
-            <a className="link">
-              Continue Shopping
-            </a>
+            <a className="link">Continue Shopping</a>
           </Link>
         </div>
       </header>
@@ -52,9 +46,7 @@ const Cart = () => {
             <li className="py-6">Product 2</li>
           </ul>
         </div>
-        <div>
-          Cart Summary
-        </div>
+        <div>Cart Summary</div>
       </div>
     </Layout>
   );
@@ -65,48 +57,45 @@ export default Cart;
 
 ## Splitting the cart page into components
 
-Before we add new features, first let's refactor a little bit the cart page. We will split the cart component into a few smaller components so it's easier to manage. 
+Before adding new features, let's refactor the cart page a little. We will split the cart component into a few smaller components so that it's easier to manage.
 
-We can identify the followins sections to extract as separate components: 
-1. the cart header section that consists of the content between the `<header>...</header>` tags;
-1. the list of products described by the `<ul>...</ul>`;
-1. the cart summary that will eventually contain the cart value, i.e. the products total along with shipping costs, taxes and possible discounts
+We can identify the following sections to extract as separate components:
 
-For the cart header, let's put it into `components/CartHeader.tsx`
+1. The cart header section that consists of the content between the `<header>...</header>` tags;
+1. The list of products inside the `<ul>...</ul>` tags;
+1. The cart summary that will eventually contain the cart value, i.e. the products total along with shipping costs, taxes and possible discounts;
+
+As for the cart header, let's put it into `components/CartHeader.tsx`
 
 ```tsx
 // components/CartHeader.tsx
-import React from 'react';
+import React from "react";
 import Link from "next/link";
 
 const styles = {
-  header: 'flex justify-between',
-  title: 'text-3xl font-extrabold tracking-tight text-gray-900',
-}
+  header: "flex justify-between",
+  title: "text-3xl font-extrabold tracking-tight text-gray-900",
+};
 
 export const CartHeader = () => {
   return (
     <header className={styles.header}>
-      <h1 className={styles.title}>
-        Your Cart
-      </h1>
+      <h1 className={styles.title}>Your Cart</h1>
       <div>
         <Link href="/">
-          <a className="link">
-            Continue Shopping
-          </a>
+          <a className="link">Continue Shopping</a>
         </Link>
       </div>
     </header>
   );
-}
+};
 ```
 
 For the cart list, let's put it into `components/CartList.tsx`
 
 ```tsx
 // components/CartList.tsx
-import React from 'react';
+import React from "react";
 
 export const CartList = () => {
   return (
@@ -115,20 +104,18 @@ export const CartList = () => {
       <li className="py-6">Product 2</li>
     </ul>
   );
-}
+};
 ```
 
 And finally, for the cart summary, let's put it into the `components/CartSummary.tsx`
 
 ```tsx
 // components/CartSummary.tsx
-import React from 'react';
+import React from "react";
 
 export const CartSummary = () => {
-  return (
-    <div>Cart Summary</div>
-  );
-}
+  return <div>Cart Summary</div>;
+};
 ```
 
 Let's not forget to export added components from `components/index.ts`:
@@ -147,22 +134,17 @@ export { CartList } from './CartList';
 export { CartSummary } from './CartSummary';
 ```
 
-Now we can put it all together and rewrite the cart page (that's located in `pages/cart.tsx`):
+Now, we can put it all together and rewrite the cart page (located in `pages/cart.tsx`):
 
 ```tsx
 // pages/cart.tsx
 import React from "react";
 
-import {
-  Layout,
-  CartHeader,
-  CartList,
-  CartSummary
-} from "@/components";
+import { Layout, CartHeader, CartList, CartSummary } from "@/components";
 
 const styles = {
-  grid: 'grid grid-cols-3 gap-8',
-}
+  grid: "grid grid-cols-3 gap-8",
+};
 
 const Cart = () => {
   return (
@@ -186,4 +168,4 @@ export default Cart;
 
 Open your browser and navigate to `/cart`. You should see the following page:
 
-**IMAGE**
+![Visual structure of the cart.](/images/checkout-page.png)
