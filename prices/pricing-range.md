@@ -12,7 +12,7 @@ Since products have variants, the product price may be different dependening on 
 
 ## Getting the price range of a product
 
-Let's use the `products` query again, but this time we will only list the lowest and the highst price for each product in the collection.
+Let's use the `products` query again, but this time we will only list the lowest and the highest price for each product in the collection.
 
 ```graphql{6-18}
 {
@@ -42,7 +42,7 @@ Let's use the `products` query again, but this time we will only list the lowest
 
 The `pricing` field gives a range descriptor (`priceRange`) where we can request the lowest (`start`) and the highest (`stop`) price among each variants of a product. Additionally, the price of a product is always available as a gross, net or just the tax value. In the example above we are interested in displaying the final price to the customer, thus we select the gross value.
 
-Try this query in the GraphQL Playground. In response you will get a collection of product with names and their price ranges. Most elements will have the same value for the `start` and `stop` fields, meaning that the product variants don't differ in price.
+Try the query above in the GraphQL Playground. In response you will get a collection of products with names and their price ranges. Most elements will have the same value for the `start` and `stop` fields, meaning that the product variants don't differ in price.
 
 ```json
 {
@@ -96,15 +96,15 @@ Try this query in the GraphQL Playground. In response you will get a collection 
 }
 ```
 
-## Displaying prices in the collection page
+## Displaying prices on the collection page
 
-Let's update the product collection pages so that there is also the price information displayed along with each product. For simplicity, we will display a single price if both values in the price range are the same, otherwise we will display two values: the lowest and the highest price for each product.
+Let's update the product collection page with the price information displayed along with each product. For simplicity, we will show a single price if both values in the price range are the same. Otherwise we will display two values: the lowest and the highest price for each product.
 
-Open the `FilterProducts` query located in `graphql/queries` and adjust it as shown below:
+Open the `ProductFilterByName` query located in `graphql/queries` and adjust it as shown below:
 
 ```graphql{14-27}
-# graphql/queries/FilterProducts.graphql
-query ProductCollection($first: Int = 4, $after: String) {
+# graphql/queries/ProductFilterByName.graphql
+query ProductFilterByName($first: Int = 4, $after: String) {
   products(first: $first, channel: "default-channel", after: $after) {
     edges {
       node {
