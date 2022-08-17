@@ -10,14 +10,14 @@ next:
 
 ## Creating an empty checkout
 
-You can create a checkout in Saleor using the `createCheckout` mutation. We need to specify the `email` address of the owner of this checkout, its initial content provided via `lines` (this is a list of product variants along with their quantities) and the `channel`.
+You can create a checkout in Saleor using the `checkoutCreate` mutation. We need to specify the `email` address of the owner of this checkout, its initial content provided via `lines` (this is a list of product variants along with their quantities) and the `channel`.
 
 1. In your code editor, direct to the `graphql` folder and create a `mutations` folder inside it.
-2. There, create a `CreateCheckout.graphql` file and copy/paste the mutation below.
+2. There, create a `CheckoutCreate.graphql` file and copy/paste the mutation below.
 
 ```graphql
-# graphql/mutations/CreateCheckout.graphql
-mutation CreateCheckout {
+# graphql/mutations/CheckoutCreate.graphql
+mutation CheckoutCreate {
   checkoutCreate(
     input: {
       channel: "default-channel"
@@ -62,7 +62,7 @@ or
 pnpm add react-use
 ```
 
-Let's use `pages/_app.tsx` as a place to initialize the checkout in our React application. Since the checkout creation is performed via a GraphQL mutation, we need the GraphQL client to be already available within the React component tree. For that, we will create a _pass-through_ component called `Root` that wraps the built-in `Component` provided by Next.js. With such setup in place we will be able to use GraphQL queries and mutations at the top level.
+Let's use `pages/_app.tsx` as a place to initialize the checkout in our React application. Since the checkout creation is performed via a GraphQL mutation, we need the GraphQL client to be already available within the React component tree. For that we will create a _pass-through_ component called `Root` that wraps the built-in `Component` provided by Next.js. With such a setup in place, we will be able to use GraphQL queries and mutations at the top level.
 
 2. In your code editor, navigate to `pages/_app.tsx` file and update its contents:
 
@@ -77,15 +77,15 @@ import { useLocalStorage } from "react-use";
 import "../styles/main.css";
 
 import { apolloClient } from "@/lib";
-import { useCreateCheckoutMutation } from "@/saleor/api";
+import { useCheckoutCreateMutation } from "@/saleor/api";
 
 const Root = ({ Component, pageProps }: AppProps) => {
   const [token, setToken] = useLocalStorage("token");
-  const [createCheckout, { data, loading }] = useCreateCheckoutMutation();
+  const [checkoutCreate, { data, loading }] = useCheckoutCreateMutation();
 
   useEffect(() => {
     async function doCheckout() {
-      const { data } = await createCheckout();
+      const { data } = await checkoutCreate();
       const token = data?.checkoutCreate?.checkout?.token;
 
       setToken(token);
@@ -108,4 +108,4 @@ export default MyApp;
 
 `Root` reads the local storage to get the token of a checkout. If the token exists, it fetches an existing checkout, otherwise it creates a new one and sets its token in the local storage.
 
-At this stage the checkout session exists in the application state as long as you don't refresh the page. We will make this session persisted between requests in the next sections.
+At this stage, the checkout session exists in the application state as long as you don't refresh the page. We will make this session persist between requests in the following sections.
