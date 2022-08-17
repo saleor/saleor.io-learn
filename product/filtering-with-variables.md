@@ -11,11 +11,11 @@ next:
 
 Often the filtering criteria come from the users. We cannot put these criteria as-is into the GraphQL query. We must dynamically set them using the query variables.
 
-1. Go to the `graphql/queries` folder and create a `FilterProducts.graphql` file. Copy/paste the query below:
+1. Go to the `graphql/queries` folder and create a `ProductFilterByName.graphql` file. Copy/paste the query below:
 
 ```graphql{1,2}
-# graphql/queries/FilterProducts.graphql
-query FilterProducts($filter: ProductFilterInput!) {
+# graphql/queries/ProductFilterByName.graphql
+query ProductFilterByName($filter: ProductFilterInput!) {
   products(first: 12, channel: "default-channel", filter: $filter) {
     edges {
       node {
@@ -47,17 +47,17 @@ or
 pnpm run generate
 ```
 
-It will generate the `useFilterProductsQuery` React Hook.
+It will generate the `useProductFilterByNameQuery` React Hook.
 
 Such defined GraphQL query accepts its input via the `variables` field. This transformation is done automatically by the Apollo library along with the code generation and is available as input in its React Hook.
 
-3. In `components/ProductCollection.tsx`, replace the `useFetchTwelveProductsQuery` with the newly generated `useFilterProductsQuery` as the shape of the elements in the product collection doesn't change.
+3. In `components/ProductCollection.tsx`, replace the `useProductFetchTwelveElementsQuery` with the newly generated `useProductFilterByNameQuery` as the shape of the elements in the product collection doesn't change.
 
 ```tsx{4,12-16}
 // components/ProductCollection.tsx
 import React from 'react';
 
-import { Product, useFilterProductsQuery } from '@/saleor/api';
+import { Product, useProductFilterByNameQuery } from '@/saleor/api';
 import { ProductElement } from '@/components';
 
 const styles = {
@@ -65,7 +65,7 @@ const styles = {
 }
 
 export const ProductCollection = () => {
-  const { loading, error, data } = useFilterProductsQuery({
+  const { loading, error, data } = useProductFilterByNameQuery({
     variables: {
       filter: { search: 'juice' }
     }

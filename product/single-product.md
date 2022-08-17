@@ -31,10 +31,10 @@ query ProductByID($id: ID!) {
 }
 ```
 
-The `product` query requires a value for the `id` argument, which is the product we want to fetch. After you run the `generate` script, you can use the `useProductByIdQuery` hook in React components with the product `id` specified via the `variables`, like so:
+The `product` query requires a value for the `id` argument, which is the product we want to fetch. After you run the `generate` script, you can use the `useProductByIDQuery` hook in React components with the product `id` specified via the `variables`, like so:
 
 ```js
-const { loading, error, data } = useProductByIdQuery({
+const { loading, error, data } = useProductByIDQuery({
   variables: {
     id: "UHJvZHVjdDoxMTE=",
   },
@@ -51,7 +51,7 @@ Let's focus on the React component first. Let's name it `ProductPage`. In the `p
 
 ```tsx
 // pages/product/[id].tsx
-import { useProductByIdQuery } from "@/saleor/api";
+import { useProductByIDQuery } from "@/saleor/api";
 import { Layout } from "@/components";
 
 const styles = {
@@ -72,7 +72,7 @@ interface Props {
 }
 
 const ProductPage = ({ id }: Props) => {
-  const { loading, error, data } = useProductByIdQuery({ variables: { id } });
+  const { loading, error, data } = useProductByIDQuery({ variables: { id } });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
@@ -113,7 +113,7 @@ const ProductPage = ({ id }: Props) => {
 export default ProductPage;
 ```
 
-`ProductPage` has the product identifier passed in, and then it uses that to fetch details for a particular product using the auto-generated `useProductByIdQuery`. Then, we display the product data we received. The flow is similar to the page that displays the collection of products, except that here we need an `id` of a product to display as input for this React component.
+`ProductPage` has the product identifier passed in, and then it uses that to fetch details for a particular product using the auto-generated `useProductByIDQuery`. Then, we display the product data we received. The flow is similar to the page that displays the collection of products, except that here we need an `id` of a product to display as input for this React component.
 
 Next.js provides two special functions for React components that are used as pages (i.e., the ones located in `pages/` directory) with dynamic routes: `getStaticPaths` and `getStaticProps`.
 
@@ -122,9 +122,9 @@ Next.js provides two special functions for React components that are used as pag
 ```tsx{2,3,20-35}
 // pages/product/[id].tsx
 import {
-  useProductByIdQuery,
-  FilterProductsDocument,
-  FilterProductsQuery
+  useProductByIDQuery,
+  ProductFilterByNameDocument,
+  ProductFilterByNameQuery
 } from "@/saleor/api";
 import { apolloClient } from "@/lib";
 import {
@@ -146,8 +146,8 @@ const ProductPage = ({ id }: Props) => {
 export default ProductPage;
 
 export async function getStaticPaths() {
-  const { data } = await apolloClient.query<FilterProductsQuery>({
-    query: FilterProductsDocument,
+  const { data } = await apolloClient.query<ProductFilterByNameQuery>({
+    query: ProductFilterByNameDocument,
     variables: {
       filter: {}
     }
@@ -163,7 +163,7 @@ export async function getStaticPaths() {
 }
 ```
 
-First, we are executing a GraphQL query to fetch a collection of products. We are re-using the same query we defined in the section about fetching products. Both `FilterProductsDocument` and `FilterProductsQuery` are auto-generated from the query name (`FilterProducts`). The first is the actual query, while the second is the type describing the shape of the data returned in response to that query.
+First, we are executing a GraphQL query to fetch a collection of products. We are re-using the same query we defined in the section about fetching products. Both `ProductFilterByNameDocument` and `ProductFilterByNameQuery` are auto-generated from the query name (`ProductFilterByName`). The first is the actual query, while the second is the type describing the shape of the data returned in response to that query.
 
 The response data is a collection of products. We extract just the identifier of each product using the built-in `map` function and return the result as a collection of paths.
 
@@ -202,9 +202,9 @@ The second function provided by Next.js for pages is `getStaticProps` - it retur
 import { GetStaticProps } from "next";
 
 import {
-  useProductByIdQuery,
-  FilterProductsDocument,
-  FilterProductsQuery
+  useProductByIDQuery,
+  ProductFilterByNameDocument,
+  ProductFilterByNameQuery
 } from "@/saleor/api";
 import { apolloClient } from "@/lib";
 import {
@@ -449,9 +449,9 @@ Now, we are ready to significantly reduce the size of `ProductPage`. Head over t
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 
 import {
-  useProductByIdQuery,
-  FilterProductsDocument,
-  FilterProductsQuery,
+  useProductByIDQuery,
+  ProductFilterByNameDocument,
+  ProductFilterByNameQuery,
   Product
 } from "@/saleor/api";
 import { apolloClient } from "@/lib";
@@ -461,7 +461,7 @@ import {
 } from '@/components';
 
 const ProductPage = ({ id }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { loading, error, data } = useProductByIdQuery({ variables: { id } });
+  const { loading, error, data } = useProductByIDQuery({ variables: { id } });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
@@ -482,8 +482,8 @@ const ProductPage = ({ id }: InferGetStaticPropsType<typeof getStaticProps>) => 
 export default ProductPage;
 
 export async function getStaticPaths() {
-  const { data } = await apolloClient.query<FilterProductsQuery>({
-    query: FilterProductsDocument,
+  const { data } = await apolloClient.query<ProductFilterByNameQuery>({
+    query: ProductFilterByNameDocument,
     variables: {
       filter: {}
     }

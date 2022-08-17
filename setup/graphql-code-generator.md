@@ -143,10 +143,10 @@ We will be putting all GraphQL statements (queries, mutations, and fragments) in
 
 2. Inside the `graphql` folder create another one called `queries`.
 
-3. Inside `queries` create a file called `ThreeProducts.graphql` and paste the following query:
+3. Inside `queries` create a file called `ProductGetThreeElements.graphql` and paste the following query:
 
 ```graphql
-query ThreeProducts {
+query ProductGetThreeElements {
   products(first: 3, channel: "default-channel") {
     edges {
       node {
