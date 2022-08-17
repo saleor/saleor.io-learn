@@ -96,9 +96,9 @@ Try the query above in the GraphQL Playground. In response you will get a collec
 }
 ```
 
-## Displaying prices in the collection page
+## Displaying prices on the collection page
 
-Let's update the product collection pages with the price information displayed along with each product. For simplicity, we will show a single price if both values in the price range are the same. Otherwise we will display two values: the lowest and the highest price for each product.
+Let's update the product collection page with the price information displayed along with each product. For simplicity, we will show a single price if both values in the price range are the same. Otherwise we will display two values: the lowest and the highest price for each product.
 
 Open the `ProductFilterByName` query located in `graphql/queries` and adjust it as shown below:
 
