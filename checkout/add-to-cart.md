@@ -1,18 +1,18 @@
 ---
-pos: 4 
-title: Adding to a Cart 
-description: 
+pos: 4
+title: Adding to a Cart
+description:
 prev:
   path: /checkout/checkout-page/
 next:
   path: /checkout/displaying-cart-content/
 ---
 
-In the previous step we added the page that displays the content of a cart. For now it is just a dummy list of products. Let's make the cart page display the actual products that are added to that cart.  Saleor API provides the `checkoutLinesAdd` mutation that takes the checkout `token` and a list of product variants along with their quantities (`lines`).
+In the previous step we added the page that displays the content of a cart. For now it is just a dummy list of products. Let's make the cart page display the actual products that are added to that cart. Saleor API provides the `checkoutLinesAdd` mutation that takes the checkout `token` and a list of product variants along with their quantities (`lines`).
 
 ```graphql
 checkoutLinesAdd(
-  token: <token> 
+  token: <token>
   lines: [{ quantity: 1, variantId: <product variant id >}]
 ) {
   checkout {
@@ -24,13 +24,15 @@ checkoutLinesAdd(
 }
 ```
 
-It is important to note that when adding a product to a cart, we must use the product variant ID and not the product ID. One of the reasons is that a variant of the same product may have a different price.
+<Notice>
+When adding a product to a cart, we must use the product variant ID and not the product ID. One of the reasons is that a variant of the same product may have a different price.
+</Notice>
 
-The `checkoutLinesAdd` mutation can provide not only the `id` of the checkout, but also the entire checkout object with its content available as `lines`. Let's slightly change the mutation response so that we can use `lines` for verifying that the mutation was successful. In this context, we will get the `id` of each line in the cart along with the name of product, its variant and quantity. Call this mutation `AddProductVariantToCart` and put it in `graphql/mutations/AddProductVariantToCart.graphql`:
+The `checkoutLinesAdd` mutation can provide not only the `id` of the checkout, but also the entire checkout object with its content available as `lines`. Let's slightly change the mutation response so that we can use `lines` for verifying that the mutation was successful. In this context, we will get the `id` of each line in the cart along with the name of product, its variant and quantity. Call this mutation `ProductAddVariantToCart` and put it in `graphql/mutations/ProductAddVariantToCart.graphql` file:
 
 ```graphql
-# graphql/mutations/AddProductVariantToCart.graphql
-mutation AddProductVariantToCart($checkoutToken: UUID!, $variantId: ID!) {
+# graphql/mutations/ProductAddVariantToCart.graphql
+mutation ProductAddVariantToCart($checkoutToken: UUID!, $variantId: ID!) {
   checkoutLinesAdd(
     token: $checkoutToken
     lines: [{ quantity: 1, variantId: $variantId }]
@@ -58,10 +60,10 @@ mutation AddProductVariantToCart($checkoutToken: UUID!, $variantId: ID!) {
 We can now incorporate this mutation into our React application.
 
 <Notice>
-Reminder. In our application we automatically generate React Hooks for GraphQL operations using the GraphQL Code Generator toolset.
+In our application we automatically generate React Hooks for GraphQL operations using the GraphQL Code Generator toolset working in the `watch` mode.
 </Notice>
 
-Since we named our mutation `AddProductVariantToCart`, this will generate the `useAddProductVariantToCart` hook.  
+Since we named our mutation `ProductAddVariantToCart`, this will generate the `useProductAddVariantToCart` hook.
 
 Open the component for displaying the content of a single product, located at `components/ProductDetails.tsx` and modify it as shown below:
 
@@ -72,7 +74,7 @@ import { useRouter } from "next/router";
 import { useLocalStorage } from "react-use";
 
 import {
-  useAddProductVariantToCartMutation,
+  useProductAddVariantToCartMutation,
   Product
 } from "@/saleor/api";
 
@@ -102,7 +104,7 @@ interface Props {
 export const ProductDetails = ({ product }: Props) => {
   const router = useRouter();
   const [token] = useLocalStorage('token');
-  const [addProductToCart] = useAddProductVariantToCartMutation();
+  const [addProductToCart] = useProductAddVariantToCartMutation();
 
   const queryVariant = process.browser
     ? router.query.variant?.toString()
@@ -159,4 +161,4 @@ export const ProductDetails = ({ product }: Props) => {
 }
 ```
 
-At this stage the important part is the use of the `useAddProductToCheckoutMutation` hook to prepare (not execute) the mutation and the `onAddToCart` handler that executes the mutation once the *Add to cart* button is clicked. We also get the token from the local storage to identify the current checkout session. Finally, once the mutation is executed and the selected product variant is added to the cart, we redirect to the cart page to display the current cart content. There is, however, a problem: we still display the dummy data for the cart. Let's change that in the next section.
+At this stage the important part is the use of the `useAddProductToCheckoutMutation` hook to prepare (not execute) the mutation and the `onAddToCart` handler that executes the mutation once the _Add to cart_ button is clicked. We also get the token from the local storage to identify the current checkout session. Finally, once the mutation is executed and the selected product variant is added to the cart, we redirect to the cart page to display the current cart content. There is, however, a problem: we still display the dummy data for the cart. Let's change that in the next section.
