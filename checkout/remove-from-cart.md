@@ -1,7 +1,7 @@
 ---
-pos: 6 
-title: Removing from a Cart 
-description: 
+pos: 6
+title: Removing from a Cart
+description:
 prev:
   path: /checkout/displaying-cart-content/
 next:
@@ -22,15 +22,12 @@ checkoutLineDelete(token: $checkoutToken, lineId: $lineId) {
 }
 ```
 
-Let's name this mutation as `RemoveProductFromCheckout` and put it in `graphql/mutations/RemoveProductFromCheckout.graphql`. As before, we are using the `CheckoutFragment` fragment to standarize the shape of a checkout object that we are getting in response to this mutation.
+Let's name this mutation as `CheckoutRemoveProduct` and put it in `graphql/mutations/CheckoutRemoveProduct.graphql`. As before, we are using the `CheckoutFragment` fragment to standardize the shape of a checkout object we are getting in response to this mutation.
 
 ```graphql
-# graphql/mutations/RemoveProductFromCheckout.graphql
-mutation RemoveProductFromCheckout($checkoutToken: UUID!, $lineId: ID!) {
-  checkoutLineDelete(
-    token: $checkoutToken
-    lineId: $lineId
-  ) {
+# graphql/mutations/CheckoutRemoveProduct.graphql
+mutation CheckoutRemoveProduct($checkoutToken: UUID!, $lineId: ID!) {
+  checkoutLineDelete(token: $checkoutToken, lineId: $lineId) {
     checkout {
       ...CheckoutFragment
     }
@@ -41,9 +38,9 @@ mutation RemoveProductFromCheckout($checkoutToken: UUID!, $lineId: ID!) {
 }
 ```
 
-Now we can incorporate this mutation into our application as a React.js hook. Since the named our mutation `RemoveProductFromCheckout`, this will automatically generate the `useRemoveProductFromCheckout` hook.
+Now we can incorporate this mutation into our application as a React.js hook. Since we named our mutation `CheckoutRemoveProduct`, this will automatically generate the `useCheckoutRemoveProduct` hook.
 
-The ability to remove from the cart will be added to the `CartList` component available at `components/CartList`. We will add the remove link to each line in the cart.
+We will add the possibility to remove a product from the cart to the `CartList` component located at `components/CartList`. We will attach the remove link to each line in the cart.
 
 ```tsx{5,7,22,23,53-55}
 // components/CartList.tsx
@@ -51,7 +48,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import {
-  useRemoveProductFromCheckoutMutation,
+  useCheckoutRemoveProductMutation,
 } from "@/saleor/api";
 
 import { useLocalStorage } from 'react-use';
@@ -70,7 +67,7 @@ const styles = {
 
 export const CartList = ({ products }: Props) => {
   const [token] = useLocalStorage("token");
-  const [removeProductFromCheckout] = useRemoveProductFromCheckoutMutation();
+  const [CheckoutremoveProduct] = useCheckoutRemoveProductMutation();
 
   return (
     <ul role="list" className="divide-y divide-gray-200">
@@ -106,7 +103,7 @@ export const CartList = ({ products }: Props) => {
                   <button
                     type="button"
                     onClick={() =>
-                      removeProductFromCheckout({
+                      CheckoutremoveProduct({
                         variables: {
                           checkoutToken: token,
                           lineId: lineID,
