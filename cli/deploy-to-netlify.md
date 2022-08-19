@@ -8,7 +8,7 @@ next:
   path: /cli/checkout-integration/
 ---
 
-MINIMAL SALEOR VERSION 3.4.10<br/>gco MINIMAL SALEOR CLI VERSION 1.8.0
+MINIMAL SALEOR VERSION 3.4.10<br/>MINIMAL SALEOR CLI VERSION 1.8.0
 
 This tutorial will guide you through the process of deploying your Saleor App to Netlify, another popular platform, which provides various tools and features for automating web projects. You can read more about Netlify in the [Technologies](/intro/technologies#Netlify) section.
 
