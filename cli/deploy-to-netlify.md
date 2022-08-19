@@ -8,9 +8,7 @@ next:
   path: /cli/checkout-integration/
 ---
 
-MINIMAL SALEOR VERSION 3.4.10
-
-MINIMAL SALEOR CLI VERSION 1.8.0
+MINIMAL SALEOR VERSION 3.4.10<br/>gco MINIMAL SALEOR CLI VERSION 1.8.0
 
 This tutorial will guide you through the process of deploying your Saleor App to Netlify, another popular platform, which provides various tools and features for automating web projects. You can read more about Netlify in the [Technologies](/intro/technologies#Netlify) section.
 
@@ -35,25 +33,28 @@ Once logged in, you will be redirected to your dashboard. Here, click **Add new 
 ## Step 3. Connecting to Git provider.
 
 1. Connect to Git provider.
-   ![connect to Git provider](/images/netlify2.png)
+
+![connect to Git provider](/images/netlify2.png)
 
 2. Search and select your app repository from the list. If you don't see the list, click on **Configure the Netlify app on GitHub link** below and allow all / chosen repositories to be managed by Netlify.
-   ![pick the repository](/images/netlify3.png)
+
+![pick the repository](/images/netlify3.png)
 
 ## Step 4. Preparing your App for deployment.
 
 1. At the next page, change the build command to:
    `npx pnpm i --store=node_modules/.pnpm-store && npx pnpm run build`
 
-   ![update build command](/images/netlify4.png)
+![update build command](/images/netlify4.png)
 
-   Netlify's build environment does not support `pnpm` out of the box. So, with this command we will kindly ask Netlify to use `npx` to install `pnpm` in the `node_modules` folder and run the `build` script with it.
+Netlify's build environment does not support `pnpm` out of the box. So, with this command we will kindly ask Netlify to use `npx` to install `pnpm` in the `node_modules` folder and run the `build` script with it.
 
 2. In the Advanced settings, add two new variables:
 
 - `NEXT_PUBLIC_SALEOR_HOST_URL`, take the value from `.env` file of your app
 - `NPM_FLAGS`, set the value to `--legacy-peer-deps`.
-  ![add new variables](/images/netlify5.png)
+
+![add new variables](/images/netlify5.png)
 
 3. Hit Deploy site.
 
