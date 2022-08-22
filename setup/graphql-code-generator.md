@@ -99,7 +99,7 @@ Finally, we need to configure the generator. To do that, we'll use another great
 2. Create a `.graphqlrc.yaml` file in the root of our project:
 
 ```yaml
-schema: https://tutorial.saleor.cloud/graphql/
+schema: https://vercel.saleor.cloud/graphql/
 documents: graphql/**/*.graphql
 extensions:
   codegen:
