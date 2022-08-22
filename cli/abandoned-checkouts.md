@@ -192,5 +192,5 @@ export default AbandonedCheckoutsPage;
 
 In the above code, we utilised `useFetchAllCheckoutsQuery()` to pull data from Saleor. Then, we created a table with three columns: `No.`, `Checkout Id` and `Created At`. and iterated over the nodes to display the data in each row.
 
-After adding the necessary imports, the page is ready to be inspected. Got to your Saleor Dashboard and in the Orders tab click on the Abandoned Checkouts label. You should see the table with data:
+After adding the necessary imports, the page is ready to be inspected. Go to your Saleor Dashboard and in the "Orders" tab click on the "Abandoned Checkouts" label. You should see the table with data:
 ![Abandoned Checkouts. Table with data.](/images/checkouts-list.png)
