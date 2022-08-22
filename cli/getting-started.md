@@ -79,4 +79,4 @@ Last thing to set up is the environment. The setup flow is going to be quite the
 
 In the process of establishing the environment, you will be prompted for some details, like the project name, database template or sandbox version. You will also have the possibility to opt in for a dashboard access and basic authorisation.
 
-And that's it! Your are now ready to use the features of the Salor Cloud.
+And that's it! You are now ready to use the features of the Saleor Cloud.
