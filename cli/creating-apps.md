@@ -102,6 +102,6 @@ Then, go to your Terminal and:
 2. Provide the `name` for the app: `abandoned-checkouts`.
 3. Provide the `url` to the app's manifest: _[yourdomain-set-with-tunneling-app]/api/manifest_
 
-You can now go to your Admin Dashboard and inspect the new App in the Apps tab and inside the Orders tab.
+You can now go to your Admin Dashboard and inspect the new App in the "Apps" tab and inside the "Orders" tab.
 
 ![Admin Dashboard with App installed.](/images/app-installed.png)
