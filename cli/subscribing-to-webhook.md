@@ -16,7 +16,10 @@ quizQuestions:
     feedback: With saleor webhook create you create and active the webhook at Saleor.
 ---
 
-MINIMAL SALEOR VERSION 3.4.2
+MINIMUM SALEOR VERSION
+3.5.10<br/>
+MINIMUM SALEOR CLI VERSION
+1.13
 
 After you have installed your first App and learned how to develop its new features, it is time to extend its capabilities. Saleor platform allows developers to use webhooks, which can be set to notify the App about certain events i.e. creating a new order, updating a category, sending an invoice, and many more. The architectural details of webhooks and the complete list of webhook events are available in the [docs](https://docs.saleor.io/docs/3.x/developer/extending/apps/asynchronous-webhooks).
 
@@ -74,7 +77,7 @@ For your webhook to send a notification to the handler, you need to trigger an a
 
 ### Using `saleor trigger` command.
 
-1. On the web browser, go to the GraphQL Playground for your environment and use the query below to fetch some information about products.
+1. In the web browser, go to the GraphQL Playground for your environment and use the query below to fetch some information about products.
 
 ```graphql
 query FetchTwelveProducts {
