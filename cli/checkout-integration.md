@@ -1,6 +1,6 @@
 ---
 pos: 7
-title: Integrating React Storefront with Saleor Checkout using CLI
+title: Integrating React Storefront with Saleor Checkout [ DEPRECATED]
 description:
 prev:
   path: /cli/deploy-to-vercel/
@@ -8,8 +8,9 @@ next:
   path: /cli/deploy-templates/
 ---
 
-MINIMAL SALEOR VERSION
-3.4.5
+<Notice>
+This article is **deprecated**. Starting from Saleor 3.5, the Saleor React Storefront (SRS) is fully integrated with Saleor Checkout out of the box. You can install the SRS by running `saleor storefront create --demo` or visit the repository [here](https://github.com/saleor/react-storefront).
+</Notice>
 
 Saleor platform comprises many powerful parts that can be easily combined and integrated using CLI tool. This guide will show you how you can swiftly add Saleor Checkout to an existing Saleor React Storefront (SRS).
 
@@ -70,7 +71,7 @@ Saleor Checkout consists of two projects:
 - a Next.js Saleor App installed in Dashboard for managing settings and theme and backend for checkout SPA, in this tutorial named `my-checkout-app`
 - the frontend part - a SPA React 18 project, in this tutorial named `my-checkout`
 
-The script creates a project in Vercel and deploys the Checkout App. The url of the deployed Checkout App is then set in the environment variable inside the Checkout App. Next, the Checkout App is redeployed. It is also installed in your Dashboard. Lastly, the script creates a project in Vercel for Checkout SPA and deploys it.
+The script creates a project in Vercel and deploys the Checkout App. The `URL` of the deployed Checkout App is then set in the environment variable inside the Checkout App. Next, the Checkout App is redeployed. It is also installed in your Dashboard. Lastly, the script creates a project in Vercel for Checkout SPA and deploys it.
 
 After a while, you will have both apps deployed to Vercel, and the Checkout App will also be installed in your Saleor Dashboard.
 

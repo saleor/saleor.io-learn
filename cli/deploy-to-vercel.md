@@ -8,11 +8,10 @@ next:
   path: /cli/deploy-to-netlify/
 ---
 
-MINIMAL SALEOR VERSION
-3.4.10
-
-MINIMAL SALEOR CLI VERSION
-1.8.0
+MINIMUM SALEOR VERSION
+3.5.10<br/>
+MINIMUM SALEOR CLI VERSION
+1.13
 
 Vercel is a robust platform that enables hosting of static sites and frontend frameworks. It is built to integrate with a headless content, commerce, or database. It provides a smooth integration with Next.js so, in this guide we are going to set up the Saleor App template to be hosted on this platform.
 

@@ -1,6 +1,6 @@
 ---
 pos: 1
-title: Getting Started with Saleor CLI
+title: Getting Started
 description:
 next:
   path: /cli/creating-apps/
@@ -39,7 +39,7 @@ One particular instance of your e-commerce data. It is equipped with a GraphQL-p
 
 To download and install Saleor CLI, run the following command:
 
-`npm i -g saleor-cli@latest`
+`npm i -g saleor@latest`
 
 ## Getting Help
 
@@ -61,11 +61,7 @@ and go through the wizard.
 
 ## Setting up your organisation
 
-Once logged in, let us now create the organisation. To initiate the wizard, type in:
-
-`saleor org create`
-
-You will be prompted for the name of the organisation, which is obligatory. The rest of information is not required, and you can fill them in later using [Saleor Cloud webpage.](https://cloud.saleor.io/)
+As of CLI version 1.13, there is no possibility to create an organisation using command line. Once logged in, use the [Saleor Cloud webpage](https://cloud.saleor.io/) to set up your organisation. You can however list, remove and switch between your orginisations using the CLI.
 
 ## Creating a new Project
 
@@ -77,10 +73,10 @@ After selecting the organisation, typing in the name and choosing the region, yo
 
 ## Creating a new Environment
 
-Last thing to set up is the environment. The setup flow is going to be quite the same as with the previous iterations. In the terminal use:
+Last thing to set up is the environment. The setup flow is going to be quite the same as with the previous iterations. In the terminal, use:
 
 `saleor env create`
 
 In the process of establishing the environment, you will be prompted for some details, like the project name, database template or sandbox version. You will also have the possibility to opt in for a dashboard access and basic authorisation.
 
-And that's it! Your business client is now ready to use the features of the Salor Cloud.
+And that's it! You are now ready to use the features of the Saleor Cloud.
