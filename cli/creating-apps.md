@@ -84,7 +84,7 @@ extensions: [
 
 Here, we're giving the extension a label under which it is going to be visible in the navbar in the Admin Dashboard, the mounting place for the App (which is the Orders tab in the navbar) and permissions for the App. We want the App's view to be the index page.
 
-## Step 2. Installing the App template in the Dashboard
+## Step 3. Installing the App template in the Dashboard
 
 ### Using `saleor app tunnel`
 
@@ -92,9 +92,9 @@ In order to integrate your App with Saleor Cloud it needs to have a public endpo
 
 The `saleor app tunnel` command will also install the app in the Dashboard, so after running it successfully you will complete the integration process.
 
-### Using `saleor app install`
+### Using a third-party tunnelling software and `saleor app install` 
 
-We're going to use a technique called _tunneling_, which will turn the App template live. In order to set the tunnel manually, you can use [localtunnel](https://theboroer.github.io/localtunnel-www/) or [ngrok](https://ngrok.com/). Follow the installation guides linked.
+Alternatively, you can set the App template live using a third-party tool. We're going to use a technique called _tunneling_, . In order to set the tunnel manually, you can use [localtunnel](https://theboroer.github.io/localtunnel-www/) or [ngrok](https://ngrok.com/). Follow the installation guides linked.
 
 Then, go to your Terminal and:
 
