@@ -39,7 +39,7 @@ One particular instance of your e-commerce data. It is equipped with a GraphQL-p
 
 To download and install Saleor CLI, run the following command:
 
-`npm i -g saleor@latest`
+`npm i -g @saleor/cli`
 
 ## Getting Help
 
