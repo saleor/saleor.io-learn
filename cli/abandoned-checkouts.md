@@ -91,7 +91,7 @@ You can read more about Saleor GraphQL Playground in the [docs](https://learn.sa
 
 Since the template App doesn't have the permissions for managing checkouts, every attempt to query checkouts will fail. Hence, we need to update the permissions to enable querying Saleor for the data:
 
-1. In your terminal type in `saleor app permission set`.
+1. In your terminal type in `saleor app permission`.
 2. Choose the environment and the App name.
 3. Navigate to `MANAGE_CHECKOUTS` permission using arrow keys.
 4. Press the space key to select it.
