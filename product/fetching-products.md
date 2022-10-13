@@ -332,7 +332,7 @@ export const ProductCollection = () => {
 You can now inspect the changes in the browser:
 ![Products grid with thumbnails.](/images/product-thumbnails.png)
 
-## The `ProductElement` component
+## The Product Element component
 
 Before we dive into other Saleor features, let's take a moment to slightly refactor the `ProductCollection` component. We can take each product element in the list and put it into a separate component.
 

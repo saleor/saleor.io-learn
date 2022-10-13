@@ -92,7 +92,7 @@ const Root = ({ Component, pageProps }: AppProps) => {
     }
 
     doCheckout();
-  }, []);
+  }, [checkoutCreate, setToken]);
 
   return <Component {...pageProps} token={token} />;
 };

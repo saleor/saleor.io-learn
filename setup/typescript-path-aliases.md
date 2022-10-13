@@ -23,7 +23,7 @@ Let's declare a couple of aliases for components, the auto-generated Saleor typi
     "paths": {
       "@/components": ["components"],
       "@/components/*": ["components/*"],
-      "@/saleor/api": ["saleor/api"],
+      "@/saleor/api": ["saleor/api.ts"],
       "@/graphql": ["graphql"],
       "@/lib": ["lib"]
     }
@@ -32,6 +32,6 @@ Let's declare a couple of aliases for components, the auto-generated Saleor typi
 ```
 
 2. Save the changes in the file.
-3. Press `SHIFT`+`CMD`+`P` on a Mac, or `SHIFT`+`CTRL`+`P` on Windows to open Command Palette in VSCode and select the command: `Typescript: Reset TS Server`. It will enable the changes to take effect.
+3. Press `SHIFT`+`CMD`+`P` on a Mac, or `SHIFT`+`CTRL`+`P` on Windows to open Command Palette in VSCode and select the command: `Typescript: Restart TS Server`. It will enable the changes to take effect.
 
 This path configuration will allow us to directly reference the files in the `components`, `saleor/api`, `graphql` and `lib` directories from anywhere in the project tree.
