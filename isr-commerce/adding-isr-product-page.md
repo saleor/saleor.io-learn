@@ -30,7 +30,7 @@ In this example, we define the revalidation time to be **15** seconds. This mean
 
 ## Pages to generate at build-time
 
-Our Saloer API provides a total of 12 products. Let's generate 4 product pages ahead-of-time, at build-time and the rest 8 product pages will be generated on-demand whenever there is an incoming request for one of these 8 product pages. 
+Our Saleor API provides a total of 12 products. Let's generate 4 product pages ahead-of-time, at build-time and the rest 8 product pages will be generated on-demand whenever there is an incoming request for one of these 8 product pages. 
 
 We are still in `pages/product/[id].tsx` and we need to change the `getStaticPath` function as shown below:
 
