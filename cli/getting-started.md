@@ -53,6 +53,10 @@ Firstly, you need to login into an existing Saleor Cloud account or create a new
 
 command, which will redirect you to a webpage with authentication. There, you need to pass in your login credentials. After a successful login, you can come back to the CLI.
 
+Alternatively you can login without the need of a browser. Use `--headless` flag which prompts for a token created with [Saleor Cloud webpage](https://cloud.saleor.io/tokens). Useful for CI, VPS, Docker environments or environments with connectivity issues.
+
+`saleor login --headless`
+
 In order to create a new account you need to use:
 
 `saleor register`
