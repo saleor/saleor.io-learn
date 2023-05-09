@@ -20,9 +20,8 @@ Building a storefront from ground up may seem like a drudgery. Thus, Saleor prov
 3. Login or register to Saleor and create the environment. You can do it in your Saleor account in the web browser or by using the CLI. For more details, please follow the guide in [Getting Started with Saleor CLI](/cli/getting-started/).
 4. Navigate to the directory you want to install your storefront in.
 5. Run `saleor storefront create my-storefront`
-6. Choose the environment in which you want to install this storefront instance and hit Enter.
 
-This command will install a Saleor React Storefront project called `my-storefront` on your machine and start the local server. The application will already be preinstalled with:
+This command will install a Saleor React Storefront project called `my-storefront` on your machine. To run the storefront - start the local server - go to the my-storefront directory `cd my-storefront` and start the development server `pnpm dev`. The application will already be preinstalled with:
 
 - [Typescript](https://www.typescriptlang.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
@@ -30,8 +29,6 @@ This command will install a Saleor React Storefront project called `my-storefron
 - [Apollo GraphQL client](https://www.apollographql.com/docs/react/)
 
 ...and other goodies that will support you in extending the storefront further.
-
-![Saleor CLI creating storefront.](/images/saleor-cli-storefront.png)
 
 Now, you can skip the remaining steps in the setup and jump straight into the next sections of this tutorial. However, if you wish you can choose to go through the manual setup and configure all the nuts and bolts on your own, so that you have a better understanding of the base for building e-commerce applications with Next.js & Saleor using TypeScript.
 
