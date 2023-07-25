@@ -33,8 +33,8 @@ const Cart = () => {
       <header className={styles.header}>
         <h1 className={styles.title}>Your Cart</h1>
         <div>
-          <Link href="/">
-            <a className="link">Continue Shopping</a>
+          <Link href="/" className="link">
+            Continue Shopping
           </Link>
         </div>
       </header>
@@ -82,8 +82,8 @@ export const CartHeader = () => {
     <header className={styles.header}>
       <h1 className={styles.title}>Your Cart</h1>
       <div>
-        <Link href="/">
-          <a className="link">Continue Shopping</a>
+        <Link href="/" className="link">
+          Continue Shopping
         </Link>
       </div>
     </header>

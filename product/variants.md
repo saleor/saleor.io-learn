@@ -200,6 +200,7 @@ export const VariantSelector = ({ variants, id, selectedVariantID }: Props) => {
             }}
             replace
             shallow
+            legacyBehavior
           >
             <a
               className={clsx(

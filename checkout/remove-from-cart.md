@@ -92,9 +92,7 @@ export const CartList = ({ products }: Props) => {
                 <div className="pr-6">
                   <h3 className={styles.product.name}>
                     <Link href={`/product/${productID}`}>
-                      <a>
                         {product?.name}
-                      </a>
                     </Link>
                   </h3>
                   <h4>

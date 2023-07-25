@@ -259,7 +259,6 @@ export const ProductElement = ({ id, name, thumbnail, category }: Props) => {
   return (
     <li key={id} className={styles.card}>
       <Link href={`/product/${id}`}>
-        <a>
           <div className={styles.image.aspect}>
             <img src={thumbnail?.url} alt="" className={styles.image.content} />
           </div>
@@ -267,7 +266,6 @@ export const ProductElement = ({ id, name, thumbnail, category }: Props) => {
             <p className={styles.title}>{name}</p>
             <p className={styles.category}>{category?.name}</p>
           </div>
-        </a>
       </Link>
     </li>
   );
@@ -322,10 +320,8 @@ export const Navbar = () => {
       <div className={styles.container}>
         <div className={styles.menu}>
           <div className={styles.menuSection}>
-            <Link href="/">
-              <a className={styles.menuLink} aria-expanded="false">
+            <Link href="/" className={styles.menuLink} aria-expanded="false">
                 All Products
-              </a>
             </Link>
           </div>
 

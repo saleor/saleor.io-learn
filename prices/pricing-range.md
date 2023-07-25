@@ -173,7 +173,6 @@ export const ProductElement = ({ id, name, thumbnail, category, pricing }: Props
   return (
     <li key={id} className={styles.card}>
       <Link href={`/product/${id}`}>
-        <a>
           <div className={styles.image.aspect}>
             <img src={thumbnail?.url} alt="" className={styles.image.content} />
           </div>
@@ -186,7 +185,6 @@ export const ProductElement = ({ id, name, thumbnail, category, pricing }: Props
               <div>{lowestPrice == highestPrice ? highestPrice : `${lowestPrice} - ${highestPrice}`}</div>
             </div>
           </div>
-        </a>
       </Link>
     </li>
   );
