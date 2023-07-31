@@ -12,6 +12,6 @@ In the first section of this tutorial, we will see how to fetch products from th
 
 Here's the final result for this section:
 
-<Codesandbox slug="github/saleor/tutorial-walkthrough/tree/product-variants" />
+<Codesandbox slug="github/saleor/tutorial-walkthrough" />
 
 Move the vertical sidebar to see the code.
