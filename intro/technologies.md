@@ -4,7 +4,7 @@ title: Technologies
 description:
 ---
 
-Our storefront will be built in React.js using the Next.js framework. Those two solutions will be complemented with TypeScript, GraphQL & Apollo Client and Tailwind CSS. We aim at Vercel and Netlify for easy deployment.
+Our storefront will be built in React.js using the Next.js framework. Those two solutions will be complemented with TypeScript, GraphQL & Tailwind CSS. We aim at Vercel and Netlify for easy deployment.
 
 ## React.js
 
