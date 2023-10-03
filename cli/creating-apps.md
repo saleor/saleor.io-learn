@@ -54,7 +54,7 @@ Saleor CLI provides developers with the possibility to use a ready-made example 
 
 In your Terminal, `cd` to the path where you want to install the template and type in:
 
-`saleor app create abandoned-checkouts`
+`saleor app template abandoned-checkouts`
 
 This command will install a Next.js app called "abandoned-checkouts" equipped with many tools that'll come in handy during the process of integration. After the successful completion of the installation process, the CLI will automatically start the development server.
 
@@ -92,7 +92,7 @@ In order to integrate your App with Saleor Cloud it needs to have a public endpo
 
 The `saleor app tunnel` command will also install the app in the Dashboard, so after running it successfully you will complete the integration process.
 
-### Using a third-party tunnelling software and `saleor app install` 
+### Using a third-party tunnelling software and `saleor app install`
 
 Alternatively, you can set the App template live using a third-party tool. We're going to use a technique called _tunneling_, . In order to set the tunnel manually, you can use [localtunnel](https://theboroer.github.io/localtunnel-www/) or [ngrok](https://ngrok.com/). Follow the installation guides linked.
 

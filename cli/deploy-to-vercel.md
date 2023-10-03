@@ -33,7 +33,7 @@ Vercel is a robust platform that enables hosting of static sites and frontend fr
 
 ## Step 1. Creating a template App.
 
-1. In your Terminal, go to a directory in your computer you'd like to install the App in and type: `saleor app create my-saleor-app`.
+1. In your Terminal, go to a directory in your computer you'd like to install the App in and type: `saleor app template my-saleor-app`.
 2. Select your organisation and environment.
 
 After a few moments, you'll have your app named `my-saleor-app` created locally, and your developer environment set up. Also, the CLI will automatically run the development server. You may stop the server with `CTRL+C`.
