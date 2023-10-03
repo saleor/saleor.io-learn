@@ -24,7 +24,7 @@ In your terminal, type in:
 
 In this step we will scaffold a function that fetches data from a GraphQL API and converts it into a Typesense index, in the format specific to Typesense.
 
-1. In the root folder of our app create a folder called `scripts`.
+1. In the root folder of our app, create a folder called `scripts`.
 2. Inside `scripts` create a new file called `populate.ts`.
 3. In `populate.ts` write the following lines of code:
 
